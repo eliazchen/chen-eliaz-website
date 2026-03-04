@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>הצהרת נגישות | חן אליעז</title>
+    <meta name="description" content="הצהרת נגישות אתר חן אליעז — מדריך טיולים. עמידה בתקן IS 5568 / WCAG 2.1 AA">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700&family=Secular+One&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --accent: #c8956c;
+            --accent-dark: #a87650;
+            --light: #f8f5f0;
+            --text: #333;
+            --text-light: #666;
+            --white: #ffffff;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Assistant', 'Segoe UI', sans-serif;
+            color: var(--text);
+            line-height: 1.8;
+            background: var(--white);
+        }
+        /* Focus */
+        *:focus { outline: none; }
+        *:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+        /* Header / Nav */
+        .site-header {
+            background: var(--primary);
+            color: #fff;
+            padding: 16px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .header-inner {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .site-header a {
+            color: #fff;
+            text-decoration: none;
+            font-family: 'Secular One', sans-serif;
+            font-size: 20px;
+        }
+        .site-header a:hover { color: var(--accent); }
+        .lang-btn {
+            background: none;
+            border: 1px solid rgba(255,255,255,0.5);
+            color: #fff;
+            border-radius: 20px;
+            padding: 4px 14px;
+            font-size: 14px;
+            font-family: 'Assistant', sans-serif;
+            cursor: pointer;
+        }
+        .lang-btn:hover { background: rgba(255,255,255,0.15); }
+
+        /* Page content */
+        .page-container {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 48px 24px 80px;
+        }
+        .page-title {
+            font-family: 'Secular One', sans-serif;
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+        .page-subtitle {
+            color: var(--text-light);
+            font-size: 15px;
+            margin-bottom: 40px;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 16px;
+        }
+
+        /* Sections */
+        .a11y-section {
+            margin-bottom: 40px;
+        }
+        .a11y-section h2 {
+            font-family: 'Secular One', sans-serif;
+            font-size: 1.25rem;
+            color: var(--primary);
+            margin-bottom: 12px;
+            padding-right: 12px;
+            border-right: 4px solid var(--accent);
+        }
+        .a11y-section p {
+            margin-bottom: 10px;
+            font-size: 15px;
+        }
+        .a11y-section ul {
+            list-style: none;
+            padding: 0;
+        }
+        .a11y-section ul li {
+            font-size: 15px;
+            padding: 6px 0 6px 0;
+            padding-right: 20px;
+            position: relative;
+        }
+        .a11y-section ul li::before {
+            content: "✓";
+            color: var(--accent);
+            position: absolute;
+            right: 0;
+            font-weight: 700;
+        }
+
+        /* Contact box */
+        .contact-box {
+            background: var(--light);
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-top: 12px;
+        }
+        .contact-box p { margin-bottom: 8px; font-size: 15px; }
+        .contact-box a { color: var(--accent); font-weight: 600; }
+
+        /* Badge */
+        .wcag-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: #fff;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+
+        /* Footer */
+        .page-footer {
+            text-align: center;
+            padding: 24px;
+            background: var(--light);
+            color: var(--text-light);
+            font-size: 13px;
+        }
+        .page-footer a { color: var(--accent); text-decoration: underline; }
+
+        /* LTR (English) overrides */
+        html[dir="ltr"] .a11y-section h2 {
+            padding-right: 0;
+            border-right: none;
+            padding-left: 12px;
+            border-left: 4px solid var(--accent);
+        }
+        html[dir="ltr"] .a11y-section ul li {
+            padding-right: 0;
+            padding-left: 20px;
+        }
+        html[dir="ltr"] .a11y-section ul li::before {
+            right: auto;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="index.html" data-he="← חן אליעז" data-en="← Chen Eliaz">← חן אליעז</a>
+            <button class="lang-btn" id="langToggle" onclick="toggleLanguage()">English</button>
+        </div>
+    </header>
+
+    <!-- Main content -->
+    <main class="page-container" id="main-content">
+
+        <h1 class="page-title" data-he="הצהרת נגישות" data-en="Accessibility Statement">הצהרת נגישות</h1>
+        <p class="page-subtitle">
+            <span data-he="עודכן לאחרונה: מרץ 2026" data-en="Last updated: March 2026">עודכן לאחרונה: מרץ 2026</span>
+        </p>
+
+        <!-- Commitment -->
+        <section class="a11y-section">
+            <h2 data-he="המחויבות שלנו לנגישות" data-en="Our Commitment to Accessibility">המחויבות שלנו לנגישות</h2>
+            <p data-he="אתר זה, eliazchen.com, שייך לחן אליעז — מדריך טיולים, מרצה וסופר. אנו מחויבים להנגיש את האתר לכלל המשתמשים, לרבות אנשים עם מוגבלויות, בהתאם לתקן הישראלי IS 5568 ולהנחיות הנגישות לתכני אינטרנט WCAG 2.1 ברמה AA."
+               data-en="This website, eliazchen.com, belongs to Chen Eliaz — travel guide, lecturer and author. We are committed to making this site accessible to all users, including people with disabilities, in accordance with Israeli Standard IS 5568 and the Web Content Accessibility Guidelines WCAG 2.1 at level AA.">
+                אתר זה, eliazchen.com, שייך לחן אליעז — מדריך טיולים, מרצה וסופר. אנו מחויבים להנגיש את האתר לכלל המשתמשים, לרבות אנשים עם מוגבלויות, בהתאם לתקן הישראלי IS 5568 ולהנחיות הנגישות לתכני אינטרנט WCAG 2.1 ברמה AA.
+            </p>
+            <span class="wcag-badge">IS 5568 · WCAG 2.1 AA</span>
+        </section>
+
+        <!-- Adaptations -->
+        <section class="a11y-section">
+            <h2 data-he="התאמות הנגישות באתר" data-en="Accessibility Adaptations">התאמות הנגישות באתר</h2>
+            <p data-he="האתר כולל את ההתאמות הבאות:" data-en="The site includes the following adaptations:">האתר כולל את ההתאמות הבאות:</p>
+            <ul>
+                <li data-he="ניווט מקלדת מלא — כל הפונקציות נגישות ללא עכבר" data-en="Full keyboard navigation — all functions accessible without a mouse">ניווט מקלדת מלא — כל הפונקציות נגישות ללא עכבר</li>
+                <li data-he="תמיכה בקוראי מסך (NVDA, JAWS, VoiceOver)" data-en="Screen reader support (NVDA, JAWS, VoiceOver)">תמיכה בקוראי מסך (NVDA, JAWS, VoiceOver)</li>
+                <li data-he="שינוי גודל הטקסט בין 80% ל-150% דרך ווידג'ט הנגישות" data-en="Text size adjustment between 80%–150% via the accessibility widget">שינוי גודל הטקסט בין 80% ל-150% דרך ווידג'ט הנגישות</li>
+                <li data-he="מצב ניגודיות גבוהה — רקע שחור, טקסט לבן, קישורים צהובים" data-en="High contrast mode — black background, white text, yellow links">מצב ניגודיות גבוהה — רקע שחור, טקסט לבן, קישורים צהובים</li>
+                <li data-he="הדגשת קישורים בצהוב לזיהוי קל" data-en="Link highlighting in yellow for easy identification">הדגשת קישורים בצהוב לזיהוי קל</li>
+                <li data-he="גופן קריא (Arial) עם ריווח מוגבר בין אותיות ושורות" data-en="Readable font (Arial) with increased letter and line spacing">גופן קריא (Arial) עם ריווח מוגבר בין אותיות ושורות</li>
+                <li data-he="טקסט חלופי (alt) לכל התמונות המשמעותיות" data-en="Alternative text (alt) for all meaningful images">טקסט חלופי (alt) לכל התמונות המשמעותיות</li>
+                <li data-he="מבנה HTML סמנטי עם כותרות היררכיות ונקודות ציון" data-en="Semantic HTML structure with hierarchical headings and landmarks">מבנה HTML סמנטי עם כותרות היררכיות ונקודות ציון</li>
+                <li data-he="קישור 'דלג לתוכן הראשי' לדף המאפשר ניווט מהיר" data-en="'Skip to main content' link for quick navigation">קישור 'דלג לתוכן הראשי' לדף המאפשר ניווט מהיר</li>
+                <li data-he="מחוונים ברורים לפוקוס מקלדת על כל האלמנטים האינטראקטיביים" data-en="Clear keyboard focus indicators on all interactive elements">מחוונים ברורים לפוקוס מקלדת על כל האלמנטים האינטראקטיביים</li>
+                <li data-he="שמירת הגדרות הנגישות בדפדפן לביקורים עתידיים" data-en="Accessibility settings saved in the browser for future visits">שמירת הגדרות הנגישות בדפדפן לביקורים עתידיים</li>
+                <li data-he="תמיכה בשפה עברית ואנגלית עם מבנה RTL/LTR תקני" data-en="Support for Hebrew and English with standard RTL/LTR structure">תמיכה בשפה עברית ואנגלית עם מבנה RTL/LTR תקני</li>
+            </ul>
+        </section>
+
+        <!-- Widget -->
+        <section class="a11y-section">
+            <h2 data-he="ווידג'ט הנגישות" data-en="Accessibility Widget">ווידג'ט הנגישות</h2>
+            <p data-he="בפינה השמאלית התחתונה של האתר תמצאו כפתור נגישות (סמל כיסא גלגלים). לחיצה עליו תפתח פאנל הגדרות עם האפשרויות הבאות:" data-en="In the bottom-left corner of the site you will find an accessibility button (wheelchair symbol). Clicking it opens a settings panel with the following options:">בפינה השמאלית התחתונה של האתר תמצאו כפתור נגישות (סמל כיסא גלגלים). לחיצה עליו תפתח פאנל הגדרות עם האפשרויות הבאות:</p>
+            <ul>
+                <li data-he="גודל טקסט — הגדלה והקטנה בצעדים של 10%" data-en="Text size — increase and decrease in 10% steps">גודל טקסט — הגדלה והקטנה בצעדים של 10%</li>
+                <li data-he="ניגודיות גבוהה — מצב שחור-לבן עם קישורים צהובים" data-en="High contrast — black and white mode with yellow links">ניגודיות גבוהה — מצב שחור-לבן עם קישורים צהובים</li>
+                <li data-he="הדגש קישורים — הבלטת כל הקישורים בצבע צהוב" data-en="Highlight links — highlight all links in yellow">הדגש קישורים — הבלטת כל הקישורים בצבע צהוב</li>
+                <li data-he="פונט קריא — מעבר לגופן Arial עם ריווח מוגבר" data-en="Readable font — switch to Arial with increased spacing">פונט קריא — מעבר לגופן Arial עם ריווח מוגבר</li>
+                <li data-he="איפוס הגדרות — חזרה לברירת המחדל" data-en="Reset settings — return to defaults">איפוס הגדרות — חזרה לברירת המחדל</li>
+            </ul>
+        </section>
+
+        <!-- Browser & Screen Reader Compatibility -->
+        <section class="a11y-section">
+            <h2 data-he="תאימות דפדפנים וקוראי מסך" data-en="Browser & Screen Reader Compatibility">תאימות דפדפנים וקוראי מסך</h2>
+            <p data-he="האתר נבדק ותואם לגרסאות העדכניות של:" data-en="The site has been tested and is compatible with the latest versions of:">האתר נבדק ותואם לגרסאות העדכניות של:</p>
+            <ul>
+                <li data-he="דפדפנים: Chrome, Firefox, Safari, Edge" data-en="Browsers: Chrome, Firefox, Safari, Edge">דפדפנים: Chrome, Firefox, Safari, Edge</li>
+                <li data-he="קוראי מסך: NVDA, JAWS (Windows) · VoiceOver (macOS / iOS)" data-en="Screen readers: NVDA, JAWS (Windows) · VoiceOver (macOS / iOS)">קוראי מסך: NVDA, JAWS (Windows) · VoiceOver (macOS / iOS)</li>
+                <li data-he="מכשירים: מחשב שולחני, טאבלט, טלפון נייד" data-en="Devices: desktop computer, tablet, mobile phone">מכשירים: מחשב שולחני, טאבלט, טלפון נייד</li>
+            </ul>
+        </section>
+
+        <!-- Known limitations -->
+        <section class="a11y-section">
+            <h2 data-he="מגבלות ידועות ושיפורים בהכנה" data-en="Known Limitations & Ongoing Improvements">מגבלות ידועות ושיפורים בהכנה</h2>
+            <p data-he="אנו פועלים באופן שוטף לשיפור הנגישות. ייתכן שחלק מהתוכן הישן (כגון גלריות תמונות) טרם עומד באופן מלא בדרישות הנגישות — אנו עובדים על כך. אם נתקלתם בבעיה, נשמח לשמוע."
+               data-en="We continuously work to improve accessibility. Some older content (such as image galleries) may not yet fully comply with accessibility requirements — we are working on this. If you encounter an issue, we would be glad to hear from you.">
+                אנו פועלים באופן שוטף לשיפור הנגישות. ייתכן שחלק מהתוכן הישן (כגון גלריות תמונות) טרם עומד באופן מלא בדרישות הנגישות — אנו עובדים על כך. אם נתקלתם בבעיה, נשמח לשמוע.
+            </p>
+        </section>
+
+        <!-- Contact -->
+        <section class="a11y-section">
+            <h2 data-he="יצירת קשר בנושאי נגישות" data-en="Accessibility Contact">יצירת קשר בנושאי נגישות</h2>
+            <p data-he="נתקלתם בבעיית נגישות או זקוקים לסיוע? אנחנו כאן:" data-en="Encountered an accessibility issue or need assistance? We are here:">נתקלתם בבעיית נגישות או זקוקים לסיוע? אנחנו כאן:</p>
+            <div class="contact-box">
+                <p>📞 <a href="tel:+972528595493">052-8595493</a></p>
+                <p>💬 <a href="https://wa.me/972528595493" target="_blank" rel="noopener">WhatsApp</a></p>
+                <p data-he="📍 זיכרון יעקב, ישראל" data-en="📍 Zichron Ya'akov, Israel">📍 זיכרון יעקב, ישראל</p>
+                <p style="margin-top:12px; font-size:13px; color:var(--text-light);"
+                   data-he="נשתדל להגיב תוך 5 ימי עסקים."
+                   data-en="We aim to respond within 5 business days.">נשתדל להגיב תוך 5 ימי עסקים.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="page-footer">
+        <p>
+            <a href="index.html" data-he="← חזרה לאתר הראשי" data-en="← Back to main site">← חזרה לאתר הראשי</a>
+            &nbsp;·&nbsp;
+            <span data-he="© 2026 חן אליעז. כל הזכויות שמורות." data-en="© 2026 Chen Eliaz. All rights reserved.">© 2026 חן אליעז. כל הזכויות שמורות.</span>
+        </p>
+    </footer>
+
+    <script>
+        let currentLang = 'he';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'he' ? 'en' : 'he';
+            const html = document.documentElement;
+            if (currentLang === 'en') {
+                html.setAttribute('lang', 'en');
+                html.setAttribute('dir', 'ltr');
+                document.getElementById('langToggle').textContent = 'עברית';
+                document.title = 'Accessibility Statement | Chen Eliaz';
+            } else {
+                html.setAttribute('lang', 'he');
+                html.setAttribute('dir', 'rtl');
+                document.getElementById('langToggle').textContent = 'English';
+                document.title = 'הצהרת נגישות | חן אליעז';
+            }
+            document.querySelectorAll('[data-he][data-en]').forEach(el => {
+                el.innerHTML = el.getAttribute('data-' + currentLang);
+            });
+        }
+    </script>
+
+</body>
+</html>
