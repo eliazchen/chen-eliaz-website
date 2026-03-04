@@ -1,0 +1,43 @@
+/* ===========================================
+   Accessibility Widget - Required CSS
+   Add these styles to your global stylesheet.
+   =========================================== */
+
+/* High Contrast Mode */
+body.high-contrast {
+  background: #000 !important;
+  color: #fff !important;
+}
+
+body.high-contrast * {
+  background-color: inherit;
+  color: inherit;
+  border-color: #fff !important;
+}
+
+body.high-contrast a,
+body.high-contrast button {
+  color: #ffff00 !important;
+}
+
+body.high-contrast img {
+  filter: contrast(1.2);
+}
+
+/* Highlight Links */
+body.highlight-links a {
+  background-color: #ffff00 !important;
+  color: #000 !important;
+  text-decoration: underline !important;
+  padding: 2px 4px;
+  border-radius: 2px;
+}
+
+/* Readable Font */
+body.readable-font,
+body.readable-font * {
+  font-family: Arial, Helvetica, sans-serif !important;
+  letter-spacing: 0.05em;
+  word-spacing: 0.1em;
+  line-height: 1.8 !important;
+}
