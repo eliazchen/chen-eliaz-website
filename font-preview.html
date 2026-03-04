@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>בחירת פונט - חן אליעז</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Karantina:wght@300;400;700&family=Secular+One&family=Suez+One&family=Bellefair&family=Varela+Round&family=Assistant:wght@300;400;600;700&family=Rubik+Dirt&family=Handlee&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Assistant', sans-serif;
+            background: #f5f0eb;
+            color: #333;
+            padding: 30px;
+        }
+        h1 {
+            text-align: center;
+            font-family: 'Assistant', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        .subtitle {
+            text-align: center;
+            color: #888;
+            margin-bottom: 40px;
+            font-size: 1rem;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .font-card {
+            background: #fff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+        .font-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        }
+        .font-card.selected {
+            outline: 4px solid #c8956c;
+        }
+        .font-card.selected::after {
+            content: '✓ נבחר';
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: #c8956c;
+            color: white;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            font-family: 'Assistant', sans-serif;
+        }
+        .card-label {
+            background: #2c3e50;
+            color: white;
+            padding: 12px 20px;
+            font-family: 'Assistant', sans-serif;
+            font-size: 0.9rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .card-label .number {
+            background: #c8956c;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+        .card-hero {
+            background: linear-gradient(135deg, rgba(20,30,40,0.55), rgba(44,62,80,0.45)),
+                        url('images/hero.jpg') center/cover no-repeat;
+            padding: 40px 30px;
+            color: white;
+            text-align: center;
+            min-height: 220px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .card-hero .pre-title {
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            opacity: 0.8;
+            margin-bottom: 10px;
+            font-family: 'Assistant', sans-serif;
+        }
+        .card-content {
+            padding: 25px 30px;
+        }
+        .card-content .section-title {
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+        .card-content .body-text {
+            color: #666;
+            font-family: 'Assistant', sans-serif;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+        .card-content .quote {
+            font-style: italic;
+            color: #c8956c;
+            margin-bottom: 15px;
+        }
+        .card-content .nav-demo {
+            display: flex;
+            gap: 20px;
+            padding: 10px 0;
+            border-top: 1px solid #eee;
+            margin-top: 10px;
+        }
+        .card-content .nav-demo span {
+            font-size: 0.9rem;
+            color: #2c3e50;
+        }
+
+        /* Font-specific styles */
+        .font-1 .card-hero h2,
+        .font-1 .card-content .section-title,
+        .font-1 .card-content .quote,
+        .font-1 .card-content .nav-demo span {
+            font-family: 'Amatic SC', cursive;
+        }
+        .font-1 .card-hero h2 { font-size: 3rem; font-weight: 700; }
+        .font-1 .section-title { font-size: 2rem; font-weight: 700; }
+        .font-1 .quote { font-size: 1.2rem; }
+        .font-1 .nav-demo span { font-size: 1.1rem; font-weight: 700; }
+
+        .font-2 .card-hero h2,
+        .font-2 .card-content .section-title,
+        .font-2 .card-content .quote,
+        .font-2 .card-content .nav-demo span {
+            font-family: 'Karantina', cursive;
+        }
+        .font-2 .card-hero h2 { font-size: 2.8rem; font-weight: 400; }
+        .font-2 .section-title { font-size: 1.8rem; }
+        .font-2 .quote { font-size: 1.15rem; }
+        .font-2 .nav-demo span { font-size: 1.05rem; }
+
+        .font-3 .card-hero h2,
+        .font-3 .card-content .section-title,
+        .font-3 .card-content .quote,
+        .font-3 .card-content .nav-demo span {
+            font-family: 'Secular One', sans-serif;
+        }
+        .font-3 .card-hero h2 { font-size: 2.6rem; }
+        .font-3 .section-title { font-size: 1.7rem; }
+        .font-3 .quote { font-size: 1.05rem; }
+
+        .font-4 .card-hero h2,
+        .font-4 .card-content .section-title,
+        .font-4 .card-content .quote,
+        .font-4 .card-content .nav-demo span {
+            font-family: 'Suez One', serif;
+        }
+        .font-4 .card-hero h2 { font-size: 2.6rem; }
+        .font-4 .section-title { font-size: 1.7rem; }
+        .font-4 .quote { font-size: 1.05rem; }
+
+        .font-5 .card-hero h2,
+        .font-5 .card-content .section-title,
+        .font-5 .card-content .quote,
+        .font-5 .card-content .nav-demo span {
+            font-family: 'Bellefair', serif;
+        }
+        .font-5 .card-hero h2 { font-size: 2.8rem; }
+        .font-5 .section-title { font-size: 1.8rem; }
+        .font-5 .quote { font-size: 1.1rem; }
+
+        .font-6 .card-hero h2,
+        .font-6 .card-content .section-title,
+        .font-6 .card-content .quote,
+        .font-6 .card-content .nav-demo span {
+            font-family: 'Varela Round', sans-serif;
+        }
+        .font-6 .card-hero h2 { font-size: 2.6rem; }
+        .font-6 .section-title { font-size: 1.7rem; }
+        .font-6 .quote { font-size: 1.05rem; }
+
+        .font-7 .card-hero h2,
+        .font-7 .card-content .section-title,
+        .font-7 .card-content .quote,
+        .font-7 .card-content .nav-demo span {
+            font-family: 'Rubik Dirt', cursive;
+        }
+        .font-7 .card-hero h2 { font-size: 2.6rem; }
+        .font-7 .section-title { font-size: 1.7rem; }
+        .font-7 .quote { font-size: 1.05rem; }
+
+        .font-8 .card-hero h2,
+        .font-8 .card-content .section-title,
+        .font-8 .card-content .quote,
+        .font-8 .card-content .nav-demo span {
+            font-family: 'Karantina', cursive;
+            font-weight: 300;
+        }
+        .font-8 .card-hero h2 { font-size: 3rem; font-weight: 300; }
+        .font-8 .section-title { font-size: 1.9rem; font-weight: 300; }
+        .font-8 .quote { font-size: 1.15rem; font-weight: 300; }
+        .font-8 .nav-demo span { font-size: 1.05rem; font-weight: 300; }
+
+        @media (max-width: 768px) {
+            .grid { grid-template-columns: 1fr; }
+            body { padding: 15px; }
+        }
+    </style>
+</head>
+<body>
+    <h1>בחירת פונט לאתר חן אליעז</h1>
+    <p class="subtitle">לחצו על הכרטיס שהכי מוצא חן בעיניכם</p>
+
+    <div class="grid">
+
+        <!-- 1. Amatic SC -->
+        <div class="font-card font-1" onclick="select(this, 'Amatic SC')">
+            <div class="card-label"><span>Amatic SC — כתב יד דק ואמנותי</span><span class="number">1</span></div>
+            <div class="card-hero">
+                <div class="pre-title">מדריך טיולים · מרצה · סופר</div>
+                <h2>גלו את העולם<br>עם חן אליעז</h2>
+            </div>
+            <div class="card-content">
+                <h3 class="section-title">טיולים מתקרבים</h3>
+                <p class="body-text">למעלה מ-25 שנות ניסיון בהדרכת טיולים למזרח הרחוק ואירופה.</p>
+                <p class="quote">״המוטו שלי בטיולים הוא לטייל לאט, לראות את המקומות והאנשים מבוקר עד ערב.״</p>
+                <div class="nav-demo">
+                    <span>אודות</span><span>טיולים</span><span>הרצאות</span><span>ספרים</span><span>צרו קשר</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Karantina -->
+        <div class="font-card font-2" onclick="select(this, 'Karantina')">
+            <div class="card-label"><span>Karantina — מכחול עבה ונועז</span><span class="number">2</span></div>
+            <div class="card-hero">
+                <div class="pre-title">מדריך טיולים · מרצה · סופר</div>
+                <h2>גלו את העולם<br>עם חן אליעז</h2>
+            </div>
+            <div class="card-content">
+                <h3 class="section-title">טיולים מתקרבים</h3>
+                <p class="body-text">למעלה מ-25 שנות ניסיון בהדרכת טיולים למזרח הרחוק ואירופה.</p>
+                <p class="quote">״המוטו שלי בטיולים הוא לטייל לאט, לראות את המקומות והאנשים מבוקר עד ערב.״</p>
+                <div class="nav-demo">
+                    <span>אודות</span><span>טיולים</span><span>הרצאות</span><span>ספרים</span><span>צרו קשר</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Secular One -->
+        <div class="font-card font-3" onclick="select(this, 'Secular One')">
+            <div class="card-label"><span>Secular One — עגול וחם</span><span class="number">3</span></div>
+            <div class="card-hero">
+                <div class="pre-title">מדריך טיולים · מרצה · סופר</div>
+                <h2>גלו את העולם<br>עם חן אליעז</h2>
+            </div>
+            <div class="card-content">
+                <h3 class="section-title">טיולים מתקרבים</h3>
+                <p class="body-text">למעלה מ-25 שנות ניסיון בהדרכת טיולים למזרח הרחוק ואירופה.</p>
+                <p class="quote">״המוטו שלי בטיולים הוא לטייל לאט, לראות את המקומות והאנשים מבוקר עד ערב.״</p>
+                <div class="nav-demo">
+                    <span>אודות</span><span>טיולים</span><span>הרצאות</span><span>ספרים</span><span>צרו קשר</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Suez One -->
+        <div class="font-card font-4" onclick="select(this, 'Suez One')">
+            <div class="card-label"><span>Suez One — סריף קלאסי ומכובד</span><span class="number">4</span></div>
+            <div class="card-hero">
+                <div class="pre-title">מדריך טיולים · מרצה · סופר</div>
+                <h2>גלו את העולם<br>עם חן אליעז</h2>
+            </div>
+            <div class="card-content">
+                <h3 class="section-title">טיולים מתקרבים</h3>
+                <p class="body-text">למעלה מ-25 שנות ניסיון בהדרכת טיולים למזרח הרחוק ואירופה.</p>
+                <p class="quote">״המוטו שלי בטיולים הוא לטייל לאט, לראות את המקומות והאנשים מבוקר עד ערב.״</p>
+                <div class="nav-demo">
+                    <span>אודות</span><span>טיולים</span><span>הרצאות</span><span>ספרים</span><span>צרו קשר</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. Bellefair -->
+        <div class="font-card font-5" onclick="select(this, 'Bellefair')">
+            <div class="card-label"><span>Bellefair — אלגנטי וקלאסי</span><span class="number">5</span></div>
+            <div class="card-hero">
+                <div class="pre-title">מדריך טיולים · מרצה · סופר</div>
+                <h2>גלו את העולם<br>עם חן אליעז</h2>
+            </div>
+            <div class="card-content">
+                <h3 class="section-title">טיולים מתקרבים</h3>
+                <p class="body-text">למעלה מ-25 שנות ניסיון בהדרכת טיולים למזרח הרחוק ואירופה.</p>
+                <p class="quote">״המוטו שלי בטיולים הוא לטייל לאט, לראות את המקומות והאנשים מבוקר עד ערב.״</p>
+                <div class="nav-demo">
+                    <span>אודות</span><span>טיולים</span><span>הרצאות</span><span>ספרים</span><span>צרו קשר</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. Varela Round -->
+        <div class="font-card font-6" onclick="select(this, 'Varela Round')">
+            <div class="card-label"><span>Varela Round — מודרני ונעים</span><span class="number">6</span></div>
+            <div class="card-hero">
+                <div class="pre-title">מדריך טיולים · מרצה · סופר</div>
+                <h2>גלו את העולם<br>עם חן אליעז</h2>
+            </div>
+            <div class="card-content">
+                <h3 class="section-title">טיולים מתקרבים</h3>
+                <p class="body-text">למעלה מ-25 שנות ניסיון בהדרכת טיולים למזרח הרחוק ואירופה.</p>
+                <p class="quote">״המוטו שלי בטיולים הוא לטייל לאט, לראות את המקומות והאנשים מבוקר עד ערב.״</p>
+                <div class="nav-demo">
+                    <span>אודות</span><span>טיולים</span><span>הרצאות</span><span>ספרים</span><span>צרו קשר</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 7. Rubik Dirt -->
+        <div class="font-card font-7" onclick="select(this, 'Rubik Dirt')">
+            <div class="card-label"><span>Rubik Dirt — מחוספס והרפתקני</span><span class="number">7</span></div>
+            <div class="card-hero">
+                <div class="pre-title">מדריך טיולים · מרצה · סופר</div>
+                <h2>גלו את העולם<br>עם חן אליעז</h2>
+            </div>
+            <div class="card-content">
+                <h3 class="section-title">טיולים מתקרבים</h3>
+                <p class="body-text">למעלה מ-25 שנות ניסיון בהדרכת טיולים למזרח הרחוק ואירופה.</p>
+                <p class="quote">״המוטו שלי בטיולים הוא לטייל לאט, לראות את המקומות והאנשים מבוקר עד ערב.״</p>
+                <div class="nav-demo">
+                    <span>אודות</span><span>טיולים</span><span>הרצאות</span><span>ספרים</span><span>צרו קשר</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 8. Karantina Light -->
+        <div class="font-card font-8" onclick="select(this, 'Karantina Light')">
+            <div class="card-label"><span>Karantina Light — כתב יד קליל</span><span class="number">8</span></div>
+            <div class="card-hero">
+                <div class="pre-title">מדריך טיולים · מרצה · סופר</div>
+                <h2>גלו את העולם<br>עם חן אליעז</h2>
+            </div>
+            <div class="card-content">
+                <h3 class="section-title">טיולים מתקרבים</h3>
+                <p class="body-text">למעלה מ-25 שנות ניסיון בהדרכת טיולים למזרח הרחוק ואירופה.</p>
+                <p class="quote">״המוטו שלי בטיולים הוא לטייל לאט, לראות את המקומות והאנשים מבוקר עד ערב.״</p>
+                <div class="nav-demo">
+                    <span>אודות</span><span>טיולים</span><span>הרצאות</span><span>ספרים</span><span>צרו קשר</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="selection" style="position: fixed; bottom: 0; left: 0; right: 0; background: #2c3e50; color: white; padding: 15px 30px; text-align: center; font-size: 1.1rem; transform: translateY(100%); transition: transform 0.3s ease; z-index: 100;">
+        <span id="selectionText"></span>
+    </div>
+
+    <script>
+        function select(card, fontName) {
+            document.querySelectorAll('.font-card').forEach(c => c.classList.remove('selected'));
+            card.classList.add('selected');
+            const bar = document.getElementById('selection');
+            document.getElementById('selectionText').textContent = `נבחר: ${fontName} — ספרו לי את המספר ואעדכן את האתר`;
+            bar.style.transform = 'translateY(0)';
+        }
+    </script>
+</body>
+</html>

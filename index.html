@@ -1,0 +1,1649 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>חן אליעז | מדריך טיולים</title>
+    <meta name="description" content="חן אליעז - מדריך טיולים, מרצה וסופר. טיולים למזרח הרחוק, אירופה והרצאות מרתקות.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700&family=Playfair+Display:wght@400;600;700&family=Secular+One&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --accent: #c8956c;
+            --accent-dark: #a87650;
+            --light: #f8f5f0;
+            --cream: #faf8f4;
+            --text: #333;
+            --text-light: #666;
+            --white: #ffffff;
+            --shadow: 0 4px 20px rgba(0,0,0,0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Assistant', 'Segoe UI', sans-serif;
+            color: var(--text);
+            line-height: 1.7;
+            background: var(--white);
+        }
+
+        [dir="rtl"] body {
+            direction: rtl;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Secular One', sans-serif;
+        }
+
+        [lang="en"] h1, [lang="en"] h2, [lang="en"] h3, [lang="en"] h4 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: var(--transition);
+            padding: 20px 0;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.97);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+            padding: 12px 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-family: 'Secular One', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--white);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .navbar.scrolled .nav-logo {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: rgba(255,255,255,0.9);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .navbar.scrolled .nav-links a {
+            color: var(--text);
+        }
+
+        .lang-toggle {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.4);
+            color: var(--white);
+            padding: 6px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: 'Assistant', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .navbar.scrolled .lang-toggle {
+            background: var(--light);
+            border-color: #ddd;
+            color: var(--text);
+        }
+
+        .lang-toggle:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: var(--white);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 2px;
+            background: var(--white);
+            transition: var(--transition);
+        }
+
+        .navbar.scrolled .hamburger span {
+            background: var(--text);
+        }
+
+        /* Hero */
+        .hero {
+            height: 100vh;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            z-index: 0;
+        }
+
+        .hero-bg.active {
+            opacity: 1;
+        }
+
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(20,30,40,0.55), rgba(44,62,80,0.45));
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            opacity: 0.85;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero-desc {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 40px;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            font-family: 'Assistant', sans-serif;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(200,149,108,0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid rgba(255,255,255,0.6);
+            margin-right: 15px;
+        }
+
+        .btn-outline:hover {
+            background: var(--white);
+            color: var(--primary);
+            border-color: var(--white);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            z-index: 1;
+        }
+
+        .scroll-indicator svg {
+            width: 30px;
+            height: 30px;
+            stroke: rgba(255,255,255,0.6);
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        /* Sections */
+        section {
+            padding: 100px 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .section-line {
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+            margin: 15px auto 0;
+        }
+
+        /* About */
+        .about {
+            background: var(--cream);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .about-image .img-placeholder {
+            position: relative;
+            width: 100%;
+            padding-bottom: 125%; /* 4:5 ratio */
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .about-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1.2s ease-in-out;
+        }
+
+        .about-slide.active {
+            opacity: 1;
+        }
+
+        .about-text h2 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .about-text p {
+            color: var(--text-light);
+            margin-bottom: 15px;
+            font-size: 1.05rem;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 20px;
+            background: var(--white);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .stat-number {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--accent);
+            font-family: 'Secular One', sans-serif;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-top: 5px;
+        }
+
+        /* Trips */
+        .trips {
+            background: var(--white);
+        }
+
+        .trips-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .trip-card {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            background: var(--white);
+        }
+
+        .trip-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        }
+
+        .trip-image {
+            height: 220px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .trip-date {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--accent);
+            color: var(--white);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        [dir="ltr"] .trip-date {
+            right: auto;
+            left: 15px;
+        }
+
+        .trip-content {
+            padding: 25px;
+        }
+
+        .trip-content h3 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .trip-content p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+
+        .trip-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .trip-link:hover {
+            color: var(--accent-dark);
+        }
+
+        /* Lectures */
+        .lectures {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .lectures .section-header h2 {
+            color: var(--white);
+        }
+
+        .lectures .section-header p {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .lectures-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .lecture-card {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 12px;
+            padding: 30px;
+            transition: var(--transition);
+        }
+
+        .lecture-card:hover {
+            background: rgba(255,255,255,0.12);
+            transform: translateY(-4px);
+        }
+
+        .lecture-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+
+        .lecture-card p {
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.75);
+            line-height: 1.7;
+        }
+
+        /* Books */
+        .books {
+            background: var(--cream);
+        }
+
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 50px;
+            align-items: start;
+        }
+
+        .book-card {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 30px;
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            padding: 30px;
+        }
+
+        .book-cover {
+            width: 200px;
+            height: 280px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-align: center;
+            padding: 20px;
+        }
+
+        .book-cover h4 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .book-cover .author {
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+
+        .book-info h3 {
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .book-info p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-bottom: 12px;
+        }
+
+        .book-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-top: 10px;
+        }
+
+        /* Quote */
+        .quote-section {
+            background: linear-gradient(135deg, rgba(44,62,80,0.85), rgba(20,30,40,0.9)),
+                        url('images/silk-road.jpg') center/cover no-repeat fixed;
+            padding: 80px 0;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .quote-text {
+            font-family: 'Secular One', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 300;
+            line-height: 2;
+            max-width: 800px;
+            margin: 0 auto 20px;
+            font-style: italic;
+        }
+
+        .quote-author {
+            font-size: 1rem;
+            opacity: 0.7;
+        }
+
+        /* Contact */
+        .contact {
+            background: var(--white);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+
+        .contact-info h3 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .contact-info p {
+            color: var(--text-light);
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+        }
+
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .contact-icon {
+            width: 45px;
+            height: 45px;
+            background: var(--light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .contact-detail span {
+            font-size: 1.05rem;
+            color: var(--text);
+        }
+
+        .contact-detail a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .contact-form {
+            background: var(--light);
+            padding: 40px;
+            border-radius: 12px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--primary);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Assistant', sans-serif;
+            font-size: 1rem;
+            transition: var(--transition);
+            background: var(--white);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(200,149,108,0.15);
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary);
+            color: rgba(255,255,255,0.7);
+            padding: 50px 0 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer h4 {
+            color: var(--white);
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .footer p {
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 25px;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .hero h1 { font-size: 2.8rem; }
+            .about-grid { grid-template-columns: 1fr; gap: 40px; }
+            .about-image { order: -1; max-width: 400px; margin: 0 auto; }
+            .trips-grid { grid-template-columns: repeat(2, 1fr); }
+            .lectures-grid { grid-template-columns: 1fr; }
+            .books-grid { grid-template-columns: 1fr; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; text-align: center; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                height: 100vh;
+                background: var(--primary);
+                flex-direction: column;
+                padding: 80px 40px;
+                transition: var(--transition);
+                gap: 25px;
+            }
+
+            [dir="ltr"] .nav-links {
+                right: auto;
+                left: -100%;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            [dir="ltr"] .nav-links.active {
+                right: auto;
+                left: 0;
+            }
+
+            .nav-links a {
+                color: var(--white) !important;
+                font-size: 1.2rem;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hero h1 { font-size: 2.2rem; }
+            .hero-desc { font-size: 1rem; }
+            .trips-grid { grid-template-columns: 1fr; }
+            .book-card { grid-template-columns: 1fr; justify-items: center; }
+            .form-row { grid-template-columns: 1fr; }
+            .about-stats { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+            section { padding: 70px 0; }
+            .section-header h2 { font-size: 2rem; }
+        }
+
+        /* Animations */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Book Modal */
+        .book-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.6);
+            z-index: 2000;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 40px 20px;
+            overflow-y: auto;
+        }
+
+        .book-modal-overlay.active {
+            display: flex;
+        }
+
+        .book-modal {
+            background: var(--white);
+            border-radius: 16px;
+            max-width: 800px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: modalSlideIn 0.3s ease;
+        }
+
+        @keyframes modalSlideIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .book-modal-header {
+            position: sticky;
+            top: 0;
+            background: var(--primary);
+            color: var(--white);
+            padding: 25px 35px;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            z-index: 1;
+            border-radius: 16px 16px 0 0;
+        }
+
+        .book-modal-header img {
+            width: 80px;
+            height: 110px;
+            object-fit: cover;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .book-modal-header h2 {
+            font-size: 1.6rem;
+            margin-bottom: 4px;
+        }
+
+        .book-modal-header p {
+            opacity: 0.8;
+            font-size: 0.95rem;
+        }
+
+        .book-modal-close {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-size: 1.3rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        [dir="ltr"] .book-modal-close {
+            left: auto;
+            right: 20px;
+        }
+
+        .book-modal-close:hover {
+            background: rgba(255,255,255,0.4);
+        }
+
+        .book-modal-body {
+            padding: 35px;
+            line-height: 2;
+            font-size: 1.05rem;
+            color: var(--text);
+        }
+
+        .book-modal-body h3 {
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin: 30px 0 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+        }
+
+        .book-modal-body h3:first-child {
+            margin-top: 0;
+        }
+
+        .book-modal-body p {
+            margin-bottom: 16px;
+        }
+
+        .book-modal-body .book-quote {
+            background: var(--light);
+            border-right: 4px solid var(--accent);
+            padding: 20px 25px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+            color: var(--text-light);
+            line-height: 2;
+        }
+
+        [dir="ltr"] .book-modal-body .book-quote {
+            border-right: none;
+            border-left: 4px solid var(--accent);
+            border-radius: 8px 0 0 8px;
+        }
+
+        .book-modal-body .interview-q {
+            font-weight: 700;
+            color: var(--primary);
+            margin-top: 20px;
+        }
+
+        .book-modal-body .separator {
+            text-align: center;
+            color: var(--accent);
+            margin: 25px 0;
+            font-size: 1.2rem;
+            letter-spacing: 8px;
+        }
+
+        .book-modal-body .book-cta {
+            background: var(--light);
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .book-modal-body .book-cta .price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .book-card {
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .book-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+
+        @media (max-width: 768px) {
+            .book-modal-overlay { padding: 20px 10px; }
+            .book-modal-header { padding: 20px; gap: 15px; }
+            .book-modal-header h2 { font-size: 1.3rem; }
+            .book-modal-body { padding: 25px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#hero" class="nav-logo" data-he="חן אליעז" data-en="Chen Eliaz">חן אליעז</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#about" data-he="אודות" data-en="About">אודות</a></li>
+                <li><a href="#trips" data-he="טיולים" data-en="Trips">טיולים</a></li>
+                <li><a href="#lectures" data-he="הרצאות" data-en="Lectures">הרצאות</a></li>
+                <li><a href="#books" data-he="ספרים" data-en="Books">ספרים</a></li>
+                <li><a href="#contact" data-he="צרו קשר" data-en="Contact">צרו קשר</a></li>
+                <li><button class="lang-toggle" id="langToggle" onclick="toggleLanguage()">English</button></li>
+            </ul>
+            <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" id="hero">
+        <div class="hero-bg active" style="background-image: url('images/hero.jpg')"></div>
+        <div class="hero-bg" style="background-image: url('images/hero-silkroad.jpg')"></div>
+        <div class="hero-bg" style="background-image: url('images/hero-china.jpg')"></div>
+        <div class="hero-bg" style="background-image: url('images/hero-vietnam.jpg')"></div>
+        <div class="hero-bg" style="background-image: url('images/hero-bagan.jpg')"></div>
+        <div class="hero-bg" style="background-image: url('images/hero-cambodia.jpg')"></div>
+        <div class="hero-bg" style="background-image: url('images/hero-ruins.jpg')"></div>
+        <div class="hero-bg" style="background-image: url('images/hero-baltics.jpg')"></div>
+        <div class="hero-bg" style="background-image: url('images/hero-burma.jpg')"></div>
+        <div class="hero-content">
+            <p class="hero-subtitle" data-he="מדריך טיולים · מרצה · סופר" data-en="Travel Guide · Lecturer · Author">מדריך טיולים · מרצה · סופר</p>
+            <h1 data-he="גלו את העולם<br>עם חן אליעז" data-en="Explore the World<br>with Chen Eliaz">גלו את העולם<br>עם חן אליעז</h1>
+            <p class="hero-desc" data-he="למעלה מ-25 שנות ניסיון בהדרכת טיולים למזרח הרחוק ואירופה. מסעות ייחודיים, הרצאות מרתקות וחוויות שלא תשכחו." data-en="Over 25 years of experience guiding trips to the Far East and Europe. Unique journeys, fascinating lectures, and unforgettable experiences.">למעלה מ-25 שנות ניסיון בהדרכת טיולים למזרח הרחוק ואירופה. מסעות ייחודיים, הרצאות מרתקות וחוויות שלא תשכחו.</p>
+            <div class="hero-buttons">
+                <a href="#trips" class="btn btn-primary" data-he="הטיולים הקרובים" data-en="Upcoming Trips">הטיולים הקרובים</a>
+                <a href="#contact" class="btn btn-outline" data-he="צרו קשר" data-en="Contact Me">צרו קשר</a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M7 13l5 5 5-5M7 6l5 5 5-5"/></svg>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image fade-up">
+                    <div class="img-placeholder" id="aboutSlideshow">
+                        <img class="about-slide active" src="images/chen-02.jpg" alt="חן אליעז">
+                        <img class="about-slide" src="images/chen-04.jpg" alt="חן אליעז">
+                        <img class="about-slide" src="images/chen-01.jpg" alt="חן אליעז">
+                        <img class="about-slide" src="images/chen-03.jpg" alt="חן אליעז">
+                        <img class="about-slide" src="images/chen-05.jpg" alt="חן אליעז">
+                        <img class="about-slide" src="images/chen-06.jpg" alt="חן אליעז">
+                        <img class="about-slide" src="images/chen-07.jpg" alt="חן אליעז">
+                        <img class="about-slide" src="images/chen-08.jpg" alt="חן אליעז">
+                        <img class="about-slide" src="images/chen-09.jpg" alt="חן אליעז">
+                        <img class="about-slide" src="images/chen-10.jpg" alt="חן אליעז">
+                        <img class="about-slide" src="images/chen-11.jpg" alt="חן אליעז">
+                    </div>
+                </div>
+                <div class="about-text fade-up">
+                    <h2 data-he="חן אליעז" data-en="Chen Eliaz">חן אליעז</h2>
+                    <p data-he="מתגורר בזיכרון יעקב, נשוי ואב לשלושה. בעל תואר שני בגיאוגרפיה וארכיאולוגיה מאוניברסיטת בן גוריון ואוניברסיטת תל אביב." data-en="Based in Zichron Ya'akov, married and father of three. Holds a Master's degree in Geography and Archaeology from Ben-Gurion University and Tel Aviv University.">מתגורר בזיכרון יעקב, נשוי ואב לשלושה. בעל תואר שני בגיאוגרפיה וארכיאולוגיה מאוניברסיטת בן גוריון ואוניברסיטת תל אביב.</p>
+                    <p data-he="מזה למעלה מ-25 שנה מטייל ומדריך בעולם, כותב מאמרים ומצלם למגזינים גיאוגרפיים. ניהלתי בעבר את טיולי המשפחות של החברה הגיאוגרפית. התמחתי בהדרכת קבוצות והובלת מסעות וטיולים למזרח הרחוק וחלקים מאירופה." data-en="For over 25 years, I've been traveling and guiding around the world, writing articles and photographing for geographic magazines. I previously managed the Geographic Society's family trips. I specialize in guiding groups and leading expeditions to the Far East and parts of Europe.">מזה למעלה מ-25 שנה מטייל ומדריך בעולם, כותב מאמרים ומצלם למגזינים גיאוגרפיים. ניהלתי בעבר את טיולי המשפחות של החברה הגיאוגרפית. התמחתי בהדרכת קבוצות והובלת מסעות וטיולים למזרח הרחוק וחלקים מאירופה.</p>
+                    <p data-he="&laquo;המוטו שלי בטיולים הוא לטייל לאט, להשתדל לנצל את הזמן היטב, לראות את המקומות והאנשים מבוקר עד ערב.&raquo;" data-en="&laquo;My motto for traveling is to travel slowly, make the most of the time, and see the places and people from morning to evening.&raquo;" style="font-style: italic; color: var(--accent);">&laquo;המוטו שלי בטיולים הוא לטייל לאט, להשתדל לנצל את הזמן היטב, לראות את המקומות והאנשים מבוקר עד ערב.&raquo;</p>
+                    <div class="about-stats">
+                        <div class="stat">
+                            <div class="stat-number">25+</div>
+                            <div class="stat-label" data-he="שנות ניסיון" data-en="Years Experience">שנות ניסיון</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">2</div>
+                            <div class="stat-label" data-he="ספרים" data-en="Books">ספרים</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">15+</div>
+                            <div class="stat-label" data-he="מדינות" data-en="Countries">מדינות</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quote -->
+    <div class="quote-section">
+        <div class="container">
+            <p class="quote-text" data-he="ממש כמו ענן קייצי ולבן, בהרמוניה עם השמיים והאדמה, מרחף בחופשיות בשמיים הכחולים מאופק לאופק, עוקב אחרי נשימת האטמוספירה." data-en="Just like a white summer cloud, in harmony with the sky and earth, floating freely in the blue heavens from horizon to horizon, following the breath of the atmosphere.">ממש כמו ענן קייצי ולבן, בהרמוניה עם השמיים והאדמה, מרחף בחופשיות בשמיים הכחולים מאופק לאופק, עוקב אחרי נשימת האטמוספירה.</p>
+            <p class="quote-author" data-he="— גווינדה לאמה, ״דרכם של העננים הלבנים״" data-en='— Govinda Lama, "The Way of the White Clouds"'>— גווינדה לאמה, ״דרכם של העננים הלבנים״</p>
+        </div>
+    </div>
+
+    <!-- Upcoming Trips -->
+    <section class="trips" id="trips">
+        <div class="container">
+            <div class="section-header fade-up">
+                <h2 data-he="טיולים מתקרבים" data-en="Upcoming Trips">טיולים מתקרבים</h2>
+                <p data-he="הצטרפו למסע הבא — טיולי דגש ייחודיים, תאריך אחד ליעד אחד" data-en="Join the next journey — unique focused trips, one date for one destination">הצטרפו למסע הבא — טיולי דגש ייחודיים, תאריך אחד ליעד אחד</p>
+                <div class="section-line"></div>
+            </div>
+            <div class="trips-grid">
+                <div class="trip-card fade-up">
+                    <div class="trip-image" style="background-image: url('images/china.jpg')">
+                        <span class="trip-date" data-he="מאי 2026" data-en="May 2026">מאי 2026</span>
+                    </div>
+                    <div class="trip-content">
+                        <h3 data-he="סין האחרת" data-en="The Other China">סין האחרת</h3>
+                        <p data-he="בעקבות הפיל הלבן, הדרקון והבודהא. מסע אל סין שמעבר לערים הגדולות." data-en="Following the White Elephant, the Dragon, and the Buddha. A journey to China beyond the big cities.">בעקבות הפיל הלבן, הדרקון והבודהא. מסע אל סין שמעבר לערים הגדולות.</p>
+                        <a href="#contact" class="trip-link" data-he="לפרטים נוספים ←" data-en="More details →">לפרטים נוספים ←</a>
+                    </div>
+                </div>
+                <div class="trip-card fade-up">
+                    <div class="trip-image" style="background-image: url('images/silk-road.jpg')">
+                        <span class="trip-date" data-he="יוני 2026" data-en="June 2026">יוני 2026</span>
+                    </div>
+                    <div class="trip-content">
+                        <h3 data-he="דרך המשי ההיסטורית" data-en="The Historic Silk Road">דרך המשי ההיסטורית</h3>
+                        <p data-he="תחנות דרכים עתיקות, שווקים בהם מזרח ומערב מתחברים, קבוצות מיעוטים וחיי נוודים." data-en="Ancient waypoints, markets where East meets West, minority groups, and nomadic life.">תחנות דרכים עתיקות, שווקים בהם מזרח ומערב מתחברים, קבוצות מיעוטים וחיי נוודים.</p>
+                        <a href="#contact" class="trip-link" data-he="לפרטים נוספים ←" data-en="More details →">לפרטים נוספים ←</a>
+                    </div>
+                </div>
+                <div class="trip-card fade-up">
+                    <div class="trip-image" style="background-image: url('images/china-dragon.jpg')">
+                        <span class="trip-date" data-he="ספטמבר 2026" data-en="Sep 2026">ספטמבר 2026</span>
+                    </div>
+                    <div class="trip-content">
+                        <h3 data-he="סין — הדרקון התנער" data-en="China — The Dragon Awakens">סין — הדרקון התנער</h3>
+                        <p data-he="הדרקון התנער וצועד לאופקים חדשים. מסע אל סין המתחדשת." data-en="The dragon has awakened and strides toward new horizons. A journey into the renewing China.">הדרקון התנער וצועד לאופקים חדשים. מסע אל סין המתחדשת.</p>
+                        <a href="#contact" class="trip-link" data-he="לפרטים נוספים ←" data-en="More details →">לפרטים נוספים ←</a>
+                    </div>
+                </div>
+                <div class="trip-card fade-up">
+                    <div class="trip-image" style="background-image: url('images/baltics.jpg')">
+                        <span class="trip-date" data-he="אוקטובר 2026" data-en="Oct 2026">אוקטובר 2026</span>
+                    </div>
+                    <div class="trip-content">
+                        <h3 data-he="המדינות הבלטיות — אוהבי לכת" data-en="The Baltics — Walking Tour">המדינות הבלטיות — אוהבי לכת</h3>
+                        <p data-he="ליטא ולטביה — בין מבצרים עתיקים, יערות ואגמים. טיול הליכה ייחודי." data-en="Lithuania and Latvia — among ancient castles, forests, and lakes. A unique walking tour.">ליטא ולטביה — בין מבצרים עתיקים, יערות ואגמים. טיול הליכה ייחודי.</p>
+                        <a href="#contact" class="trip-link" data-he="לפרטים נוספים ←" data-en="More details →">לפרטים נוספים ←</a>
+                    </div>
+                </div>
+                <div class="trip-card fade-up">
+                    <div class="trip-image" style="background-image: url('images/japan.jpg')">
+                        <span class="trip-date" data-he="נובמבר 2026" data-en="Nov 2026">נובמבר 2026</span>
+                    </div>
+                    <div class="trip-content">
+                        <h3 data-he="יפן בשלכת חלומית" data-en="Japan in Dreamy Autumn">יפן בשלכת חלומית</h3>
+                        <p data-he="מסורת וטבע מהים אל ההרים. יפן בעונת השלכת היפה ביותר." data-en="Tradition and nature from the sea to the mountains. Japan in its most beautiful autumn season.">מסורת וטבע מהים אל ההרים. יפן בעונת השלכת היפה ביותר.</p>
+                        <a href="#contact" class="trip-link" data-he="לפרטים נוספים ←" data-en="More details →">לפרטים נוספים ←</a>
+                    </div>
+                </div>
+                <div class="trip-card fade-up">
+                    <div class="trip-image" style="background-image: url('images/vietnam.jpg')">
+                        <span class="trip-date" data-he="דצמבר 2026" data-en="Dec 2026">דצמבר 2026</span>
+                    </div>
+                    <div class="trip-content">
+                        <h3 data-he="ויאטנם וקמבודיה" data-en="Vietnam & Cambodia">ויאטנם וקמבודיה</h3>
+                        <p data-he="מממלכת הדרקון הקטן אל ממלכה שנעלמה בג'ונגלים. מסע מרתק בדרום מזרח אסיה." data-en="From the kingdom of the small dragon to a kingdom lost in the jungles. A fascinating journey through Southeast Asia.">מממלכת הדרקון הקטן אל ממלכה שנעלמה בג'ונגלים. מסע מרתק בדרום מזרח אסיה.</p>
+                        <a href="#contact" class="trip-link" data-he="לפרטים נוספים ←" data-en="More details →">לפרטים נוספים ←</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2027 Preview -->
+            <div style="text-align: center; margin-top: 50px;" class="fade-up">
+                <h3 style="color: var(--primary); font-size: 1.5rem; margin-bottom: 10px;" data-he="2027 — לא כל כך רחוק..." data-en="2027 — Not So Far Away...">2027 — לא כל כך רחוק...</h3>
+                <p style="color: var(--text-light); font-size: 1.05rem;" data-he="ינואר: הודו — מראג'סטאן ועד למורדות נהר הגנגס הקדוש. ועוד טיולים בהמשך..." data-en="January: India — from Rajasthan to the banks of the holy Ganges. More trips coming soon...">ינואר: הודו — מראג'סטאן ועד למורדות נהר הגנגס הקדוש. ועוד טיולים בהמשך...</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lectures -->
+    <section class="lectures" id="lectures">
+        <div class="container">
+            <div class="section-header fade-up">
+                <h2 data-he="הרצאות" data-en="Lectures">הרצאות</h2>
+                <p data-he="הרצאות מצולמות ומרתקות על מדינות, תרבויות ומסעות" data-en="Fascinating illustrated lectures on countries, cultures, and journeys">הרצאות מצולמות ומרתקות על מדינות, תרבויות ומסעות</p>
+                <div class="section-line"></div>
+            </div>
+            <div class="lectures-grid">
+                <div class="lecture-card fade-up">
+                    <h3 data-he="ויטנאם — בודהא, קונפוציוס ולאוצה" data-en="Vietnam — Buddha, Confucius & Laozi">ויטנאם — בודהא, קונפוציוס ולאוצה</h3>
+                    <p data-he="בין המשי לשדות האורז. מסע מהדלתא של נהר המקונג בדרום ועד לשבטי הצפון." data-en="Between silk and rice fields. A journey from the Mekong Delta in the south to the northern tribes.">בין המשי לשדות האורז. מסע מהדלתא של נהר המקונג בדרום ועד לשבטי הצפון.</p>
+                </div>
+                <div class="lecture-card fade-up">
+                    <h3 data-he="קמבודיה — שגריר סיני מדווח אחרי 800 שנים" data-en="Cambodia — A Chinese Ambassador Reports After 800 Years">קמבודיה — שגריר סיני מדווח אחרי 800 שנים</h3>
+                    <p data-he="בעקבות השגריר הסיני זוהו דג'ואן בן המאה ה-13 אל העיר האבודה אנגקור." data-en="Following 13th-century Chinese ambassador Zhou Daguan to the lost city of Angkor.">בעקבות השגריר הסיני זוהו דג'ואן בן המאה ה-13 אל העיר האבודה אנגקור.</p>
+                </div>
+                <div class="lecture-card fade-up">
+                    <h3 data-he="דרך המשי — ערים אבודות ונסתרות" data-en="The Silk Road — Lost & Hidden Cities">דרך המשי — ערים אבודות ונסתרות</h3>
+                    <p data-he="תחנות דרכים עתיקות, שווקים בהם מזרח ומערב מתחברים, חיי נוודים לצד יושבי הקבע." data-en="Ancient waypoints, markets where East meets West, nomadic life alongside settlers.">תחנות דרכים עתיקות, שווקים בהם מזרח ומערב מתחברים, חיי נוודים לצד יושבי הקבע.</p>
+                </div>
+                <div class="lecture-card fade-up">
+                    <h3 data-he="בין הודו לבורמה — שבטי נאגה המסתוריים" data-en="India to Burma — The Mysterious Naga Tribes">בין הודו לבורמה — שבטי נאגה המסתוריים</h3>
+                    <p data-he="מסע אל צפונה הלא ידוע של בורמה, בעקבות אחרוני השבטים המבודדים." data-en="A journey to Burma's unknown north, following the last isolated tribes.">מסע אל צפונה הלא ידוע של בורמה, בעקבות אחרוני השבטים המבודדים.</p>
+                </div>
+                <div class="lecture-card fade-up">
+                    <h3 data-he="קאמה סוטרה — העיר האבודה קאג'רהו" data-en="Kama Sutra — The Lost City of Khajuraho">קאמה סוטרה — העיר האבודה קאג'רהו</h3>
+                    <p data-he="מסע אישי אל ממלכת צ'אנדלה. מהי אומנות החיים הטובים ואומנות האהבה באבן." data-en="A personal journey to the Chandela kingdom. The art of good living carved in stone.">מסע אישי אל ממלכת צ'אנדלה. מהי אומנות החיים הטובים ואומנות האהבה באבן.</p>
+                </div>
+                <div class="lecture-card fade-up">
+                    <h3 data-he="לאוס — המפלט לחולמים האחרונים" data-en="Laos — Refuge of the Last Dreamers">לאוס — המפלט לחולמים האחרונים</h3>
+                    <p data-he="מסע במעלה נהר המקונג בין קמבודיה, לאוס ותאילנד. הכרות עם ערים רומנטיות על גדות הנהר." data-en="Journey up the Mekong between Cambodia, Laos, and Thailand. Discovering romantic riverside cities.">מסע במעלה נהר המקונג בין קמבודיה, לאוס ותאילנד. הכרות עם ערים רומנטיות על גדות הנהר.</p>
+                </div>
+                <div class="lecture-card fade-up">
+                    <h3 data-he="בורמה — קסמים וחידות בארץ פגודות הזהב" data-en="Burma — Enchantment in the Land of Golden Pagodas">בורמה — קסמים וחידות בארץ פגודות הזהב</h3>
+                    <p data-he="מיאנמר הידועה כ״ארץ הזהב״ — יערות טיק, אבנים טובות, אגמים נוצצים ומורשת תרבותית עצומה." data-en='Myanmar, known as "The Golden Land" — teak forests, precious stones, gleaming lakes, and immense cultural heritage.'>מיאנמר הידועה כ״ארץ הזהב״ — יערות טיק, אבנים טובות, אגמים נוצצים ומורשת תרבותית עצומה.</p>
+                </div>
+                <div class="lecture-card fade-up">
+                    <h3 data-he="הודו — אלים ובני אנוש בין הסארי לטאג' מאהל" data-en="India — Gods & Mortals from Sari to Taj Mahal">הודו — אלים ובני אנוש בין הסארי לטאג' מאהל</h3>
+                    <p data-he="משוט בין דלהי, ואראנסי, אגרה וראג'סטאן. מבצרים אדומים, סיפורי מהרג'ות וחיי הודו המרתקים." data-en="Wandering between Delhi, Varanasi, Agra, and Rajasthan. Red forts, Maharaja tales, and India's fascinating life.">משוט בין דלהי, ואראנסי, אגרה וראג'סטאן. מבצרים אדומים, סיפורי מהרג'ות וחיי הודו המרתקים.</p>
+                </div>
+                <div class="lecture-card fade-up">
+                    <h3 data-he="נפאל — האם הגענו אל גן עדן?" data-en="Nepal — Have We Reached Paradise?">נפאל — האם הגענו אל גן עדן?</h3>
+                    <p data-he="חיי תרבויות בעמק עשיר, דרכים נסתרות בהימלאיה ומימד הגובה. גג העולם." data-en="Cultural life in a rich valley, hidden Himalayan paths, and the altitude dimension. The roof of the world.">חיי תרבויות בעמק עשיר, דרכים נסתרות בהימלאיה ומימד הגובה. גג העולם.</p>
+                </div>
+                <div class="lecture-card fade-up">
+                    <h3 data-he="שנחאי — העיר הגדולה בקצה נהר היאנגצה" data-en="Shanghai — The Great City at the Yangtze's Edge">שנחאי — העיר הגדולה בקצה נהר היאנגצה</h3>
+                    <p data-he="עיר הענק, המערבית בעולם יש אומרים. פיוז'ן בין מזרח למערב, מוקפת ערי מים חלומיות." data-en="The giant city, some say the most Western in the world. A fusion of East and West, surrounded by dreamlike water towns.">עיר הענק, המערבית בעולם יש אומרים. פיוז'ן בין מזרח למערב, מוקפת ערי מים חלומיות.</p>
+                </div>
+                <div class="lecture-card fade-up">
+                    <h3 data-he="קיריגיסטאן — ארצם של הנוודים" data-en="Kyrgyzstan — Land of the Nomads">קיריגיסטאן — ארצם של הנוודים</h3>
+                    <p data-he="״שוויץ של אסיה״ — נופים אלפינים מרהיבים, עדרי סוסים בין יורטות לבנות על שפת אגמים כחולים." data-en='"The Switzerland of Asia" — stunning alpine landscapes, horse herds among white yurts by blue lakes.'>"שוויץ של אסיה" — נופים אלפינים מרהיבים, עדרי סוסים בין יורטות לבנות על שפת אגמים כחולים.</p>
+                </div>
+                <div class="lecture-card fade-up">
+                    <h3 data-he="צפון הים הבלטי — ליטא ולטביה" data-en="The Northern Baltics — Lithuania & Latvia">צפון הים הבלטי — ליטא ולטביה</h3>
+                    <p data-he="בין מבצרים ובתי אחוזה עתיקים, לאורך נהרות בלב יערות ועל גדות מאות אגמים." data-en="Among castles and ancient manors, along rivers through forests and hundreds of lakeshores.">בין מבצרים ובתי אחוזה עתיקים, לאורך נהרות בלב יערות ועל גדות מאות אגמים.</p>
+                </div>
+                <div class="lecture-card fade-up">
+                    <h3 data-he="סלובקיה — בין הרי הטטרה לאיחוד האירופאי" data-en="Slovakia — From the Tatra Mountains to the EU">סלובקיה — בין הרי הטטרה לאיחוד האירופאי</h3>
+                    <p data-he="מדינה קטנה מלאה בעמקים מוריקים, כפרים עתיקים, אגמים ציוריים וברטיסלאבה עמוסת ההיסטוריה." data-en="A small country full of green valleys, ancient villages, picturesque lakes, and history-laden Bratislava.">מדינה קטנה מלאה בעמקים מוריקים, כפרים עתיקים, אגמים ציוריים וברטיסלאבה עמוסת ההיסטוריה.</p>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="#contact" class="btn btn-primary" data-he="להזמנת הרצאה" data-en="Book a Lecture">להזמנת הרצאה</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Books -->
+    <section class="books" id="books">
+        <div class="container">
+            <div class="section-header fade-up">
+                <h2 data-he="ספרים" data-en="Books">ספרים</h2>
+                <p data-he="ספרי מסע ותרגום מרתקים" data-en="Fascinating travel books and translations">ספרי מסע ותרגום מרתקים</p>
+                <div class="section-line"></div>
+            </div>
+            <div class="books-grid">
+                <div class="book-card fade-up" onclick="openBookModal('paam')">
+                    <div class="book-cover" style="background: none; padding: 0;">
+                        <img src="images/book-paam.jpg" alt="פעם אחת בחיים" style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
+                    </div>
+                    <div class="book-info">
+                        <h3 data-he="פעם אחת בחיים" data-en="Once in a Lifetime">פעם אחת בחיים</h3>
+                        <p data-he="557 עמודים כולל 32 עמודי צבע. ספר מסע מבוסס על יומן שנכתב במהלך שנת טיול במזרח הרחוק. למחרת מסיבת חתונתם לקחו גלית וחן את תרמיליהם ויצאו להגשים חלום חיים: מסע ארוך, בלתי מוגבל בזמן, במזרח הרחוק." data-en="557 pages including 32 color pages. A travel book based on a diary written during a year-long trip in the Far East. The day after their wedding party, Galit and Chen took their backpacks and set out to fulfill a lifelong dream: a long, open-ended journey through the Far East.">557 עמודים כולל 32 עמודי צבע. ספר מסע מבוסס על יומן שנכתב במהלך שנת טיול במזרח הרחוק. למחרת מסיבת חתונתם לקחו גלית וחן את תרמיליהם ויצאו להגשים חלום חיים: מסע ארוך, בלתי מוגבל בזמן, במזרח הרחוק.</p>
+                        <p style="font-size: 0.9rem;" data-he="נפאל, הודו, תאילנד, בורמה, קמבודיה וויאטנם — רכבות, אוטובוסים, אופנוע, ריקשות וסירות." data-en="Nepal, India, Thailand, Burma, Cambodia, and Vietnam — trains, buses, motorcycle, rickshaws, and boats.">נפאל, הודו, תאילנד, בורמה, קמבודיה וויאטנם — רכבות, אוטובוסים, אופנוע, ריקשות וסירות.</p>
+                    </div>
+                </div>
+                <div class="book-card fade-up" onclick="openBookModal('cambodia')">
+                    <div class="book-cover" style="background: none; padding: 0;">
+                        <img src="images/book-cambodia.jpg" alt="מנהגי קמבודיה" style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
+                    </div>
+                    <div class="book-info">
+                        <h3 data-he="מנהגי קמבודיה" data-en="Customs of Cambodia">מנהגי קמבודיה</h3>
+                        <p data-he="הספר היחיד בעברית אודות ההיסטוריה של ממלכת קמבודיה האדירה. תרגום כתביו של השגריר הסיני צ'ו טא-קואן מהמאה ה-13, שביקר בקמבודיה ותיעד את חיי הממלכה. 109 עמודים." data-en="The only book in Hebrew about the history of the great Cambodian kingdom. A translation of the writings of 13th-century Chinese ambassador Zhou Daguan, who visited Cambodia and documented the kingdom's life. 109 pages.">הספר היחיד בעברית אודות ההיסטוריה של ממלכת קמבודיה האדירה. תרגום כתביו של השגריר הסיני צ'ו טא-קואן מהמאה ה-13, שביקר בקמבודיה ותיעד את חיי הממלכה. 109 עמודים.</p>
+                        <p class="book-price" data-he="90 ₪ כולל משלוח והקדשה אישית" data-en="90 ₪ including shipping & personal dedication">90 ₪ כולל משלוח והקדשה אישית</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header fade-up">
+                <h2 data-he="צרו קשר" data-en="Contact">צרו קשר</h2>
+                <p data-he="לפרטים על טיולים, הרצאות, רכישת ספרים או כל שאלה אחרת" data-en="For information about trips, lectures, book purchases, or any other inquiry">לפרטים על טיולים, הרצאות, רכישת ספרים או כל שאלה אחרת</p>
+                <div class="section-line"></div>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info fade-up">
+                    <h3 data-he="חן אליעז" data-en="Chen Eliaz">חן אליעז</h3>
+                    <p data-he="אשמח לשמוע מכם. בין אם אתם מעוניינים להצטרף לטיול, להזמין הרצאה, לרכוש ספר או סתם לשאול שאלה — אל תהססו ליצור קשר." data-en="I'd love to hear from you. Whether you're interested in joining a trip, booking a lecture, purchasing a book, or just asking a question — don't hesitate to reach out.">אשמח לשמוע מכם. בין אם אתם מעוניינים להצטרף לטיול, להזמין הרצאה, לרכוש ספר או סתם לשאול שאלה — אל תהססו ליצור קשר.</p>
+                    <div class="contact-detail">
+                        <div class="contact-icon">📞</div>
+                        <div>
+                            <span style="font-weight: 600; display: block; font-size: 0.85rem; color: var(--text-light);" data-he="טלפון" data-en="Phone">טלפון</span>
+                            <a href="tel:+972528595493" dir="ltr">052-8595493</a>
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <div class="contact-icon">📍</div>
+                        <div>
+                            <span style="font-weight: 600; display: block; font-size: 0.85rem; color: var(--text-light);" data-he="מיקום" data-en="Location">מיקום</span>
+                            <span data-he="זיכרון יעקב, ישראל" data-en="Zichron Ya'akov, Israel">זיכרון יעקב, ישראל</span>
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <div class="contact-icon">✉️</div>
+                        <div>
+                            <span style="font-weight: 600; display: block; font-size: 0.85rem; color: var(--text-light);" data-he="אימייל" data-en="Email">אימייל</span>
+                            <span data-he="שלחו הודעה דרך הטופס" data-en="Send a message via the form">שלחו הודעה דרך הטופס</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form fade-up">
+                    <form id="contactForm" onsubmit="handleSubmit(event)">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label data-he="שם מלא" data-en="Full Name">שם מלא</label>
+                                <input type="text" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label data-he="טלפון" data-en="Phone">טלפון</label>
+                                <input type="tel" name="phone">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label data-he="אימייל" data-en="Email">אימייל</label>
+                            <input type="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label data-he="נושא" data-en="Subject">נושא</label>
+                            <input type="text" name="subject" data-he-placeholder="טיול, הרצאה, ספר..." data-en-placeholder="Trip, lecture, book..." placeholder="טיול, הרצאה, ספר...">
+                        </div>
+                        <div class="form-group">
+                            <label data-he="הודעה" data-en="Message">הודעה</label>
+                            <textarea name="message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;" data-he="שליחה" data-en="Send">שליחה</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h4 data-he="חן אליעז" data-en="Chen Eliaz">חן אליעז</h4>
+                    <p data-he="מדריך טיולים, מרצה וסופר. למעלה מ-25 שנות ניסיון בהדרכת מסעות למזרח הרחוק ואירופה. מתמחה בטיולי דגש — תאריך אחד, יעד אחד." data-en="Travel guide, lecturer, and author. Over 25 years of experience guiding journeys to the Far East and Europe. Specializing in focused trips — one date, one destination.">מדריך טיולים, מרצה וסופר. למעלה מ-25 שנות ניסיון בהדרכת מסעות למזרח הרחוק ואירופה. מתמחה בטיולי דגש — תאריך אחד, יעד אחד.</p>
+                </div>
+                <div>
+                    <h4 data-he="ניווט מהיר" data-en="Quick Links">ניווט מהיר</h4>
+                    <ul class="footer-links">
+                        <li><a href="#about" data-he="אודות" data-en="About">אודות</a></li>
+                        <li><a href="#trips" data-he="טיולים" data-en="Trips">טיולים</a></li>
+                        <li><a href="#lectures" data-he="הרצאות" data-en="Lectures">הרצאות</a></li>
+                        <li><a href="#books" data-he="ספרים" data-en="Books">ספרים</a></li>
+                        <li><a href="#contact" data-he="צרו קשר" data-en="Contact">צרו קשר</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 data-he="יצירת קשר" data-en="Get in Touch">יצירת קשר</h4>
+                    <p>📞 052-8595493</p>
+                    <p data-he="📍 זיכרון יעקב, ישראל" data-en="📍 Zichron Ya'akov, Israel">📍 זיכרון יעקב, ישראל</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p data-he="© 2026 חן אליעז. כל הזכויות שמורות." data-en="© 2026 Chen Eliaz. All rights reserved.">© 2026 חן אליעז. כל הזכויות שמורות.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Language toggle
+        let currentLang = 'he';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'he' ? 'en' : 'he';
+            const html = document.documentElement;
+
+            if (currentLang === 'en') {
+                html.setAttribute('lang', 'en');
+                html.setAttribute('dir', 'ltr');
+                document.getElementById('langToggle').textContent = 'עברית';
+                document.title = 'Chen Eliaz | Travel Guide';
+            } else {
+                html.setAttribute('lang', 'he');
+                html.setAttribute('dir', 'rtl');
+                document.getElementById('langToggle').textContent = 'English';
+                document.title = 'חן אליעז | מדריך טיולים';
+            }
+
+            // Update all translatable elements
+            document.querySelectorAll('[data-he][data-en]').forEach(el => {
+                el.innerHTML = el.getAttribute(`data-${currentLang}`);
+            });
+
+            // Update placeholders
+            document.querySelectorAll('[data-he-placeholder][data-en-placeholder]').forEach(el => {
+                el.placeholder = el.getAttribute(`data-${currentLang}-placeholder`);
+            });
+        }
+
+        // About photo slideshow
+        const aboutSlides = document.querySelectorAll('.about-slide');
+        let currentAbout = 0;
+        setInterval(() => {
+            aboutSlides[currentAbout].classList.remove('active');
+            currentAbout = (currentAbout + 1) % aboutSlides.length;
+            aboutSlides[currentAbout].classList.add('active');
+        }, 5000);
+
+        // Hero slideshow
+        const heroBgs = document.querySelectorAll('.hero-bg');
+        let currentBg = 0;
+        setInterval(() => {
+            heroBgs[currentBg].classList.remove('active');
+            currentBg = (currentBg + 1) % heroBgs.length;
+            heroBgs[currentBg].classList.add('active');
+        }, 10000);
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Mobile menu
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+
+        // Close mobile menu on link click
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('active');
+            });
+        });
+
+        // Scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+        // Form handling
+        function handleSubmit(e) {
+            e.preventDefault();
+            const form = e.target;
+            const data = new FormData(form);
+            const name = data.get('name');
+            const phone = data.get('phone');
+            const email = data.get('email');
+            const subject = data.get('subject');
+            const message = data.get('message');
+
+            // Build WhatsApp/phone message as fallback
+            const whatsappMsg = encodeURIComponent(
+                `שלום חן, שמי ${name}.\n${subject ? 'נושא: ' + subject + '\n' : ''}${message}\n\nאימייל: ${email}${phone ? '\nטלפון: ' + phone : ''}`
+            );
+            window.open(`https://wa.me/972528595493?text=${whatsappMsg}`, '_blank');
+
+            const btn = form.querySelector('button[type="submit"]');
+            const origText = btn.textContent;
+            btn.textContent = currentLang === 'he' ? 'ההודעה נשלחה!' : 'Message sent!';
+            btn.style.background = '#27ae60';
+            setTimeout(() => {
+                btn.textContent = origText;
+                btn.style.background = '';
+                form.reset();
+            }, 3000);
+        }
+    </script>
+
+    <!-- Book Modal: פעם אחת בחיים -->
+    <div class="book-modal-overlay" id="modal-paam" onclick="if(event.target===this)closeBookModal()">
+        <div class="book-modal">
+            <div class="book-modal-header">
+                <button class="book-modal-close" onclick="closeBookModal()">&times;</button>
+                <img src="images/book-paam.jpg" alt="פעם אחת בחיים">
+                <div>
+                    <h2>פעם אחת בחיים</h2>
+                    <p>מאת: חן אליעז · 557 עמודים כולל 32 עמודי צבע</p>
+                </div>
+            </div>
+            <div class="book-modal-body">
+                <h3>על הספר</h3>
+                <p>״פעם אחת בחיים״ מבוסס על יומן מסע שנכתב במהלך שנת טיול במזרח הרחוק.</p>
+                <p>למחרת מסיבת חתונתם לקחו גלית וחן את תרמיליהם ויצאו להגשים חלום חיים: מסע ארוך, בלתי מוגבל בזמן, במזרח הרחוק. זה היה המסע המיוחל, פסק הזמן שלפני הכניסה למרוץ החיים.</p>
+                <p>במהלך שנת המסע הם טיילו בנפאל, הודו, תאילנד, בורמה, קמבודיה וויאטנם. הם עברו במסלולי ה״חובה״ של תרמילאים ישראלים וגם הגיעו למקומות נידחים שאך מעטים פוקדים אותם. הם עשו דרכם ברכבות, אוטובוסים, רכובים על אופנוע, בריקשות ובסירות. טיפסו בפסגות נפאל, שוטטו בעריה המיוחדות של הודו, השתאו מול מקדשים מופלאים בקמבודיה וצפו בשקיעות מרהיבות בחופי תאילנד.</p>
+                <p>חן וגלית הם שניים מתוך אלפי ישראלים שיוצאים בכל שנה לטיול הגדול במזרח הרחוק. מה הם מחפשים שם? ומה הם מוצאים?</p>
+                <p>ספר זה מבוסס על יומן המסע שנכתב במהלך שנת הטיול: אירועים גדולים וקטנים, חוויות, רשמים והווי תרמילאים, מפגשים עם תרבויות ועם בני אדם, כל אלו הועלו על הכתב בחיוניות רבה ובמבט רענן. ולצדם הרהורים, תובנות והגיגים בשאלות גדולות וקטנות.</p>
+                <p>פעם אחת בחיים הוא ספר מסע מרתק למי שמתכנן טיול במזרח הרחוק, להורים שבניהם מטיילים, לאלו שחזרו ומתגעגעים ולכל מי שליבו יוצא אל המרחקים.</p>
+
+                <div class="book-quote">מעבר לעיקול התיישרה הדרך. ככל שהתקרבנו חדרה בנו ההכרה שהגענו אל ה״פס״ ההרים נראו קרובים ושקט עמוק שרר. אפילו קריאות השמחה ותקתוקי המצלמות כמו נשמעו מרחוק. ציפורים לא השמיעו אף לא צפצוף בודד. התיישבנו על גל אבנים והתבוננו באחד הנופים היפים באסיה: פסגות רחוקות התמזגו בשמיים. חשנו כמנצחים, שיכורים משמחה מול נוף הקדומים והמרחב העצום. צחקנו באושר.</div>
+
+                <div class="separator">* * *</div>
+
+                <h3>ראיון עם המחבר</h3>
+
+                <p>״פעם אחת בחיים״ הוא שמו של ספר מסע שראה אור באחרונה. את הספר כתב חן אליעז. בשנת 1996 התחתן חן עם גלית. זמן קצר לאחר החופה, יצאו השניים למזרח, למסע שנמשך שנה: נפאל, הודו, תאילנד, ויטנאם, בורמה, קמבודיה. שנה שלמה שבה נסעו השניים ברכבות, באוטובוסים, בריקשות, על אופניים; ישנו בבתי הארחה, שכרו חדרים בכפרים אצל משפחות, לנו בבקתות-הרים, אכלו מזונות מגוונים, פגשו אנשים שונים ומשונים, ראו נופים, מקדשים, תרבויות, דתות.</p>
+                <p>כשחזרו, ריכז אליעז את שלושת יומני המסע שמילא בכתב יד צפוף והתיישב לכתוב ספר.</p>
+                <p>הספר כתוב בשפה קלילה בגוף ראשון. זהו ספר העוסק בחוויה האישית של המסע ובכך קסמו. אליעז כותב על הדברים המתרחשים ומדי פעם גם מתייחס בדרכו לשאלות המעסיקות אותו: מהו זה שהינך עוזב? האם זאת בריחה? האם המסע אכן מאפשר ״חופש״? מהו אותו ״חופש״? מהי ״שגרה״? מהם הדברים שמהם אנחנו מבקשים להשתחרר? מה באמת חשוב?</p>
+
+                <div class="book-quote">הנסיעה הארוכה הראשונה שלנו באוטובוס במזרח הייתה קשה במיוחד, צפופה, חמה ורבת תקלות ועצירות. בספסל לפנינו ישבה אישה ענקית, כבדת חזה, עטופה בשמלה עצומה. לאורך כל הנסיעה היא זזה בכבדות, השתעלה או נחרה בקולניות, באחת העצירות היא התעלתה על עצמה: כחכחה בגרונה בקולי קולות, התרוממה קלות וירקה מהחלון בתרועה. כמה שניות חלפו וקול נפץ נשמע, הגברת נפחה לחלל האוטובוס הדחוס ולסיום קנחה אפה על רצפת העץ. גלית התפקעה מצחוק וחזרה לישון. לקראת בוקר התגלה לעינינו עמק קטמנדו שנראה כחלום יפה.</div>
+
+                <p class="interview-q">מדוע ״פעם אחת בחיים״?</p>
+                <p>״גליתי ישבה אתי וחשבנו ולבסוף החלטנו לקרוא לספר ׳פעם אחת בחיים׳. צריך להיות כנים וריאליים – תקופה כזו לא תשוב. מסע כזה עושים אחרי הצבא, או מיד לאחר החתונה, או כשהילדים נפרדים לדרכם, או כשאתה בפנסיה. במשך שנה, אתה פותח את המפה בכל בוקר וכמו ציפור אתה מחליט לאן לעוף. אין התחייבויות, אין לחץ. אתה חופשי, אני לא יכול להשוות את זה לשום חופש אחר. זו גדולה שהתרמילאות נתנה.״</p>
+
+                <p class="interview-q">נראה לך שטיול כזה אכן יכול לעזור?</p>
+                <p>״אני מאמין בזה לגמרי. לא רק טיול כזה, אלא כל יציאה מהמסגרת, עזיבה לתקופה, זה לא חייב להיות בחו״ל, זה יכול להיות טיול בארץ, עבודה אחרת – כל פסק זמן לבחון את הדברים. בטיול שלי התחלתי לכתוב, מהטיול צמח העיסוק שלי כמדריך טיולים, כמרצה.״</p>
+
+                <p class="interview-q">טיולים מאורגנים הם אנטי-תזה למסע שאתם עברתם ב״פעם אחת בחיים״ ובכל זאת אתה מדריך אותם?</p>
+                <p>״זה ברור. אבל מצאתי לעצמי את הנישה של הטיולים הגיאוגרפיים, טיולים שמתמקדים במדינה ולא מכסים כמה מדינות בשבועיים. אני גם ממציא מסלולים, אלו הם ׳טיולי הדגש׳, תאריך אחד ליעד אחד.״</p>
+
+                <div class="separator">* * *</div>
+
+                <h3>מהו חופש?</h3>
+
+                <div class="book-quote">הבטתי על הסבל שלנו. כל חייו הוא סוחב משאות, מגדל ילדים, אשתו מנהלת את הבית ומגדלת ירק בחצרה. הוא ישב מכופף כדרכם של הנפאלים, כובעו שמוט והווסט הדהוי שלו מתוח על גופו הצנום והשרירי. הוא עישן בהנאה סיגריות עלים שגלגל כמה דקות קודם לכן. הצטרפתי אליו ועישנו יחד, הזמנתי אותו לתה ושתקנו. לא הייתה בינינו תקשורת מילולית, אך מדי פעם חייכנו זה אל זה בהבנה. הרגשה טובה מילאה אותי ואני חשבתי: מה חסר לו לאדם זה שחי על פסגת העולם עם משפחתו, מקיים עצמו בלב הטבע, רגוע מחוץ למרוץ החיים המטורף של העולם המערבי.</div>
+
+                <p>״החופש שאני מתייחס אליו הוא יותר חופש בבחירה. לאנשים היום אין חופש בבחירה, משהו בסדרי עדיפויות השתנה, במיוחד של צעירים גילאי 25-45. אנשים עובדים רוב הזמן ומדי פעם יש להם חלונות קטנים שבהם הם תורמים לעצמם. על החופש הזה אני מדבר, חופש הבחירה לחשוב מה אנחנו עושים עם החיים שלנו.״</p>
+
+                <p class="interview-q">דברים נוספים ששקעו בך בעקבות המסע?</p>
+                <p>״קיבלתי בעיקר איזו מין הסתכלות אחרת, שלווה יותר, על מה שקורה כאן ביום-יום. אחרי שחזרנו לא יכולתי לקנות בסופר במשך חודשים. עד היום אני מתקשה לערוך קניות. אני לא ממלא יותר ממה שאני צריך. אתה מגלה שהמעט הוא טוב, הגודש מכביד.״</p>
+
+                <div class="separator">* * *</div>
+
+                <h3>אוכל</h3>
+                <div class="book-quote">בבקרים פתחנו את יומנו במסעדה קטנה שהשקיפה על ׳רחוב השוק׳ ההומה. המקום הציע חביתות, תפוחי אדמה, פיתות חמות וגם סלט ירקות עשיר. על אש גדולה רתח תה הודי ריחני שמשך את התיירים פנימה.</div>
+
+                <p>״גילינו במהלך הטיול שהאוכל הוא חלק חשוב מהטיול. במזרח הרחוק, כולם אוכלים על המדרכה. הבתים קטנים מאוד. חיי היום-יום מתרחשים על המדרכה. שם מבשלים ואוכלים. כשאתה עובר ליד אתה רואה צלחות גדושות עם דברים מגרים: אטריות שמוקפצות לחצי דקה עם כל מיני בשרים קטנים, עם תבלינים מדהימים, עם ירקות, הכל צבעוני להפליא. אתה לא יכול שלא לנסות.״</p>
+
+                <div class="separator">* * *</div>
+
+                <h3>איך זה התחיל?</h3>
+                <p>״אני חושב ששם זה התחיל. הייתי חייל משוחרר וקראתי ספר על העתיקות בקמבודיה, על המקדשים, על הג'ונגלים ואמרתי לעצמי שאני חייב להגיע לשם. זה לקח כמה שנים, אבל זה התחיל מהנקודה הזו.״</p>
+                <p>״כשאתה מגיע לאתרים ארכאולוגיים במזרח, אתה מגיע למקומות שבהם המבנים העתיקים נשארו בגבהים, שרדו בהם התקרות והציורים והתבליטים. אין כמעט צורך לדמיין, אפשר לראות את החיים לפנייך – ככה זה היה לפני 500, לפני 1000 שנה. אתה צריך להיכנס פנימה, להיות רגוע, בשקט, וזה קורה. זה עובר אלי ואני מנסה להעביר את זה למטיילים.״</p>
+
+                <div class="separator">* * *</div>
+
+                <h3>סיפא</h3>
+                <div class="book-quote">אך ככל שננסה לקבוע את המהלך הבא זה יהיה קשה יותר. מולנו מתייצב הגורל במלוא קומתו ואנו מקבלים בסוף את הכרעתו ולאחר מכן מבינים, אולי שסטינו מתוכניותינו.</div>
+                <p>״כשיצאנו אל הטיול, הייתה לנו תכנית, סטינו ממנה. כבר בראשית דרכנו החלטנו שנבחן את עצמנו מדי שנה. מאז, מדי שנה, ביום קבוע אנחנו לוקחים יומיים חופש, באיזה צימר בגליל ועושים מעין חשבון נפש, מתכננים את המהלך הבא שלנו. אם אתה מכוון, יכול להיות שתצליח להגשים חלומות וגם אם אתה לא מכוון יכול להיות שתצליח להגשים.״</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Book Modal: מנהגי קמבודיה -->
+    <div class="book-modal-overlay" id="modal-cambodia" onclick="if(event.target===this)closeBookModal()">
+        <div class="book-modal">
+            <div class="book-modal-header">
+                <button class="book-modal-close" onclick="closeBookModal()">&times;</button>
+                <img src="images/book-cambodia.jpg" alt="מנהגי קמבודיה">
+                <div>
+                    <h2>מנהגי קמבודיה</h2>
+                    <p>מאת: צ'ו טא-קואן · תרגום והוספות: חן אליעז · 109 עמודים</p>
+                </div>
+            </div>
+            <div class="book-modal-body">
+                <h3>הספר היחיד בעברית אודות ההיסטוריה של ממלכת קמבודיה האדירה</h3>
+
+                <p class="interview-q">שגריר בן 700 שנים מספר מן העבר:</p>
+
+                <div class="book-quote">כאשר המלך עוזב את ארמונו, אנשי הצבא מובילים את התהלוכה, ואז באים הדגלים, הכרזות, המוזיקה. שלוש-מאות או חמש-מאות נערות הארמון, לבושות בעליצות, פרחים בשערותיהן ונרות בידיהן, מרוכזות בטור נפרד. הנרות דולקים גם באור יום. אחריהן מגיעות נערות אחרות, אוחזות כלי זהב וכסף מהארמון ואוסף שלם של תכשיטים בעיצוב מיוחד מאוד... שומרי הראש של הארמון אוחזים מגנים וכידונים. בעקבותיהם באו מרכבות הרתומות לעזים ולסוסים, כולם מקושטים בזהב, ושרים ונסיכים רכובים על פילים, ולפניהם נושאי שמשיות בצבע שני, רבות מספור. מאחור התקדמו נשות המלכות והפילגשים באפיריונים ובמרכבות, או רכובות על סוסים או פילים... לבסוף הופיע השליט, עומד בזקיפות על פיל ואוחז בידו את החרב הקדושה.</div>
+
+                <div class="separator">* * *</div>
+
+                <p>בשנת 1431 הכול נגמר. פולשים מתאילנד השכנה כבשו ובזזו את הבירה העצמאית האחרונה, אנגקור. תושבי קמבודיה עזבו את הערים ומצאו מקלט בכפרים קטנים, חומות העפר והחול נשחקו והתמוטטו, ובנייני העץ נרקבו והתפוררו. כמוהם גם מסמכי הארכיבים שהיו כתובים על כפות דקלים ורצועות מקליפות עצים. עצים ומטפסים כיסו את האבנים הגדולות במעטה בלתי חדיר, והשדות הפוריים הפכו עקב הגשמים הרבים וסתימת תעלות הניקוז, לביצות ממאירות.</p>
+                <p>כל שנותר מבירת הממלכה האדירה היו תלי תלים של אבנים מתחת לירוק-עד, זיכרונות עמומים חקוקים באבן... וכארבעים פרקים כתובים מתוך דיווח של שגריר-חוקר סיני שביקר במקום לפני כשבע מאות שנים. אלו מובאים בספר ״מנהגי קמבודיה״, אותו כתב צ'ו טא-קואן.</p>
+
+                <div class="separator">* * *</div>
+
+                <h3>הספר מתאר בין היתר את:</h3>
+                <p>בתי המגורים · לבוש · שלוש הקבוצות הדתיות · הילדים · לידה · בתולים בקמבודיה · עבדים · שפה · תושבים קדמונים · כתיבה בקמבודיה · השנה החדשה ועונות השנה · צדק קמבודי · צרעת וחולי · המתים · מוצרי קמבודיה · החי והצומח · איסוף המרה · רחצה בקמבודיה, ועוד.</p>
+
+                <div class="separator">* * *</div>
+
+                <h3>על המחבר והמתרגם</h3>
+                <p>צ'ו טא-קואן היה תושב יונג-צ'יאה, ממחוז צ'אקיאנג בסין. בשנת 1296 נשלח כשגריר לקמבודיה ושהה שם כשנה. כששב לסין כתב את תיאורו.</p>
+                <p>חן אליעז, תושב זיכרון יעקב, ארכיאולוג, גיאוגרף וחוקר תרבויות המזרח הרחוק (מוסמך אוניברסיטת בן גוריון ואוניברסיטת תל אביב), מדריך טיולים לארצות אלו. מחבר הספר ״פעם אחת בחיים״ המספר על מסע ארוך שערך בארצות המזרח, וכותב מאמרים לפרסומים גיאוגרפיים שונים. הספר ההיסטורי תורגם במיומנות וצורפו לתרגום צילומים, הקדמות וביאורים.</p>
+
+                <div class="book-cta">
+                    <p class="price">90 ₪ בלבד</p>
+                    <p>כולל דמי משלוח והקדשה אישית לקוראים</p>
+                    <p style="margin-top:10px;">לקניית הספר: <a href="tel:+972528595493" style="color:var(--accent); font-weight:600;">052-8595493</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openBookModal(book) {
+            document.getElementById('modal-' + book).classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeBookModal() {
+            document.querySelectorAll('.book-modal-overlay').forEach(m => m.classList.remove('active'));
+            document.body.style.overflow = '';
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeBookModal();
+        });
+    </script>
+
+</body>
+</html>
