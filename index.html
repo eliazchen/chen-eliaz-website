@@ -607,6 +607,56 @@
             margin-top: 10px;
         }
 
+        /* Consulting */
+        .consulting {
+            background: var(--light);
+        }
+
+        .consulting-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+
+        .consulting-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 32px 24px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+
+        .consulting-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        }
+
+        .consulting-icon {
+            font-size: 2.4rem;
+            margin-bottom: 16px;
+        }
+
+        .consulting-card h3 {
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .consulting-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        @media (max-width: 900px) {
+            .consulting-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 560px) {
+            .consulting-grid { grid-template-columns: 1fr; }
+        }
+
         /* Quote */
         .quote-section {
             background: linear-gradient(135deg, rgba(44,62,80,0.85), rgba(20,30,40,0.9)),
@@ -1241,6 +1291,7 @@
                 <li><a href="#trips" data-he="טיולים" data-en="Trips">טיולים</a></li>
                 <li><a href="#lectures" data-he="הרצאות" data-en="Lectures">הרצאות</a></li>
                 <li><a href="#books" data-he="ספרים" data-en="Books">ספרים</a></li>
+                <li><a href="#consulting" data-he="יעוץ לטיולים" data-en="Travel Consulting">יעוץ לטיולים</a></li>
                 <li><a href="#contact" data-he="צרו קשר" data-en="Contact">צרו קשר</a></li>
                 <li><button class="lang-toggle" id="langToggle" onclick="toggleLanguage()">English</button></li>
             </ul>
@@ -1507,6 +1558,55 @@
         </div>
     </section>
 
+    <!-- Travel Consulting -->
+    <section class="consulting" id="consulting">
+        <div class="container">
+            <div class="section-header fade-up">
+                <h2 data-he="יעוץ לטיולים" data-en="Travel Consulting">יעוץ לטיולים</h2>
+                <p data-he="ייעוץ אישי ומקצועי לתכנון טיול מושלם" data-en="Personal and professional consulting for planning the perfect trip">ייעוץ אישי ומקצועי לתכנון טיול מושלם</p>
+                <div class="section-line"></div>
+            </div>
+            <div class="consulting-grid fade-up">
+                <div class="consulting-card">
+                    <div class="consulting-icon">🗺️</div>
+                    <h3 data-he="תכנון מסלול" data-en="Route Planning">תכנון מסלול</h3>
+                    <p data-he="בניית מסלול מותאם אישית לפי הזמן, התקציב והעדפות שלכם — ממדינה אחת ועד סיור רב-יעדי." data-en="Building a customized itinerary based on your time, budget, and preferences — from a single country to a multi-destination tour.">בניית מסלול מותאם אישית לפי הזמן, התקציב והעדפות שלכם — ממדינה אחת ועד סיור רב-יעדי.</p>
+                </div>
+                <div class="consulting-card">
+                    <div class="consulting-icon">🏨</div>
+                    <h3 data-he="המלצות שהייה" data-en="Accommodation Recommendations">המלצות שהייה</h3>
+                    <p data-he="מלונות בוטיק, אכסניות, גסטהאוסים ולינות ייחודיות שרק מי שמכיר את האזור לעומק יכול להמליץ עליהם." data-en="Boutique hotels, guesthouses, and unique stays that only someone who knows the area deeply can recommend.">מלונות בוטיק, אכסניות, גסטהאוסים ולינות ייחודיות שרק מי שמכיר את האזור לעומק יכול להמליץ עליהם.</p>
+                </div>
+                <div class="consulting-card">
+                    <div class="consulting-icon">🍜</div>
+                    <h3 data-he="תרבות ואוכל מקומי" data-en="Local Culture & Food">תרבות ואוכל מקומי</h3>
+                    <p data-he="היכן לאכול, מה לטעום, איך להתנהג — טיפים מקצועיים שיהפכו את הטיול לחוויה אותנטית ובלתי נשכחת." data-en="Where to eat, what to taste, how to behave — professional tips that will make your trip an authentic, unforgettable experience.">היכן לאכול, מה לטעום, איך להתנהג — טיפים מקצועיים שיהפכו את הטיול לחוויה אותנטית ובלתי נשכחת.</p>
+                </div>
+                <div class="consulting-card">
+                    <div class="consulting-icon">🎒</div>
+                    <h3 data-he="הכנה לפני היציאה" data-en="Pre-Departure Preparation">הכנה לפני היציאה</h3>
+                    <p data-he="מה לארוז, אילו חיסונים נדרשים, ביטוח נסיעות, ויזות, מטבע מקומי — כל מה שצריך לדעת לפני שעולים על המטוס." data-en="What to pack, which vaccinations are needed, travel insurance, visas, local currency — everything you need to know before boarding the plane.">מה לארוז, אילו חיסונים נדרשים, ביטוח נסיעות, ויזות, מטבע מקומי — כל מה שצריך לדעת לפני שעולים על המטוס.</p>
+                </div>
+                <div class="consulting-card">
+                    <div class="consulting-icon">👨‍👩‍👧‍👦</div>
+                    <h3 data-he="טיולים משפחתיים" data-en="Family Trips">טיולים משפחתיים</h3>
+                    <p data-he="תכנון טיולים לאסיה עם ילדים — התאמת הקצב, הפעילויות והאטרקציות למשפחה שלכם." data-en="Planning trips to Asia with children — adapting the pace, activities, and attractions for your family.">תכנון טיולים לאסיה עם ילדים — התאמת הקצב, הפעילויות והאטרקציות למשפחה שלכם.</p>
+                </div>
+                <div class="consulting-card">
+                    <div class="consulting-icon">📞</div>
+                    <h3 data-he="ליווי מרחוק בזמן הטיול" data-en="Remote Support During the Trip">ליווי מרחוק בזמן הטיול</h3>
+                    <p data-he="יש שאלה בשטח? בעיה לא צפויה? חן זמין בוואטסאפ לסייע גם כשאתם כבר בדרך." data-en="Have a question in the field? Unexpected problem? Chen is available on WhatsApp to help even when you're already on the road.">יש שאלה בשטח? בעיה לא צפויה? חן זמין בוואטסאפ לסייע גם כשאתם כבר בדרך.</p>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 48px;" class="fade-up">
+                <p style="font-size: 1.1rem; color: var(--text-light); margin-bottom: 24px;"
+                   data-he="פגישת ייעוץ ראשונה ללא תשלום — צרו קשר ונקבע זמן"
+                   data-en="First consultation meeting free of charge — contact us and we'll set a time">פגישת ייעוץ ראשונה ללא תשלום — צרו קשר ונקבע זמן</p>
+                <a href="#contact" class="btn btn-primary" data-he="לייעוץ ראשוני חינם" data-en="Free Initial Consultation">לייעוץ ראשוני חינם</a>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact -->
     <section class="contact" id="contact">
         <div class="container">
@@ -1587,6 +1687,7 @@
                         <li><a href="#trips" data-he="טיולים" data-en="Trips">טיולים</a></li>
                         <li><a href="#lectures" data-he="הרצאות" data-en="Lectures">הרצאות</a></li>
                         <li><a href="#books" data-he="ספרים" data-en="Books">ספרים</a></li>
+                        <li><a href="#consulting" data-he="יעוץ לטיולים" data-en="Travel Consulting">יעוץ לטיולים</a></li>
                         <li><a href="#contact" data-he="צרו קשר" data-en="Contact">צרו קשר</a></li>
                     </ul>
                 </div>
