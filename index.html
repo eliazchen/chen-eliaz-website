@@ -1622,9 +1622,12 @@
                     <h3 data-he="לאוס — המפלט לחולמים האחרונים" data-en="Laos — Refuge of the Last Dreamers">לאוס — המפלט לחולמים האחרונים</h3>
                     <p data-he="מסע במעלה נהר המקונג בין קמבודיה, לאוס ותאילנד. הכרות עם ערים רומנטיות על גדות הנהר." data-en="Journey up the Mekong between Cambodia, Laos, and Thailand. Discovering romantic riverside cities.">מסע במעלה נהר המקונג בין קמבודיה, לאוס ותאילנד. הכרות עם ערים רומנטיות על גדות הנהר.</p>
                 </div>
-                <div class="lecture-card fade-up">
+                <div class="lecture-card hot fade-up" onclick="openGallery('burma')" role="button" tabindex="0"
+                     aria-label="פתח גלריית תמונות בורמה"
+                     onkeydown="if(event.key==='Enter'||event.key===' ')openGallery('burma')">
                     <h3 data-he="בורמה — קסמים וחידות בארץ פגודות הזהב" data-en="Burma — Enchantment in the Land of Golden Pagodas">בורמה — קסמים וחידות בארץ פגודות הזהב</h3>
                     <p data-he="מיאנמר הידועה כ״ארץ הזהב״ — יערות טיק, אבנים טובות, אגמים נוצצים ומורשת תרבותית עצומה." data-en='Myanmar, known as "The Golden Land" — teak forests, precious stones, gleaming lakes, and immense cultural heritage.'>מיאנמר הידועה כ״ארץ הזהב״ — יערות טיק, אבנים טובות, אגמים נוצצים ומורשת תרבותית עצומה.</p>
+                    <span class="hot-badge" data-he="לחץ לגלריית תמונות" data-en="Click for photo gallery">לחץ לגלריית תמונות</span>
                 </div>
                 <div class="lecture-card fade-up">
                     <h3 data-he="הודו — אלים ובני אנוש בין הסארי לטאג' מאהל" data-en="India — Gods & Mortals from Sari to Taj Mahal">הודו — אלים ובני אנוש בין הסארי לטאג' מאהל</h3>
@@ -2103,6 +2106,19 @@
                     'images/vietnam-04.jpg','images/vietnam-05.jpg','images/vietnam-06.jpg',
                     'images/vietnam-07.jpg','images/vietnam-08.jpg','images/vietnam-09.jpg',
                     'images/vietnam-10.jpg','images/vietnam-11.jpg','images/vietnam-12.jpg'
+                ]
+            },
+            burma: {
+                title: 'בורמה — קסמים וחידות בארץ פגודות הזהב',
+                titleEn: 'Burma — Enchantment in the Land of Golden Pagodas',
+                images: [
+                    'images/burma-01.jpg','images/burma-02.jpg','images/burma-03.jpg',
+                    'images/burma-04.jpg','images/burma-05.jpg','images/burma-06.jpg',
+                    'images/burma-07.jpg','images/burma-08.jpg','images/burma-09.jpg',
+                    'images/burma-10.jpg','images/burma-11.jpg','images/burma-12.jpg',
+                    'images/burma-13.jpg','images/burma-14.jpg','images/burma-15.jpg',
+                    'images/burma-16.jpg','images/burma-17.jpg','images/burma-18.jpg',
+                    'images/burma-19.jpg','images/burma-20.jpg'
                 ]
             }
         };
