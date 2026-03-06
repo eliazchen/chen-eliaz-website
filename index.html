@@ -529,6 +529,135 @@
             transform: translateY(-4px);
         }
 
+        /* Hot lecture card (clickable gallery) */
+        .lecture-card.hot {
+            cursor: pointer;
+            position: relative;
+            border-color: var(--accent);
+            background: rgba(200,149,108,0.08);
+        }
+        .lecture-card.hot::after {
+            content: '📷';
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            font-size: 1.2rem;
+            opacity: 0.85;
+        }
+        [dir="ltr"] .lecture-card.hot::after { left: auto; right: 14px; }
+        .lecture-card.hot .hot-badge {
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 12px;
+            color: var(--accent);
+            border: 1px solid var(--accent);
+            border-radius: 20px;
+            padding: 2px 10px;
+        }
+        .lecture-card.hot:hover {
+            background: rgba(200,149,108,0.16);
+            transform: translateY(-6px);
+            box-shadow: 0 8px 32px rgba(200,149,108,0.25);
+        }
+
+        /* Gallery Modal */
+        #gallery-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.94);
+            z-index: 10000;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        #gallery-overlay.open { display: flex; }
+        #gallery-close {
+            position: absolute;
+            top: 18px;
+            left: 20px;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+            line-height: 1;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+        #gallery-close:hover { opacity: 1; }
+        #gallery-title {
+            color: var(--accent);
+            font-family: 'Secular One', sans-serif;
+            font-size: 1.1rem;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+        #gallery-img-wrap {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 90vw;
+            max-width: 900px;
+        }
+        #gallery-img {
+            max-width: 100%;
+            max-height: 70vh;
+            border-radius: 10px;
+            object-fit: contain;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+        }
+        .gallery-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.15);
+            border: none;
+            color: #fff;
+            font-size: 2rem;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+        .gallery-nav:hover { background: rgba(200,149,108,0.5); }
+        #gallery-prev { right: -60px; }
+        #gallery-next { left: -60px; }
+        [dir="ltr"] #gallery-prev { right: auto; left: -60px; }
+        [dir="ltr"] #gallery-next { left: auto; right: -60px; }
+        #gallery-counter {
+            color: rgba(255,255,255,0.6);
+            font-size: 14px;
+            margin-top: 14px;
+        }
+        #gallery-thumbs {
+            display: flex;
+            gap: 8px;
+            margin-top: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 90vw;
+        }
+        .gallery-thumb {
+            width: 56px;
+            height: 56px;
+            object-fit: cover;
+            border-radius: 6px;
+            cursor: pointer;
+            opacity: 0.55;
+            border: 2px solid transparent;
+            transition: opacity 0.2s, border-color 0.2s;
+        }
+        .gallery-thumb.active, .gallery-thumb:hover {
+            opacity: 1;
+            border-color: var(--accent);
+        }
+
         .lecture-card h3 {
             font-size: 1.2rem;
             margin-bottom: 10px;
@@ -1466,9 +1595,12 @@
                 <div class="section-line"></div>
             </div>
             <div class="lectures-grid">
-                <div class="lecture-card fade-up">
+                <div class="lecture-card hot fade-up" onclick="openGallery('vietnam')" role="button" tabindex="0"
+                     aria-label="פתח גלריית תמונות ויאטנם"
+                     onkeydown="if(event.key==='Enter'||event.key===' ')openGallery('vietnam')">
                     <h3 data-he="ויטנאם — בודהא, קונפוציוס ולאוצה" data-en="Vietnam — Buddha, Confucius & Laozi">ויטנאם — בודהא, קונפוציוס ולאוצה</h3>
                     <p data-he="בין המשי לשדות האורז. מסע מהדלתא של נהר המקונג בדרום ועד לשבטי הצפון." data-en="Between silk and rice fields. A journey from the Mekong Delta in the south to the northern tribes.">בין המשי לשדות האורז. מסע מהדלתא של נהר המקונג בדרום ועד לשבטי הצפון.</p>
+                    <span class="hot-badge" data-he="לחץ לגלריית תמונות" data-en="Click for photo gallery">לחץ לגלריית תמונות</span>
                 </div>
                 <div class="lecture-card fade-up">
                     <h3 data-he="קמבודיה — שגריר סיני מדווח אחרי 800 שנים" data-en="Cambodia — A Chinese Ambassador Reports After 800 Years">קמבודיה — שגריר סיני מדווח אחרי 800 שנים</h3>
@@ -1947,6 +2079,93 @@
             if (e.key === 'Escape') closeBookModal();
         });
     </script>
+
+    <!-- ===================== Gallery Modal ===================== -->
+    <div id="gallery-overlay" role="dialog" aria-modal="true" aria-label="גלריית תמונות">
+        <button id="gallery-close" onclick="closeGallery()" aria-label="סגור גלריה">✕</button>
+        <div id="gallery-title"></div>
+        <div id="gallery-img-wrap">
+            <img id="gallery-img" src="" alt="">
+            <button class="gallery-nav" id="gallery-prev" onclick="galleryNav(-1)" aria-label="תמונה קודמת">&#8249;</button>
+            <button class="gallery-nav" id="gallery-next" onclick="galleryNav(1)" aria-label="תמונה הבאה">&#8250;</button>
+        </div>
+        <div id="gallery-counter"></div>
+        <div id="gallery-thumbs"></div>
+    </div>
+
+    <script>
+        var galleries = {
+            vietnam: {
+                title: 'ויטנאם — בודהא, קונפוציוס ולאוצה',
+                titleEn: 'Vietnam — Buddha, Confucius & Laozi',
+                images: [
+                    'images/vietnam-01.jpg','images/vietnam-02.jpg','images/vietnam-03.jpg',
+                    'images/vietnam-04.jpg','images/vietnam-05.jpg','images/vietnam-06.jpg',
+                    'images/vietnam-07.jpg','images/vietnam-08.jpg','images/vietnam-09.jpg',
+                    'images/vietnam-10.jpg','images/vietnam-11.jpg','images/vietnam-12.jpg'
+                ]
+            }
+        };
+
+        var currentGallery = null;
+        var currentIndex = 0;
+
+        function openGallery(name) {
+            currentGallery = galleries[name];
+            currentIndex = 0;
+            var overlay = document.getElementById('gallery-overlay');
+            overlay.classList.add('open');
+            document.body.style.overflow = 'hidden';
+
+            var lang = document.documentElement.getAttribute('lang') || 'he';
+            document.getElementById('gallery-title').textContent =
+                lang === 'en' ? currentGallery.titleEn : currentGallery.title;
+
+            // Build thumbnails
+            var thumbsEl = document.getElementById('gallery-thumbs');
+            thumbsEl.innerHTML = '';
+            currentGallery.images.forEach(function(src, i) {
+                var img = document.createElement('img');
+                img.src = src;
+                img.className = 'gallery-thumb' + (i === 0 ? ' active' : '');
+                img.alt = '';
+                img.onclick = function() { showImage(i); };
+                thumbsEl.appendChild(img);
+            });
+
+            showImage(0);
+        }
+
+        function showImage(idx) {
+            currentIndex = idx;
+            var imgs = currentGallery.images;
+            document.getElementById('gallery-img').src = imgs[currentIndex];
+            document.getElementById('gallery-counter').textContent =
+                (currentIndex + 1) + ' / ' + imgs.length;
+            document.querySelectorAll('.gallery-thumb').forEach(function(t, i) {
+                t.classList.toggle('active', i === currentIndex);
+            });
+        }
+
+        function galleryNav(dir) {
+            var len = currentGallery.images.length;
+            showImage((currentIndex + dir + len) % len);
+        }
+
+        function closeGallery() {
+            document.getElementById('gallery-overlay').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (!document.getElementById('gallery-overlay').classList.contains('open')) return;
+            if (e.key === 'ArrowLeft') galleryNav(1);
+            if (e.key === 'ArrowRight') galleryNav(-1);
+            if (e.key === 'Escape') closeGallery();
+        });
+    </script>
+    <!-- =================== End Gallery Modal =================== -->
 
     <!-- ===================== Accessibility Widget ===================== -->
     <!-- Floating Button -->
