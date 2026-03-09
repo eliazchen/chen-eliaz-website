@@ -1602,9 +1602,12 @@
                     <p data-he="בין המשי לשדות האורז. מסע מהדלתא של נהר המקונג בדרום ועד לשבטי הצפון." data-en="Between silk and rice fields. A journey from the Mekong Delta in the south to the northern tribes.">בין המשי לשדות האורז. מסע מהדלתא של נהר המקונג בדרום ועד לשבטי הצפון.</p>
                     <span class="hot-badge" data-he="לחץ לגלריית תמונות" data-en="Click for photo gallery">לחץ לגלריית תמונות</span>
                 </div>
-                <div class="lecture-card fade-up">
+                <div class="lecture-card hot fade-up" onclick="openGallery('cambodia')" role="button" tabindex="0"
+                     aria-label="פתח גלריית תמונות קמבודיה"
+                     onkeydown="if(event.key==='Enter'||event.key===' ')openGallery('cambodia')">
                     <h3 data-he="קמבודיה — שגריר סיני מדווח אחרי 800 שנים" data-en="Cambodia — A Chinese Ambassador Reports After 800 Years">קמבודיה — שגריר סיני מדווח אחרי 800 שנים</h3>
                     <p data-he="בעקבות השגריר הסיני זוהו דג'ואן בן המאה ה-13 אל העיר האבודה אנגקור." data-en="Following 13th-century Chinese ambassador Zhou Daguan to the lost city of Angkor.">בעקבות השגריר הסיני זוהו דג'ואן בן המאה ה-13 אל העיר האבודה אנגקור.</p>
+                    <span class="hot-badge" data-he="לחץ לגלריית תמונות" data-en="Click for photo gallery">לחץ לגלריית תמונות</span>
                 </div>
                 <div class="lecture-card fade-up">
                     <h3 data-he="דרך המשי — ערים אבודות ונסתרות" data-en="The Silk Road — Lost & Hidden Cities">דרך המשי — ערים אבודות ונסתרות</h3>
@@ -2119,6 +2122,17 @@
                     'images/burma-13.jpg','images/burma-14.jpg','images/burma-15.jpg',
                     'images/burma-16.jpg','images/burma-17.jpg','images/burma-18.jpg',
                     'images/burma-19.jpg','images/burma-20.jpg'
+                ]
+            },
+            cambodia: {
+                title: 'קמבודיה — שגריר סיני מדווח אחרי 800 שנים',
+                titleEn: 'Cambodia — A Chinese Ambassador Reports After 800 Years',
+                images: [
+                    'images/cambodia-gallery-01.jpg','images/cambodia-gallery-02.jpg','images/cambodia-gallery-03.jpg',
+                    'images/cambodia-gallery-04.jpg','images/cambodia-gallery-05.jpg','images/cambodia-gallery-06.jpg',
+                    'images/cambodia-gallery-07.jpg','images/cambodia-gallery-08.jpg','images/cambodia-gallery-09.jpg',
+                    'images/cambodia-gallery-10.jpg','images/cambodia-gallery-11.jpg','images/cambodia-gallery-12.jpg',
+                    'images/cambodia-gallery-13.jpg','images/cambodia-gallery-14.jpg'
                 ]
             }
         };
