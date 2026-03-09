@@ -1609,9 +1609,12 @@
                     <p data-he="בעקבות השגריר הסיני זוהו דג'ואן בן המאה ה-13 אל העיר האבודה אנגקור." data-en="Following 13th-century Chinese ambassador Zhou Daguan to the lost city of Angkor.">בעקבות השגריר הסיני זוהו דג'ואן בן המאה ה-13 אל העיר האבודה אנגקור.</p>
                     <span class="hot-badge" data-he="לחץ לגלריית תמונות" data-en="Click for photo gallery">לחץ לגלריית תמונות</span>
                 </div>
-                <div class="lecture-card fade-up">
+                <div class="lecture-card hot fade-up" onclick="openGallery('silkroad')" role="button" tabindex="0"
+                     aria-label="פתח גלריית תמונות דרך המשי"
+                     onkeydown="if(event.key==='Enter'||event.key===' ')openGallery('silkroad')">
                     <h3 data-he="דרך המשי — ערים אבודות ונסתרות" data-en="The Silk Road — Lost & Hidden Cities">דרך המשי — ערים אבודות ונסתרות</h3>
                     <p data-he="תחנות דרכים עתיקות, שווקים בהם מזרח ומערב מתחברים, חיי נוודים לצד יושבי הקבע." data-en="Ancient waypoints, markets where East meets West, nomadic life alongside settlers.">תחנות דרכים עתיקות, שווקים בהם מזרח ומערב מתחברים, חיי נוודים לצד יושבי הקבע.</p>
+                    <span class="hot-badge" data-he="לחץ לגלריית תמונות" data-en="Click for photo gallery">לחץ לגלריית תמונות</span>
                 </div>
                 <div class="lecture-card fade-up">
                     <h3 data-he="בין הודו לבורמה — שבטי נאגה המסתוריים" data-en="India to Burma — The Mysterious Naga Tribes">בין הודו לבורמה — שבטי נאגה המסתוריים</h3>
@@ -2133,6 +2136,18 @@
                     'images/cambodia-gallery-07.jpg','images/cambodia-gallery-08.jpg','images/cambodia-gallery-09.jpg',
                     'images/cambodia-gallery-10.jpg','images/cambodia-gallery-11.jpg','images/cambodia-gallery-12.jpg',
                     'images/cambodia-gallery-13.jpg','images/cambodia-gallery-14.jpg'
+                ]
+            },
+            silkroad: {
+                title: 'דרך המשי — ערים אבודות ונסתרות',
+                titleEn: 'The Silk Road — Lost & Hidden Cities',
+                images: [
+                    'images/silk-road-01.jpg','images/silk-road-02.jpg','images/silk-road-03.jpg',
+                    'images/silk-road-04.jpg','images/silk-road-05.jpg','images/silk-road-06.jpg',
+                    'images/silk-road-07.jpg','images/silk-road-08.jpg','images/silk-road-09.jpg',
+                    'images/silk-road-10.jpg','images/silk-road-11.jpg','images/silk-road-12.jpg',
+                    'images/silk-road-13.jpg','images/silk-road-14.jpg','images/silk-road-15.jpg',
+                    'images/silk-road-16.jpg','images/silk-road-17.jpg'
                 ]
             }
         };
