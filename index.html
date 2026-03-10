@@ -1635,9 +1635,12 @@
                     <p data-he="מיאנמר הידועה כ״ארץ הזהב״ — יערות טיק, אבנים טובות, אגמים נוצצים ומורשת תרבותית עצומה." data-en='Myanmar, known as "The Golden Land" — teak forests, precious stones, gleaming lakes, and immense cultural heritage.'>מיאנמר הידועה כ״ארץ הזהב״ — יערות טיק, אבנים טובות, אגמים נוצצים ומורשת תרבותית עצומה.</p>
                     <span class="hot-badge" data-he="לחץ לגלריית תמונות" data-en="Click for photo gallery">לחץ לגלריית תמונות</span>
                 </div>
-                <div class="lecture-card fade-up">
+                <div class="lecture-card hot fade-up" onclick="openGallery('india')" role="button" tabindex="0"
+                     aria-label="פתח גלריית תמונות הודו"
+                     onkeydown="if(event.key==='Enter'||event.key===' ')openGallery('india')">
                     <h3 data-he="הודו — אלים ובני אנוש בין הסארי לטאג' מאהל" data-en="India — Gods & Mortals from Sari to Taj Mahal">הודו — אלים ובני אנוש בין הסארי לטאג' מאהל</h3>
                     <p data-he="משוט בין דלהי, ואראנסי, אגרה וראג'סטאן. מבצרים אדומים, סיפורי מהרג'ות וחיי הודו המרתקים." data-en="Wandering between Delhi, Varanasi, Agra, and Rajasthan. Red forts, Maharaja tales, and India's fascinating life.">משוט בין דלהי, ואראנסי, אגרה וראג'סטאן. מבצרים אדומים, סיפורי מהרג'ות וחיי הודו המרתקים.</p>
+                    <span class="hot-badge" data-he="לחץ לגלריית תמונות" data-en="Click for photo gallery">לחץ לגלריית תמונות</span>
                 </div>
                 <div class="lecture-card fade-up">
                     <h3 data-he="נפאל — האם הגענו אל גן עדן?" data-en="Nepal — Have We Reached Paradise?">נפאל — האם הגענו אל גן עדן?</h3>
@@ -2148,6 +2151,16 @@
                     'images/silk-road-10.jpg','images/silk-road-11.jpg','images/silk-road-12.jpg',
                     'images/silk-road-13.jpg','images/silk-road-14.jpg','images/silk-road-15.jpg',
                     'images/silk-road-16.jpg','images/silk-road-17.jpg'
+                ]
+            },
+            india: {
+                title: 'הודו — אלים ובני אנוש בין הסארי לטאג\' מאהל',
+                titleEn: 'India — Gods & Mortals from Sari to Taj Mahal',
+                images: [
+                    'images/india-01.jpg','images/india-02.jpg','images/india-03.jpg',
+                    'images/india-04.jpg','images/india-05.jpg','images/india-06.jpg',
+                    'images/india-07.jpg','images/india-08.jpg','images/india-09.jpg',
+                    'images/india-10.jpg'
                 ]
             }
         };
