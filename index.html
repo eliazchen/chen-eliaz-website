@@ -1620,9 +1620,12 @@
                     <h3 data-he="בין הודו לבורמה — שבטי נאגה המסתוריים" data-en="India to Burma — The Mysterious Naga Tribes">בין הודו לבורמה — שבטי נאגה המסתוריים</h3>
                     <p data-he="מסע אל צפונה הלא ידוע של בורמה, בעקבות אחרוני השבטים המבודדים." data-en="A journey to Burma's unknown north, following the last isolated tribes.">מסע אל צפונה הלא ידוע של בורמה, בעקבות אחרוני השבטים המבודדים.</p>
                 </div>
-                <div class="lecture-card fade-up">
+                <div class="lecture-card hot fade-up" onclick="openGallery('khajuraho')" role="button" tabindex="0"
+                     aria-label="פתח גלריית תמונות קאג'רהו"
+                     onkeydown="if(event.key==='Enter'||event.key===' ')openGallery('khajuraho')">
                     <h3 data-he="קאמה סוטרה — העיר האבודה קאג'רהו" data-en="Kama Sutra — The Lost City of Khajuraho">קאמה סוטרה — העיר האבודה קאג'רהו</h3>
                     <p data-he="מסע אישי אל ממלכת צ'אנדלה. מהי אומנות החיים הטובים ואומנות האהבה באבן." data-en="A personal journey to the Chandela kingdom. The art of good living carved in stone.">מסע אישי אל ממלכת צ'אנדלה. מהי אומנות החיים הטובים ואומנות האהבה באבן.</p>
+                    <span class="hot-badge" data-he="לחץ לגלריית תמונות" data-en="Click for photo gallery">לחץ לגלריית תמונות</span>
                 </div>
                 <div class="lecture-card fade-up">
                     <h3 data-he="לאוס — המפלט לחולמים האחרונים" data-en="Laos — Refuge of the Last Dreamers">לאוס — המפלט לחולמים האחרונים</h3>
@@ -2161,6 +2164,13 @@
                     'images/india-04.jpg','images/india-05.jpg','images/india-06.jpg',
                     'images/india-07.jpg','images/india-08.jpg','images/india-09.jpg',
                     'images/india-10.jpg'
+                ]
+            },
+            khajuraho: {
+                title: 'קאמה סוטרה — העיר האבודה קאג\'רהו',
+                titleEn: 'Kama Sutra — The Lost City of Khajuraho',
+                images: [
+                    'images/khajuraho-01.jpg','images/khajuraho-02.jpg'
                 ]
             }
         };
