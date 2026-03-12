@@ -1645,9 +1645,12 @@
                     <p data-he="משוט בין דלהי, ואראנסי, אגרה וראג'סטאן. מבצרים אדומים, סיפורי מהרג'ות וחיי הודו המרתקים." data-en="Wandering between Delhi, Varanasi, Agra, and Rajasthan. Red forts, Maharaja tales, and India's fascinating life.">משוט בין דלהי, ואראנסי, אגרה וראג'סטאן. מבצרים אדומים, סיפורי מהרג'ות וחיי הודו המרתקים.</p>
                     <span class="hot-badge" data-he="לחץ לגלריית תמונות" data-en="Click for photo gallery">לחץ לגלריית תמונות</span>
                 </div>
-                <div class="lecture-card fade-up">
+                <div class="lecture-card hot fade-up" onclick="openGallery('nepal')" role="button" tabindex="0"
+                     aria-label="פתח גלריית תמונות נפאל"
+                     onkeydown="if(event.key==='Enter'||event.key===' ')openGallery('nepal')">
                     <h3 data-he="נפאל — האם הגענו אל גן עדן?" data-en="Nepal — Have We Reached Paradise?">נפאל — האם הגענו אל גן עדן?</h3>
                     <p data-he="חיי תרבויות בעמק עשיר, דרכים נסתרות בהימלאיה ומימד הגובה. גג העולם." data-en="Cultural life in a rich valley, hidden Himalayan paths, and the altitude dimension. The roof of the world.">חיי תרבויות בעמק עשיר, דרכים נסתרות בהימלאיה ומימד הגובה. גג העולם.</p>
+                    <span class="hot-badge" data-he="לחץ לגלריית תמונות" data-en="Click for photo gallery">לחץ לגלריית תמונות</span>
                 </div>
                 <div class="lecture-card fade-up">
                     <h3 data-he="שנחאי — העיר הגדולה בקצה נהר היאנגצה" data-en="Shanghai — The Great City at the Yangtze's Edge">שנחאי — העיר הגדולה בקצה נהר היאנגצה</h3>
@@ -2171,6 +2174,19 @@
                 titleEn: 'Kama Sutra — The Lost City of Khajuraho',
                 images: [
                     'images/khajuraho-01.jpg','images/khajuraho-02.jpg'
+                ]
+            },
+            nepal: {
+                title: 'נפאל — האם הגענו אל גן עדן?',
+                titleEn: 'Nepal — Have We Reached Paradise?',
+                images: [
+                    'images/nepal-01.jpg','images/nepal-02.jpg','images/nepal-03.jpg',
+                    'images/nepal-04.jpg','images/nepal-05.jpg','images/nepal-06.jpg',
+                    'images/nepal-07.jpg','images/nepal-08.jpg','images/nepal-09.jpg',
+                    'images/nepal-10.jpg','images/nepal-11.jpg','images/nepal-12.jpg',
+                    'images/nepal-13.jpg','images/nepal-14.jpg','images/nepal-15.jpg',
+                    'images/nepal-16.jpg','images/nepal-17.jpg','images/nepal-18.jpg',
+                    'images/nepal-19.jpg','images/nepal-20.jpg','images/nepal-21.jpg'
                 ]
             }
         };
