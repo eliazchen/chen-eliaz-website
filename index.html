@@ -1656,9 +1656,12 @@
                     <h3 data-he="שנחאי — העיר הגדולה בקצה נהר היאנגצה" data-en="Shanghai — The Great City at the Yangtze's Edge">שנחאי — העיר הגדולה בקצה נהר היאנגצה</h3>
                     <p data-he="עיר הענק, המערבית בעולם יש אומרים. פיוז'ן בין מזרח למערב, מוקפת ערי מים חלומיות." data-en="The giant city, some say the most Western in the world. A fusion of East and West, surrounded by dreamlike water towns.">עיר הענק, המערבית בעולם יש אומרים. פיוז'ן בין מזרח למערב, מוקפת ערי מים חלומיות.</p>
                 </div>
-                <div class="lecture-card fade-up">
+                <div class="lecture-card hot fade-up" onclick="openGallery('kyrgyz')" role="button" tabindex="0"
+                     aria-label="פתח גלריית תמונות קיריגיסטאן"
+                     onkeydown="if(event.key==='Enter'||event.key===' ')openGallery('kyrgyz')">
                     <h3 data-he="קיריגיסטאן — ארצם של הנוודים" data-en="Kyrgyzstan — Land of the Nomads">קיריגיסטאן — ארצם של הנוודים</h3>
                     <p data-he="״שוויץ של אסיה״ — נופים אלפינים מרהיבים, עדרי סוסים בין יורטות לבנות על שפת אגמים כחולים." data-en='"The Switzerland of Asia" — stunning alpine landscapes, horse herds among white yurts by blue lakes.'>"שוויץ של אסיה" — נופים אלפינים מרהיבים, עדרי סוסים בין יורטות לבנות על שפת אגמים כחולים.</p>
+                    <span class="hot-badge" data-he="לחץ לגלריית תמונות" data-en="Click for photo gallery">לחץ לגלריית תמונות</span>
                 </div>
                 <div class="lecture-card hot fade-up" onclick="openGallery('balti')" role="button" tabindex="0"
                      aria-label="פתח גלריית תמונות צפון הים הבלטי"
@@ -2216,6 +2219,20 @@
                     'images/balti-10.jpg','images/balti-11.jpg','images/balti-12.jpg',
                     'images/balti-13.jpg','images/balti-14.jpg','images/balti-15.jpg',
                     'images/balti-16.jpg','images/balti-17.jpg'
+                ]
+            },
+            kyrgyz: {
+                title: 'קיריגיסטאן — ארצם של הנוודים',
+                titleEn: 'Kyrgyzstan — Land of the Nomads',
+                images: [
+                    'images/kirgi-01.jpg','images/kirgi-02.jpg','images/kirgi-03.jpg',
+                    'images/kirgi-04.jpg','images/kirgi-05.jpg','images/kirgi-06.jpg',
+                    'images/kirgi-07.jpg','images/kirgi-08.jpg','images/kirgi-09.jpg',
+                    'images/kirgi-10.jpg','images/kirgi-11.jpg','images/kirgi-12.jpg',
+                    'images/kirgi-13.jpg','images/kirgi-14.jpg','images/kirgi-15.jpg',
+                    'images/kirgi-16.jpg','images/kirgi-17.jpg','images/kirgi-18.jpg',
+                    'images/kirgi-19.jpg','images/kirgi-20.jpg','images/kirgi-21.jpg',
+                    'images/kirgi-22.jpg'
                 ]
             }
         };
