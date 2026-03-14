@@ -1660,9 +1660,12 @@
                     <h3 data-he="קיריגיסטאן — ארצם של הנוודים" data-en="Kyrgyzstan — Land of the Nomads">קיריגיסטאן — ארצם של הנוודים</h3>
                     <p data-he="״שוויץ של אסיה״ — נופים אלפינים מרהיבים, עדרי סוסים בין יורטות לבנות על שפת אגמים כחולים." data-en='"The Switzerland of Asia" — stunning alpine landscapes, horse herds among white yurts by blue lakes.'>"שוויץ של אסיה" — נופים אלפינים מרהיבים, עדרי סוסים בין יורטות לבנות על שפת אגמים כחולים.</p>
                 </div>
-                <div class="lecture-card fade-up">
+                <div class="lecture-card hot fade-up" onclick="openGallery('balti')" role="button" tabindex="0"
+                     aria-label="פתח גלריית תמונות צפון הים הבלטי"
+                     onkeydown="if(event.key==='Enter'||event.key===' ')openGallery('balti')">
                     <h3 data-he="צפון הים הבלטי — ליטא ולטביה" data-en="The Northern Baltics — Lithuania & Latvia">צפון הים הבלטי — ליטא ולטביה</h3>
                     <p data-he="בין מבצרים ובתי אחוזה עתיקים, לאורך נהרות בלב יערות ועל גדות מאות אגמים." data-en="Among castles and ancient manors, along rivers through forests and hundreds of lakeshores.">בין מבצרים ובתי אחוזה עתיקים, לאורך נהרות בלב יערות ועל גדות מאות אגמים.</p>
+                    <span class="hot-badge" data-he="לחץ לגלריית תמונות" data-en="Click for photo gallery">לחץ לגלריית תמונות</span>
                 </div>
                 <div class="lecture-card hot fade-up" onclick="openGallery('slovakia')" role="button" tabindex="0"
                      aria-label="פתח גלריית תמונות סלובקיה"
@@ -2201,6 +2204,18 @@
                     'images/slovakia-08.jpg','images/slovakia-09.jpg','images/slovakia-10.jpg',
                     'images/slovakia-11.jpg','images/slovakia-12.jpg','images/slovakia-13.jpg',
                     'images/slovakia-14.jpg','images/slovakia-15.jpg'
+                ]
+            },
+            balti: {
+                title: 'צפון הים הבלטי — ליטא ולטביה',
+                titleEn: 'The Northern Baltics — Lithuania & Latvia',
+                images: [
+                    'images/balti-01.jpg','images/balti-02.jpg','images/balti-03.jpg',
+                    'images/balti-04.jpg','images/balti-05.jpg','images/balti-06.jpg',
+                    'images/balti-07.jpg','images/balti-08.jpg','images/balti-09.jpg',
+                    'images/balti-10.jpg','images/balti-11.jpg','images/balti-12.jpg',
+                    'images/balti-13.jpg','images/balti-14.jpg','images/balti-15.jpg',
+                    'images/balti-16.jpg','images/balti-17.jpg'
                 ]
             }
         };
