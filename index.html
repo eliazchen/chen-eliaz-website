@@ -1652,9 +1652,12 @@
                     <p data-he="חיי תרבויות בעמק עשיר, דרכים נסתרות בהימלאיה ומימד הגובה. גג העולם." data-en="Cultural life in a rich valley, hidden Himalayan paths, and the altitude dimension. The roof of the world.">חיי תרבויות בעמק עשיר, דרכים נסתרות בהימלאיה ומימד הגובה. גג העולם.</p>
                     <span class="hot-badge" data-he="לחץ לגלריית תמונות" data-en="Click for photo gallery">לחץ לגלריית תמונות</span>
                 </div>
-                <div class="lecture-card fade-up">
+                <div class="lecture-card hot fade-up" onclick="openGallery('shanghai')" role="button" tabindex="0"
+                     aria-label="פתח גלריית תמונות שנחאי"
+                     onkeydown="if(event.key==='Enter'||event.key===' ')openGallery('shanghai')">
                     <h3 data-he="שנחאי — העיר הגדולה בקצה נהר היאנגצה" data-en="Shanghai — The Great City at the Yangtze's Edge">שנחאי — העיר הגדולה בקצה נהר היאנגצה</h3>
                     <p data-he="עיר הענק, המערבית בעולם יש אומרים. פיוז'ן בין מזרח למערב, מוקפת ערי מים חלומיות." data-en="The giant city, some say the most Western in the world. A fusion of East and West, surrounded by dreamlike water towns.">עיר הענק, המערבית בעולם יש אומרים. פיוז'ן בין מזרח למערב, מוקפת ערי מים חלומיות.</p>
+                    <span class="hot-badge" data-he="לחץ לגלריית תמונות" data-en="Click for photo gallery">לחץ לגלריית תמונות</span>
                 </div>
                 <div class="lecture-card hot fade-up" onclick="openGallery('kyrgyz')" role="button" tabindex="0"
                      aria-label="פתח גלריית תמונות קיריגיסטאן"
@@ -2233,6 +2236,18 @@
                     'images/kirgi-16.jpg','images/kirgi-17.jpg','images/kirgi-18.jpg',
                     'images/kirgi-19.jpg','images/kirgi-20.jpg','images/kirgi-21.jpg',
                     'images/kirgi-22.jpg'
+                ]
+            },
+            shanghai: {
+                title: 'שנחאי — העיר הגדולה בקצה נהר היאנגצה',
+                titleEn: "Shanghai — The Great City at the Yangtze's Edge",
+                images: [
+                    'images/shanghai-01.jpg','images/shanghai-02.jpg','images/shanghai-03.jpg',
+                    'images/shanghai-04.jpg','images/shanghai-05.jpg','images/shanghai-06.jpg',
+                    'images/shanghai-07.jpg','images/shanghai-08.jpg','images/shanghai-09.jpg',
+                    'images/shanghai-10.jpg','images/shanghai-11.jpg','images/shanghai-12.jpg',
+                    'images/shanghai-13.jpg','images/shanghai-14.jpg','images/shanghai-15.jpg',
+                    'images/shanghai-16.jpg'
                 ]
             }
         };
