@@ -1759,12 +1759,15 @@
                 <div class="section-line"></div>
             </div>
             <div class="trips-grid">
-                <div class="trip-card fade-up">
-                    <div class="trip-image" style="background-image: url('images/vietnam.jpg')">
+                <div class="trip-card fade-up" onclick="openGallery('vietnam-fest')" role="button" tabindex="0" style="cursor:pointer"
+                     aria-label="פתח גלריית תמונות פסטיבל בווייטנאם"
+                     onkeydown="if(event.key==='Enter'||event.key===' ')openGallery('vietnam-fest')">
+                    <div class="trip-image" style="background-image: url('images/vietnam-fest-01.jpg')">
                         <span class="trip-date" data-he="פברואר 2025" data-en="Feb 2025">פברואר 2025</span>
                     </div>
                     <div class="trip-content">
                         <h3 data-he="פסטיבל בווייטנאם" data-en="Festival in Vietnam">פסטיבל בווייטנאם</h3>
+                        <span class="hot-badge" data-he="לחץ לגלריית תמונות" data-en="Click for photo gallery">לחץ לגלריית תמונות</span>
                     </div>
                 </div>
                 <div class="trip-card fade-up" onclick="openGallery('japan-bloom')" role="button" tabindex="0" style="cursor:pointer"
@@ -2336,6 +2339,16 @@
                     'images/japan-sakura-07.jpg','images/japan-sakura-08.jpg','images/japan-sakura-09.jpg',
                     'images/japan-sakura-10.jpg','images/japan-sakura-11.jpg','images/japan-sakura-12.jpg',
                     'images/japan-sakura-13.jpg','images/japan-sakura-14.jpg','images/japan-sakura-15.jpg'
+                ]
+            },
+            'vietnam-fest': {
+                title: 'פסטיבל בווייטנאם',
+                titleEn: 'Festival in Vietnam',
+                images: [
+                    'images/vietnam-fest-01.jpg','images/vietnam-fest-02.jpg','images/vietnam-fest-03.jpg',
+                    'images/vietnam-fest-04.jpg','images/vietnam-fest-05.jpg','images/vietnam-fest-06.jpg',
+                    'images/vietnam-fest-07.jpg','images/vietnam-fest-08.jpg','images/vietnam-fest-09.jpg',
+                    'images/vietnam-fest-10.jpg','images/vietnam-fest-11.jpg'
                 ]
             },
             'japan-bloom': {
