@@ -1767,12 +1767,15 @@
                         <h3 data-he="פסטיבל בווייטנאם" data-en="Festival in Vietnam">פסטיבל בווייטנאם</h3>
                     </div>
                 </div>
-                <div class="trip-card fade-up">
-                    <div class="trip-image" style="background-image: url('images/meeting2.jpg')">
+                <div class="trip-card fade-up" onclick="openGallery('japan-bloom')" role="button" tabindex="0" style="cursor:pointer"
+                     aria-label="פתח גלריית תמונות פריחה ביפן"
+                     onkeydown="if(event.key==='Enter'||event.key===' ')openGallery('japan-bloom')">
+                    <div class="trip-image" style="background-image: url('images/japan-bloom-01.jpg')">
                         <span class="trip-date" data-he="אפריל 2025" data-en="Apr 2025">אפריל 2025</span>
                     </div>
                     <div class="trip-content">
                         <h3 data-he="פריחה חלומית ביפן" data-en="Dreamy Blossoms in Japan">פריחה חלומית ביפן</h3>
+                        <span class="hot-badge" data-he="לחץ לגלריית תמונות" data-en="Click for photo gallery">לחץ לגלריית תמונות</span>
                     </div>
                 </div>
                 <div class="trip-card fade-up">
@@ -2333,6 +2336,16 @@
                     'images/japan-sakura-07.jpg','images/japan-sakura-08.jpg','images/japan-sakura-09.jpg',
                     'images/japan-sakura-10.jpg','images/japan-sakura-11.jpg','images/japan-sakura-12.jpg',
                     'images/japan-sakura-13.jpg','images/japan-sakura-14.jpg','images/japan-sakura-15.jpg'
+                ]
+            },
+            'japan-bloom': {
+                title: 'פריחה חלומית ביפן',
+                titleEn: 'Dreamy Blossoms in Japan',
+                images: [
+                    'images/japan-bloom-01.jpg','images/japan-bloom-02.jpg','images/japan-bloom-03.jpg',
+                    'images/japan-bloom-04.jpg','images/japan-bloom-05.jpg','images/japan-bloom-06.jpg',
+                    'images/japan-bloom-07.jpg','images/japan-bloom-08.jpg','images/japan-bloom-09.jpg',
+                    'images/japan-bloom-10.jpg'
                 ]
             }
         };
