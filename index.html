@@ -1877,13 +1877,16 @@
                         <span class="hot-badge" data-he="לחץ לגלריית תמונות" data-en="Click for photo gallery">לחץ לגלריית תמונות</span>
                     </div>
                 </div>
-                <div class="trip-card fade-up">
-                    <div class="trip-image" style="background-image: url('images/meeting3.jpg')">
+                <div class="trip-card fade-up" onclick="openGallery('lijiang')" role="button" tabindex="0" style="cursor:pointer"
+                     aria-label="פתח גלריית תמונות ליג'יאנג"
+                     onkeydown="if(event.key==='Enter'||event.key===' ')openGallery('lijiang')">
+                    <div class="trip-image" style="background-image: url('images/lijiang-01.jpg')">
                         <span class="trip-date" data-he="מאי 2025" data-en="May 2025">מאי 2025</span>
                     </div>
                     <div class="trip-content">
                         <h3 data-he="מפגשים בליג'יאנג, סין" data-en="Encounters in Lijiang, China">מפגשים בליג'יאנג, סין</h3>
                         <p class="diary-text diary-text-small" data-he="לשוב אלייך" data-en="To return to you"><span class="diary-title">לשוב אלייך</span><br>חן אליעז / 2003<br><br>כבר ראיתי ערים יפות<br>מוקפות חומה, מוצלות, מיסתוריות.<br>כבר שמעתי פעמונים מצלצלים מראשי כנסיות אבן באירופה<br>וגלגלי תפילה מתגלגלים במקדשי קטמנדו.<br>כבר הרחתי ריחות בוקר, שוק ותבשילים<br>מסתלסלים בסמטאות אבנים עתיקות.<br>כבר ליטפתי אבנים וטעמתי שיקויים.<br>אבל..........אחרי כולן תמיד שבתי אלייך<br>תמיד חזרתי לסמטאותייך, בתי העץ ודלתות התבליטים,<br>שבתי לענפי הערבה הבוכה המשתפלים לתעלות המים,<br>הרחובות המתפתלים, כיפות ההרים הלבנים.<br>לפעמים אני חושש לאבד אותך ליג'יאנג, לא לשוב אלייך,<br>אם אכתוב יותר מידי, אם אפרט..........<br>אבזבז אותך.<br>תני לי יד רכה ונטייל כל היום בעיר<br>ובלילה נשיר שירים<br>ב"גשר האבן הגדולה".</p>
+                        <span class="hot-badge" data-he="לחץ לגלריית תמונות" data-en="Click for photo gallery">לחץ לגלריית תמונות</span>
                     </div>
                 </div>
                 <div class="trip-card fade-up">
@@ -2456,6 +2459,15 @@
                     'images/japan-bloom-04.jpg','images/japan-bloom-05.jpg','images/japan-bloom-06.jpg',
                     'images/japan-bloom-07.jpg','images/japan-bloom-08.jpg','images/japan-bloom-09.jpg',
                     'images/japan-bloom-10.jpg'
+                ]
+            },
+            'lijiang': {
+                title: 'מפגשים בליג\'יאנג, סין',
+                titleEn: 'Encounters in Lijiang, China',
+                images: [
+                    'images/lijiang-01.jpg','images/lijiang-02.jpg','images/lijiang-03.jpg',
+                    'images/lijiang-04.jpg','images/lijiang-05.jpg','images/lijiang-06.jpg',
+                    'images/lijiang-07.jpg','images/lijiang-08.jpg','images/lijiang-09.jpg'
                 ]
             }
         };
