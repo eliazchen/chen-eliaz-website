@@ -510,6 +510,27 @@
             margin: 10px 0;
         }
 
+        .diary-title {
+            background: linear-gradient(120deg, rgba(255,230,0,0.35) 0%, rgba(255,240,50,0.45) 50%, rgba(255,230,0,0.25) 100%);
+            padding: 1px 6px;
+            border-radius: 2px;
+            display: inline;
+            position: relative;
+            font-weight: 600;
+        }
+
+        .diary-title::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: -2px;
+            right: -4px;
+            height: 2px;
+            background: #2c1810;
+            transform: rotate(-1.5deg);
+            border-radius: 1px;
+        }
+
         .trip-content p.diary-text::before {
             content: '';
             position: absolute;
@@ -1847,7 +1868,7 @@
                     </div>
                     <div class="trip-content">
                         <h3 data-he="פריחה חלומית ביפן" data-en="Dreamy Blossoms in Japan">פריחה חלומית ביפן</h3>
-                        <p class="diary-text" data-he="אביב חסר התחשבות" data-en="A careless spring">אביב חסר התחשבות<br>העץ עירום,<br>ללא צבע, ללא ריח,<br>וכבר על הענף<br>אביב חסר התחשבות מופיע.<br><br>יצאנו לכבד את הפריחה הנפלאה, האביבית, המפורסמת<br>ברחבי יפן. היינו כחולמים.</p>
+                        <p class="diary-text" data-he="אביב חסר התחשבות" data-en="A careless spring"><span class="diary-title">אביב חסר התחשבות</span><br>העץ עירום,<br>ללא צבע, ללא ריח,<br>וכבר על הענף<br>אביב חסר התחשבות מופיע.<br><br>יצאנו לכבד את הפריחה הנפלאה, האביבית, המפורסמת<br>ברחבי יפן. היינו כחולמים.</p>
                         <span class="hot-badge" data-he="לחץ לגלריית תמונות" data-en="Click for photo gallery">לחץ לגלריית תמונות</span>
                     </div>
                 </div>
