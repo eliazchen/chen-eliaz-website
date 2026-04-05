@@ -9,6 +9,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700&family=Playfair+Display:wght@400;600;700&family=Secular+One&family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        @font-face {
+            font-family: 'GuttmanYadBrush';
+            src: url('fonts/GuttmanYadBrush.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
         :root {
             --primary: #2c3e50;
             --accent: #c8956c;
@@ -485,22 +493,15 @@
         }
 
         .trip-content p.diary-text {
-            font-family: 'Caveat', cursive;
-            font-size: 1.3rem;
-            line-height: 2;
+            font-family: 'GuttmanYadBrush', 'Caveat', cursive;
+            font-size: 1.05rem;
+            line-height: 1.7;
             color: #2c1810;
-            background:
-                repeating-linear-gradient(
-                    transparent,
-                    transparent 31px,
-                    #c8d6e5 31px,
-                    #c8d6e5 32px
-                ),
-                linear-gradient(135deg, #f5e6c8, #efe0c6, #f0dbb8);
-            padding: 24px 28px 24px 28px;
+            background: linear-gradient(135deg, #f5e6c8, #efe0c6, #f0dbb8);
+            padding: 20px 24px;
             border-radius: 2px;
             position: relative;
-            font-weight: 500;
+            font-weight: normal;
             box-shadow:
                 3px 3px 12px rgba(0,0,0,0.15),
                 -1px -1px 4px rgba(0,0,0,0.05),
