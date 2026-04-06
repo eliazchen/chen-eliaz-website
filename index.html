@@ -1889,13 +1889,16 @@
                         <span class="hot-badge" data-he="לחץ לגלריית תמונות" data-en="Click for photo gallery">לחץ לגלריית תמונות</span>
                     </div>
                 </div>
-                <div class="trip-card fade-up">
-                    <div class="trip-image" style="background-image: url('images/meeting4.jpg')">
+                <div class="trip-card fade-up" onclick="openGallery('sicily')" role="button" tabindex="0" style="cursor:pointer"
+                     aria-label="פתח גלריית תמונות סיציליה"
+                     onkeydown="if(event.key==='Enter'||event.key===' ')openGallery('sicily')">
+                    <div class="trip-image" style="background-image: url('images/sicily-01.jpg')">
                         <span class="trip-date" data-he="ספטמבר 2025" data-en="Sep 2025">ספטמבר 2025</span>
                     </div>
                     <div class="trip-content">
                         <h3 data-he="סיציליה, מפרצים והרים" data-en="Sicily, Bays and Mountains">סיציליה, מפרצים והרים</h3>
                         <p class="diary-text diary-text-small" data-he="סיציליה" data-en="Sicily"><span class="diary-title">סיציליה</span><br>דורית ויסמן<br><br>סִיצִילְיָה – חֻרְבוֹת מִשְּׁנוֹת הַ־50.<br>מִתְעַרְבְּבוֹת בָּחֳרָבוֹת.<br>לִפְנֵי אֶלֶף שָׁנָה.<br>מֶלְצָרִים הֲדוּרִים חַסְרֵי שִׁנַּיִם.<br>מְנִיפוֹת בִּמְקוֹם מְאַוְרֵרִים.<br>לִפְנוֹת עֶרֶב סְנוּנִיּוֹת.<br>מִתְאַבְּדוֹת אֶל הַתְּהוֹם.</p>
+                        <span class="hot-badge" data-he="לחץ לגלריית תמונות" data-en="Click for photo gallery">לחץ לגלריית תמונות</span>
                     </div>
                 </div>
             </div>
@@ -2469,6 +2472,20 @@
                     'images/lijiang-01.jpg','images/lijiang-02.jpg','images/lijiang-03.jpg',
                     'images/lijiang-04.jpg','images/lijiang-05.jpg','images/lijiang-06.jpg',
                     'images/lijiang-07.jpg','images/lijiang-08.jpg','images/lijiang-09.jpg'
+                ]
+            },
+            'sicily': {
+                title: 'סיציליה, מפרצים והרים',
+                titleEn: 'Sicily, Bays and Mountains',
+                images: [
+                    'images/sicily-01.jpg','images/sicily-02.jpg','images/sicily-03.jpg',
+                    'images/sicily-04.jpg','images/sicily-05.jpg','images/sicily-06.jpg',
+                    'images/sicily-07.jpg','images/sicily-08.jpg','images/sicily-09.jpg',
+                    'images/sicily-10.jpg','images/sicily-11.jpg','images/sicily-12.jpg',
+                    'images/sicily-13.jpg','images/sicily-14.jpg','images/sicily-15.jpg',
+                    'images/sicily-16.jpg','images/sicily-17.jpg','images/sicily-18.jpg',
+                    'images/sicily-19.jpg','images/sicily-20.jpg','images/sicily-21.jpg',
+                    'images/sicily-22.jpg'
                 ]
             }
         };
