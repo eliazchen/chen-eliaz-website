@@ -124,7 +124,8 @@
             transition: width 0.3s ease;
         }
 
-        .nav-links a:hover::after {
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
             width: 100%;
         }
 
@@ -2142,6 +2143,22 @@
         }, { threshold: 0.1 });
 
         document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+        // Scroll-spy: highlight active nav link
+        const navLinksAll = document.querySelectorAll('.nav-links a[href^="#"]');
+        const sections = Array.from(navLinksAll).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+
+        window.addEventListener('scroll', function() {
+            var scrollPos = window.scrollY + 120;
+            var activeLink = null;
+            sections.forEach(function(section, i) {
+                if (section.offsetTop <= scrollPos) {
+                    activeLink = navLinksAll[i];
+                }
+            });
+            navLinksAll.forEach(a => a.classList.remove('active'));
+            if (activeLink) activeLink.classList.add('active');
+        });
 
         // Form handling
         function handleSubmit(e) {
