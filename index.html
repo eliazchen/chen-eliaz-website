@@ -2182,12 +2182,19 @@
             );
             window.open(`https://wa.me/972528595493?text=${whatsappMsg}`, '_blank');
 
-            // Also send via email
-            const emailSubject = encodeURIComponent(subject || 'פנייה מהאתר');
-            const emailBody = encodeURIComponent(
-                `שלום חן, שמי ${name}.\n${subject ? 'נושא: ' + subject + '\n' : ''}${message}\n\nאימייל: ${email}${phone ? '\nטלפון: ' + phone : ''}`
-            );
-            window.open(`mailto:eliaz_chen@hotmail.com?subject=${emailSubject}&body=${emailBody}`, '_self');
+            // Send via email using FormSubmit.co
+            const emailData = new FormData();
+            emailData.append('name', name);
+            emailData.append('email', email);
+            emailData.append('phone', phone || '');
+            emailData.append('_subject', subject || 'פנייה חדשה מהאתר');
+            emailData.append('message', message);
+            emailData.append('_captcha', 'false');
+            emailData.append('_template', 'table');
+            fetch('https://formsubmit.co/ajax/eliaz_chen@hotmail.com', {
+                method: 'POST',
+                body: emailData
+            });
 
             const btn = form.querySelector('button[type="submit"]');
             const origText = btn.textContent;
