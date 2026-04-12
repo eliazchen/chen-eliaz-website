@@ -2176,12 +2176,6 @@
             const subject = data.get('subject');
             const message = data.get('message');
 
-            // Send via WhatsApp
-            const whatsappMsg = encodeURIComponent(
-                `שלום חן, שמי ${name}.\n${subject ? 'נושא: ' + subject + '\n' : ''}${message}\n\nאימייל: ${email}${phone ? '\nטלפון: ' + phone : ''}`
-            );
-            window.open(`https://wa.me/972528595493?text=${whatsappMsg}`, '_blank');
-
             // Send via email using FormSubmit.co
             const emailData = new FormData();
             emailData.append('name', name);
