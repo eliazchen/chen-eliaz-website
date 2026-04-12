@@ -2176,11 +2176,18 @@
             const subject = data.get('subject');
             const message = data.get('message');
 
-            // Build WhatsApp/phone message as fallback
+            // Send via WhatsApp
             const whatsappMsg = encodeURIComponent(
                 `שלום חן, שמי ${name}.\n${subject ? 'נושא: ' + subject + '\n' : ''}${message}\n\nאימייל: ${email}${phone ? '\nטלפון: ' + phone : ''}`
             );
             window.open(`https://wa.me/972528595493?text=${whatsappMsg}`, '_blank');
+
+            // Also send via email
+            const emailSubject = encodeURIComponent(subject || 'פנייה מהאתר');
+            const emailBody = encodeURIComponent(
+                `שלום חן, שמי ${name}.\n${subject ? 'נושא: ' + subject + '\n' : ''}${message}\n\nאימייל: ${email}${phone ? '\nטלפון: ' + phone : ''}`
+            );
+            window.open(`mailto:eliaz_chen@hotmail.com?subject=${emailSubject}&body=${emailBody}`, '_self');
 
             const btn = form.querySelector('button[type="submit"]');
             const origText = btn.textContent;
