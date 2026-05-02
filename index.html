@@ -1514,9 +1514,67 @@
             line-height: 1.8 !important;
         }
 
+        /* Floating diagonal bubble */
+        @keyframes floatDiagonal {
+            0%   { transform: translate(0, 0) rotate(-4deg); }
+            25%  { transform: translate(8px, -10px) rotate(2deg); }
+            50%  { transform: translate(14px, -18px) rotate(-3deg); }
+            75%  { transform: translate(6px, -8px) rotate(3deg); }
+            100% { transform: translate(0, 0) rotate(-4deg); }
+        }
+
+        .floating-bubble {
+            position: fixed;
+            left: -42px;
+            top: 45%;
+            z-index: 900;
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: #fff;
+            font-family: 'Secular One', sans-serif;
+            font-size: 13px;
+            line-height: 1.4;
+            text-align: center;
+            padding: 14px 16px;
+            border-radius: 50%;
+            width: 110px;
+            height: 110px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 24px rgba(231,76,60,0.45);
+            cursor: pointer;
+            animation: floatDiagonal 4s ease-in-out infinite;
+            text-decoration: none;
+            border: 3px solid rgba(255,255,255,0.35);
+            transition: left 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+        }
+
+        .floating-bubble:hover {
+            left: 10px;
+            background: linear-gradient(135deg, #c0392b, #a93226);
+            box-shadow: 0 10px 32px rgba(231,76,60,0.6);
+            animation-play-state: paused;
+        }
+
+        @media (max-width: 768px) {
+            .floating-bubble {
+                width: 90px;
+                height: 90px;
+                font-size: 11px;
+                left: -36px;
+                padding: 10px 12px;
+            }
+            .floating-bubble:hover {
+                left: 6px;
+            }
+        }
+
     </style>
 </head>
 <body>
+
+    <!-- Floating bubble -->
+    <a href="#silk-road-trip" class="floating-bubble" data-he="מקומות אחרונים לטיול מובטח" data-en="Last spots — guaranteed trip">מקומות אחרונים לטיול מובטח</a>
 
     <!-- Skip Navigation -->
     <a href="#main-content" class="sr-only" data-he="דלג לתוכן הראשי" data-en="Skip to main content">דלג לתוכן הראשי</a>
@@ -1637,7 +1695,7 @@
                         <a href="#contact" class="trip-link" data-he="לפרטים נוספים ←" data-en="More details →">לפרטים נוספים ←</a>
                     </div>
                 </div>
-                <div class="trip-card fade-up">
+                <div class="trip-card fade-up" id="silk-road-trip">
                     <div class="trip-image" style="background-image: url('images/silk-road.jpg')">
                         <span class="trip-date" data-he="יוני 2026" data-en="June 2026">יוני 2026</span>
                     </div>
