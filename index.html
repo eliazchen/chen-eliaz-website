@@ -1534,6 +1534,72 @@
             line-height: 1.8 !important;
         }
 
+        /* Newsletter */
+        .newsletter {
+            background: linear-gradient(135deg, rgba(44,62,80,0.92), rgba(20,30,40,0.95)),
+                        url('images/hero-silkroad.jpg') center/cover no-repeat fixed;
+            padding: 80px 0;
+        }
+
+        .newsletter-box {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .newsletter-box h2 {
+            color: var(--white);
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+        }
+
+        .newsletter-box > p {
+            color: rgba(255,255,255,0.8);
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .newsletter-form input {
+            padding: 14px 20px;
+            border: none;
+            border-radius: 30px;
+            font-family: 'Assistant', sans-serif;
+            font-size: 1rem;
+            width: 220px;
+            background: rgba(255,255,255,0.95);
+        }
+
+        .newsletter-form input:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(200,149,108,0.4);
+        }
+
+        .newsletter-note {
+            margin-top: 16px;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.5);
+        }
+
+        @media (max-width: 768px) {
+            .newsletter-form {
+                flex-direction: column;
+                align-items: center;
+            }
+            .newsletter-form input,
+            .newsletter-form button {
+                width: 100%;
+                max-width: 320px;
+            }
+        }
+
         /* Floating diagonal bubble */
         @keyframes floatDiagonal {
             0%   { transform: translate(0, 0) rotate(-4deg); }
@@ -2151,6 +2217,22 @@
         </div>
     </section>
 
+    <!-- Newsletter -->
+    <section class="newsletter" id="newsletter">
+        <div class="container">
+            <div class="newsletter-box fade-up">
+                <h2 data-he="הישארו מעודכנים" data-en="Stay Updated">הישארו מעודכנים</h2>
+                <p data-he="הירשמו לרשימת התפוצה וקבלו עדכונים על טיולים חדשים, הרצאות ומסעות מיוחדים — ישירות למייל" data-en="Subscribe to our mailing list and receive updates on new trips, lectures and special journeys — straight to your inbox">הירשמו לרשימת התפוצה וקבלו עדכונים על טיולים חדשים, הרצאות ומסעות מיוחדים — ישירות למייל</p>
+                <form class="newsletter-form" onsubmit="handleNewsletter(event)">
+                    <input type="text" name="name" required placeholder="השם שלכם" data-he-placeholder="השם שלכם" data-en-placeholder="Your name">
+                    <input type="email" name="email" required placeholder="כתובת אימייל" data-he-placeholder="כתובת אימייל" data-en-placeholder="Email address">
+                    <button type="submit" class="btn btn-primary" data-he="הרשמה" data-en="Subscribe">הרשמה</button>
+                </form>
+                <p class="newsletter-note" data-he="לא נשלח ספאם. ניתן לבטל בכל עת." data-en="No spam. You can unsubscribe anytime.">לא נשלח ספאם. ניתן לבטל בכל עת.</p>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
@@ -2282,6 +2364,32 @@
         });
 
         // Form handling
+        function handleNewsletter(e) {
+            e.preventDefault();
+            const form = e.target;
+            const data = new FormData(form);
+            const emailData = new FormData();
+            emailData.append('name', data.get('name'));
+            emailData.append('email', data.get('email'));
+            emailData.append('_subject', 'הרשמה חדשה לניוזלטר');
+            emailData.append('message', 'שם: ' + data.get('name') + '\nאימייל: ' + data.get('email'));
+            emailData.append('_captcha', 'false');
+            emailData.append('_template', 'table');
+            fetch('https://formsubmit.co/ajax/eliaz_chen@hotmail.com', {
+                method: 'POST',
+                body: emailData
+            });
+            const btn = form.querySelector('button[type="submit"]');
+            const origText = btn.textContent;
+            btn.textContent = currentLang === 'he' ? 'נרשמת בהצלחה!' : 'Subscribed!';
+            btn.style.background = '#27ae60';
+            setTimeout(() => {
+                btn.textContent = origText;
+                btn.style.background = '';
+                form.reset();
+            }, 3000);
+        }
+
         function handleSubmit(e) {
             e.preventDefault();
             const form = e.target;
