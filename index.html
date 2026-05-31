@@ -1534,6 +1534,60 @@
             line-height: 1.8 !important;
         }
 
+        /* Promo Banner */
+        .promo-banner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            background: linear-gradient(135deg, #e74c3c, #c0392b, #e74c3c);
+            background-size: 200% 100%;
+            animation: shimmer 3s ease-in-out infinite;
+            padding: 18px 30px;
+            text-decoration: none;
+            color: var(--white);
+            font-family: 'Secular One', sans-serif;
+            font-size: 1.15rem;
+            transition: background 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 16px rgba(231,76,60,0.3);
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .promo-banner:hover {
+            box-shadow: 0 6px 24px rgba(231,76,60,0.5);
+        }
+
+        .promo-icon {
+            font-size: 1.4rem;
+        }
+
+        .promo-cta {
+            background: rgba(255,255,255,0.2);
+            padding: 6px 18px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            border: 1px solid rgba(255,255,255,0.4);
+            transition: background 0.2s;
+        }
+
+        .promo-banner:hover .promo-cta {
+            background: rgba(255,255,255,0.35);
+        }
+
+        @media (max-width: 768px) {
+            .promo-banner {
+                flex-wrap: wrap;
+                font-size: 1rem;
+                padding: 14px 20px;
+                gap: 10px;
+            }
+        }
+
         /* Newsletter */
         .newsletter {
             background: linear-gradient(135deg, rgba(44,62,80,0.92), rgba(20,30,40,0.95)),
@@ -1708,6 +1762,13 @@
             <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M7 13l5 5 5-5M7 6l5 5 5-5"/></svg>
         </div>
     </section>
+
+    <!-- Silk Road Banner -->
+    <a href="#silk-road-trip" class="promo-banner">
+        <span class="promo-icon">🌟</span>
+        <span class="promo-text" data-he="דרך המשי ההיסטורית — יוני 2026 — מקומות אחרונים!" data-en="The Historic Silk Road — June 2026 — Last spots!">דרך המשי ההיסטורית — יוני 2026 — מקומות אחרונים!</span>
+        <span class="promo-cta" data-he="לפרטים ←" data-en="Details →">לפרטים ←</span>
+    </a>
 
     <!-- About -->
     <section class="about" id="about">
