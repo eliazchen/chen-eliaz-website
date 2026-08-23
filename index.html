@@ -3394,13 +3394,13 @@
 
     <button id="chatbot-btn" onclick="chatbotToggle()" aria-label="פתח צ'אט">
         <span class="badge">1</span>
-        <img src="images/chen-avatar.svg" alt="צ'אט עם חן" style="width:54px; height:54px; border-radius:50%;">
+        <img src="images/chen-profile.jpg" alt="צ'אט עם חן" style="width:54px; height:54px; border-radius:50%; object-fit:cover;">
     </button>
 
     <div id="chatbot-panel">
         <div id="chatbot-header">
             <div class="chat-title">
-                <div class="avatar"><img src="images/chen-avatar.svg" alt="חן אליעז"></div>
+                <div class="avatar"><img src="images/chen-profile.jpg" alt="חן אליעז"></div>
                 <div>
                     <div data-he="חן אליעז" data-en="Chen Eliaz">חן אליעז<span class="online-dot"></span></div>
                     <div class="chat-subtitle" data-he="מדריך טיולים · מרצה · סופר" data-en="Travel Guide · Lecturer · Author">מדריך טיולים · מרצה · סופר</div>
@@ -3642,7 +3642,7 @@
 
             if (!isUser) {
                 var avatar = document.createElement('img');
-                avatar.src = 'images/chen-avatar.svg';
+                avatar.src = 'images/chen-profile.jpg';
                 avatar.alt = '';
                 avatar.className = 'chat-avatar-sm';
                 row.appendChild(avatar);
@@ -3699,7 +3699,7 @@
             var typingRow = document.createElement('div');
             typingRow.className = 'chat-msg-row';
             var typingAvatar = document.createElement('img');
-            typingAvatar.src = 'images/chen-avatar.svg';
+            typingAvatar.src = 'images/chen-profile.jpg';
             typingAvatar.alt = '';
             typingAvatar.className = 'chat-avatar-sm';
             typingRow.appendChild(typingAvatar);
