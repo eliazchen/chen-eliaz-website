@@ -3345,6 +3345,65 @@
         var chatOpen = false;
         var welcomed = false;
 
+        var trips = [
+            { date: '2026-05', he: 'סין — הטיול המקיף', en: 'China — Comprehensive Tour', status: '', tags: ['סין','china','דרקון'] },
+            { date: '2026-06', he: 'דרך המשי ההיסטורית', en: 'The Historic Silk Road', status: 'he:חזרנו, היה חלום|en:We\'re back, it was a dream', tags: ['משי','silk','road'] },
+            { date: '2026-09', he: 'סין — הדרקון התנער', en: 'China — The Dragon Awakens', status: 'he:מקומות אחרונים|en:Last spots', tags: ['סין','china','דרקון'] },
+            { date: '2026-10', he: 'המדינות הבלטיות — אוהבי לכת', en: 'The Baltics — Walking Tour', status: 'he:מקומות אחרונים|en:Last spots', tags: ['בלט','ליטא','לטביה','baltic'] },
+            { date: '2026-11', he: 'יפן בשלכת חלומית', en: 'Japan in Dreamy Autumn', status: 'he:הטיול מלא|en:Full', tags: ['יפן','japan','שלכת'] },
+            { date: '2026-12', he: 'ויאטנם וקמבודיה', en: 'Vietnam & Cambodia', status: 'he:טיול מלא|en:Full', tags: ['ויאטנם','וייטנאם','vietnam','קמבודיה','cambodia'] },
+            { date: '2027-01', he: 'ויאטנם וקמבודיה', en: 'Vietnam & Cambodia', status: 'he:מקומות אחרונים|en:Last spots', tags: ['ויאטנם','וייטנאם','vietnam','קמבודיה','cambodia'] },
+            { date: '2027-02', he: 'אלים ובני אנוש — הודו', en: 'India — Gods & Mortals', status: 'he:מקומות אחרונים|en:Last spots', tags: ['הודו','india','טאג','מאהל'] },
+            { date: '2027-04', he: 'יפן בפריחת הדובדבן', en: 'Japan in Cherry Blossom Season', status: 'he:מקומות אחרונים|en:Last spots', tags: ['יפן','japan','סאקורה','דובדבן'] },
+            { date: '2027-06', he: 'דרך המשי ההיסטורית', en: 'The Historic Silk Road', status: 'he:ההרשמה החלה|en:Registration open', tags: ['משי','silk','road'] },
+            { date: '2027-00', he: 'איחוד האמירויות — אגדה מדברית', en: 'UAE — Desert Legend', status: '', tags: ['אמירויות','דובאי','אבו','דאבי','uae','dubai'] }
+        ];
+
+        var monthNames = {
+            he: ['','ינואר','פברואר','מרץ','אפריל','מאי','יוני','יולי','אוגוסט','ספטמבר','אוקטובר','נובמבר','דצמבר'],
+            en: ['','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+        };
+
+        function getFutureTrips(filterTags) {
+            var now = new Date();
+            var currentYM = now.getFullYear() * 100 + (now.getMonth() + 1);
+            return trips.filter(function(t) {
+                var parts = t.date.split('-');
+                var m = parseInt(parts[1]);
+                var tripYM = parseInt(parts[0]) * 100 + m;
+                if (m > 0 && tripYM <= currentYM) return false;
+                if (filterTags) {
+                    for (var i = 0; i < filterTags.length; i++) {
+                        if (t.tags.indexOf(filterTags[i]) !== -1) return true;
+                    }
+                    return false;
+                }
+                return true;
+            });
+        }
+
+        function buildTripsAnswer(filteredTrips, lang) {
+            if (filteredTrips.length === 0) return null;
+            var lines = [];
+            filteredTrips.forEach(function(t) {
+                var parts = t.date.split('-');
+                var y = parts[0];
+                var m = parseInt(parts[1]);
+                var dateStr = m > 0 ? (monthNames[lang][m] + ' ' + y) : y;
+                var name = lang === 'en' ? t.en : t.he;
+                var statusText = '';
+                if (t.status) {
+                    var sts = t.status.split('|');
+                    sts.forEach(function(s) {
+                        if (s.indexOf(lang + ':') === 0) statusText = s.substring(lang.length + 1);
+                    });
+                    if (statusText) statusText = ' (' + statusText + ')';
+                }
+                lines.push('• <b>' + name + '</b> — ' + dateStr + statusText);
+            });
+            return lines.join('\n');
+        }
+
         var faq = {
             he: {
                 welcome: 'שלום! 👋 אני חן אליעז, מדריך טיולים, מרצה וסופר.\nאיך אפשר לעזור לכם?',
@@ -3359,7 +3418,11 @@
                 answers: [
                     {
                         patterns: ['טיול', 'טיולים', 'קרוב', 'יעד', 'יעדים', 'לאן', 'מתי', 'תאריך', 'תאריכים'],
-                        answer: '✈️ הטיולים הקרובים שלי:\n\n• <b>סין — הטיול המקיף</b> — מאי 2026\n• <b>דרך המשי ההיסטורית</b> — יוני 2026 (חזרנו, היה חלום!)\n• <b>סין — הדרקון התנער</b> — ספטמבר 2026 (מקומות אחרונים!)\n• <b>המדינות הבלטיות</b> — אוקטובר 2026 (מקומות אחרונים!)\n• <b>יפן בשלכת חלומית</b> — נובמבר 2026 (מלא!)\n• <b>ויאטנם וקמבודיה</b> — דצמבר 2026 (מלא!)\n\n2027:\n• ויאטנם וקמבודיה — ינואר\n• הודו — פברואר\n• יפן בפריחת הדובדבן — אפריל\n• דרך המשי — יוני\n• איחוד האמירויות\n\n<a href="#trips">לכל הטיולים באתר</a> · <a href="#contact">צרו קשר</a> · 📞 052-8595493'
+                        dynamic: function() {
+                            var list = buildTripsAnswer(getFutureTrips(), 'he');
+                            if (!list) return 'כרגע אין טיולים מתוכננים, אבל מלאו את <a href="#contact">טופס יצירת הקשר</a> ואעדכן אתכם!';
+                            return '✈️ הטיולים הקרובים שלי:\n\n' + list + '\n\n<a href="#trips">לכל הטיולים באתר</a> · <a href="#contact">צרו קשר</a> · 📞 052-8595493';
+                        }
                     },
                     {
                         patterns: ['קשר', 'טלפון', 'מייל', 'אימייל', 'וואטסאפ', 'whatsapp', 'כתובת', 'מיקום', 'phone', 'email', 'contact'],
@@ -3383,31 +3446,59 @@
                     },
                     {
                         patterns: ['סין', 'china', 'דרקון'],
-                        answer: '🐉 הטיולים שלי לסין:\n\n• <b>סין — הטיול המקיף</b> — מאי 2026\nהצטרפו אליי לטיול חלומי בין סין העתיקה והחדשה. חכמים, לוחמים, קיסרים, שירה, טבע דרמטי, מקדשים, קולינריה ורכבות המהירות בעולם.\n\n• <b>סין — הדרקון התנער</b> — ספטמבר 2026 (מקומות אחרונים!)\nמסע אל סין המתחדשת.\n\n<a href="#trips">לכל הטיולים</a> · <a href="#contact">צרו קשר</a> · 📞 052-8595493'
+                        dynamic: function() {
+                            var list = buildTripsAnswer(getFutureTrips(['סין','china','דרקון']), 'he');
+                            if (!list) return '🐉 כרגע אין טיולים מתוכננים לסין בזמן הקרוב.\nמלאו את <a href="#contact">טופס יצירת הקשר</a> ואעדכן אתכם כשייפתח טיול חדש!\n\n📞 052-8595493';
+                            return '🐉 הטיולים שלי לסין:\n\n' + list + '\n\n<a href="#trips">לכל הטיולים</a> · <a href="#contact">צרו קשר</a> · 📞 052-8595493';
+                        }
                     },
                     {
                         patterns: ['משי', 'silk', 'road'],
-                        answer: '🛤️ דרך המשי ההיסטורית:\n\n• <b>יוני 2026</b> — חזרנו, היה חלום!\n• <b>יוני 2027</b> — ההרשמה החלה!\n\nמסע מיוחד אל ראשית החיבור בין מזרח למערב. תחנות דרכים עתיקות, ערים אבודות, שווקים, חיי נוודים ויושבי קבע.\n\n<a href="#trips">לפרטים באתר</a> · <a href="#contact">מלאו את הטופס</a> · 📞 052-8595493'
+                        dynamic: function() {
+                            var list = buildTripsAnswer(getFutureTrips(['משי','silk','road']), 'he');
+                            if (!list) return '🛤️ כרגע אין טיול מתוכנן לדרך המשי.\nמלאו את <a href="#contact">טופס יצירת הקשר</a> ואעדכן אתכם!\n\n📞 052-8595493';
+                            return '🛤️ דרך המשי ההיסטורית:\n\n' + list + '\n\nמסע מיוחד אל ראשית החיבור בין מזרח למערב. תחנות דרכים עתיקות, ערים אבודות, שווקים, חיי נוודים ויושבי קבע.\n\n<a href="#trips">לפרטים באתר</a> · <a href="#contact">מלאו את הטופס</a> · 📞 052-8595493';
+                        }
                     },
                     {
                         patterns: ['יפן', 'japan', 'סאקורה', 'דובדבן', 'שלכת'],
-                        answer: '🌸 הטיולים שלי ליפן:\n\n• <b>יפן בשלכת חלומית</b> — נובמבר 2026 (מלא!)\n• <b>יפן בפריחת הדובדבן</b> — אפריל 2027 (מקומות אחרונים!)\n\nמסורת וטבע מהים אל ההרים. מקדשים עתיקים, גנים יפניים ושדרות דובדבן פורחים.\n\n<a href="#trips">לכל הטיולים</a> · <a href="#contact">צרו קשר</a> · 📞 052-8595493'
+                        dynamic: function() {
+                            var list = buildTripsAnswer(getFutureTrips(['יפן','japan','שלכת','סאקורה','דובדבן']), 'he');
+                            if (!list) return '🌸 כרגע אין טיולים מתוכננים ליפן.\nמלאו את <a href="#contact">טופס יצירת הקשר</a> ואעדכן אתכם!\n\n📞 052-8595493';
+                            return '🌸 הטיולים שלי ליפן:\n\n' + list + '\n\n<a href="#trips">לכל הטיולים</a> · <a href="#contact">צרו קשר</a> · 📞 052-8595493';
+                        }
                     },
                     {
                         patterns: ['הודו', 'india', 'טאג', 'מאהל'],
-                        answer: '🕌 הטיול שלי להודו — אלים ובני אנוש:\n\n• <b>פברואר 2027</b> — בין הסארי לטאג\' מאהל (מקומות אחרונים!)\n\nמסע אל לב הודו — מקדשים צבעוניים, שוקי תבלינים, נהר הגנגס הקדוש וטאג\' מאהל.\n\n<a href="#trips">לכל הטיולים</a> · <a href="#contact">צרו קשר</a> · 📞 052-8595493'
+                        dynamic: function() {
+                            var list = buildTripsAnswer(getFutureTrips(['הודו','india','טאג','מאהל']), 'he');
+                            if (!list) return '🕌 כרגע אין טיול מתוכנן להודו.\nמלאו את <a href="#contact">טופס יצירת הקשר</a> ואעדכן אתכם!\n\n📞 052-8595493';
+                            return '🕌 הטיול שלי להודו:\n\n' + list + '\n\nמסע אל לב הודו — מקדשים צבעוניים, שוקי תבלינים, נהר הגנגס הקדוש וטאג\' מאהל.\n\n<a href="#trips">לכל הטיולים</a> · <a href="#contact">צרו קשר</a> · 📞 052-8595493';
+                        }
                     },
                     {
                         patterns: ['ויאטנם', 'וייטנאם', 'vietnam', 'קמבודיה', 'cambodia'],
-                        answer: '🌿 ויאטנם וקמבודיה:\n\n• <b>דצמבר 2026</b> — מלא!\n• <b>ינואר 2027</b> — מקומות אחרונים!\n\nמממלכת הדרקון הקטן אל ממלכה שנעלמה בג\'ונגלים. מסע מרתק בדרום מזרח אסיה.\n\n<a href="#trips">לכל הטיולים</a> · <a href="#contact">צרו קשר</a> · 📞 052-8595493'
+                        dynamic: function() {
+                            var list = buildTripsAnswer(getFutureTrips(['ויאטנם','וייטנאם','vietnam','קמבודיה','cambodia']), 'he');
+                            if (!list) return '🌿 כרגע אין טיולים מתוכננים לויאטנם וקמבודיה.\nמלאו את <a href="#contact">טופס יצירת הקשר</a> ואעדכן אתכם!\n\n📞 052-8595493';
+                            return '🌿 ויאטנם וקמבודיה:\n\n' + list + '\n\n<a href="#trips">לכל הטיולים</a> · <a href="#contact">צרו קשר</a> · 📞 052-8595493';
+                        }
                     },
                     {
                         patterns: ['בלט', 'ליטא', 'לטביה', 'baltic'],
-                        answer: '🏰 המדינות הבלטיות — אוהבי לכת:\n\n• <b>אוקטובר 2026</b> — מקומות אחרונים!\n\nליטא ולטביה — בין מבצרים עתיקים, יערות ואגמים. טיול הליכה ייחודי.\n\n<a href="#trips">לכל הטיולים</a> · <a href="#contact">צרו קשר</a> · 📞 052-8595493'
+                        dynamic: function() {
+                            var list = buildTripsAnswer(getFutureTrips(['בלט','ליטא','לטביה','baltic']), 'he');
+                            if (!list) return '🏰 כרגע אין טיול מתוכנן למדינות הבלטיות.\nמלאו את <a href="#contact">טופס יצירת הקשר</a> ואעדכן אתכם!\n\n📞 052-8595493';
+                            return '🏰 המדינות הבלטיות:\n\n' + list + '\n\nליטא ולטביה — בין מבצרים עתיקים, יערות ואגמים. טיול הליכה ייחודי.\n\n<a href="#trips">לכל הטיולים</a> · <a href="#contact">צרו קשר</a> · 📞 052-8595493';
+                        }
                     },
                     {
                         patterns: ['אמירויות', 'דובאי', 'אבו', 'דאבי', 'uae', 'dubai'],
-                        answer: '🏜️ איחוד האמירויות — אגדה מדברית:\n\n• <b>2027</b>\n\nמסע בין מדבר ומגדלי זכוכית, שווקי תבלינים ומסגדים מפוארים — דובאי, אבו דאבי ומעבר להן.\n\n<a href="#trips">לכל הטיולים</a> · <a href="#contact">צרו קשר</a> · 📞 052-8595493'
+                        dynamic: function() {
+                            var list = buildTripsAnswer(getFutureTrips(['אמירויות','דובאי','אבו','דאבי','uae','dubai']), 'he');
+                            if (!list) return '🏜️ כרגע אין טיול מתוכנן לאיחוד האמירויות.\nמלאו את <a href="#contact">טופס יצירת הקשר</a> ואעדכן אתכם!\n\n📞 052-8595493';
+                            return '🏜️ איחוד האמירויות — אגדה מדברית:\n\n' + list + '\n\nמסע בין מדבר ומגדלי זכוכית, שווקי תבלינים ומסגדים מפוארים.\n\n<a href="#trips">לכל הטיולים</a> · <a href="#contact">צרו קשר</a> · 📞 052-8595493';
+                        }
                     }
                 ],
                 fallback: 'שאלה מעניינת! 🤔\nאני לא בטוח שיש לי תשובה מוכנה, אבל אשמח לעזור אישית.\n\nמלאו את <a href="#contact">טופס יצירת הקשר</a> ואחזור אליכם בהקדם!\n\nאו התקשרו ישירות:\n📞 <a href="tel:+972528595493">052-8595493</a>\n✉️ <a href="mailto:eliaz_chen@hotmail.com">eliaz_chen@hotmail.com</a>'
@@ -3425,7 +3516,11 @@
                 answers: [
                     {
                         patterns: ['trip', 'trips', 'tour', 'tours', 'upcoming', 'destination', 'when', 'date', 'where'],
-                        answer: '✈️ My upcoming trips:\n\n• <b>China — Comprehensive Tour</b> — May 2026\n• <b>The Historic Silk Road</b> — June 2026 (We\'re back, it was a dream!)\n• <b>China — The Dragon Awakens</b> — Sep 2026 (Last spots!)\n• <b>The Baltics</b> — Oct 2026 (Last spots!)\n• <b>Japan in Autumn</b> — Nov 2026 (Full!)\n• <b>Vietnam & Cambodia</b> — Dec 2026 (Full!)\n\n2027:\n• Vietnam & Cambodia — Jan\n• India — Feb\n• Japan Cherry Blossom — Apr\n• Silk Road — June\n• UAE\n\n<a href="#trips">See all trips</a> · <a href="#contact">Contact me</a> · 📞 052-8595493'
+                        dynamic: function() {
+                            var list = buildTripsAnswer(getFutureTrips(), 'en');
+                            if (!list) return 'No upcoming trips are scheduled at the moment, but fill out the <a href="#contact">contact form</a> and I\'ll keep you posted!\n\n📞 052-8595493';
+                            return '✈️ My upcoming trips:\n\n' + list + '\n\n<a href="#trips">See all trips</a> · <a href="#contact">Contact me</a> · 📞 052-8595493';
+                        }
                     },
                     {
                         patterns: ['contact', 'phone', 'email', 'whatsapp', 'address', 'location', 'reach'],
@@ -3514,7 +3609,8 @@
                 }
             }
 
-            return bestScore > 0 ? bestMatch.answer : data.fallback;
+            if (bestScore === 0) return data.fallback;
+            return bestMatch.dynamic ? bestMatch.dynamic() : bestMatch.answer;
         }
 
         function processQuestion(text) {
