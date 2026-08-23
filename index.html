@@ -3079,5 +3079,498 @@
     </script>
     <!-- =================== End Accessibility Widget =================== -->
 
+    <!-- ===================== Chatbot ===================== -->
+    <style>
+        #chatbot-btn {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 9998;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(200,149,108,0.45);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s, transform 0.2s;
+        }
+        #chatbot-btn:hover { background: var(--accent-dark); transform: scale(1.1); }
+        #chatbot-btn svg { width: 28px; height: 28px; }
+        #chatbot-btn .badge {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            background: #e74c3c;
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        [dir="ltr"] #chatbot-btn { right: auto; left: 24px; }
+
+        #chatbot-panel {
+            display: none;
+            position: fixed;
+            bottom: 96px;
+            right: 24px;
+            z-index: 9998;
+            width: 360px;
+            max-width: calc(100vw - 32px);
+            max-height: 520px;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+            border: 1px solid #e5e7eb;
+            font-family: 'Assistant', Arial, sans-serif;
+            direction: rtl;
+            overflow: hidden;
+            flex-direction: column;
+            animation: chatSlideUp 0.3s ease;
+        }
+        [dir="ltr"] #chatbot-panel { right: auto; left: 24px; direction: ltr; }
+        #chatbot-panel.open { display: flex; }
+
+        @keyframes chatSlideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        #chatbot-header {
+            background: var(--accent);
+            color: #fff;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-shrink: 0;
+        }
+        #chatbot-header .chat-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 15px;
+        }
+        #chatbot-header .chat-title .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+            flex-shrink: 0;
+            border: 2px solid rgba(255,255,255,0.4);
+        }
+        #chatbot-header .chat-title .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        #chatbot-header button {
+            background: none;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+        }
+        #chatbot-header button:hover { background: rgba(255,255,255,0.2); }
+
+        #chatbot-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            min-height: 200px;
+            max-height: 340px;
+        }
+
+        .chat-msg {
+            max-width: 85%;
+            padding: 10px 14px;
+            border-radius: 14px;
+            font-size: 14px;
+            line-height: 1.6;
+            word-wrap: break-word;
+        }
+        .chat-msg-row {
+            display: flex;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        .chat-msg-row.user-row {
+            flex-direction: row-reverse;
+        }
+        .chat-avatar-sm {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+        .chat-msg.bot {
+            align-self: flex-start;
+            background: #f3f4f6;
+            color: var(--text);
+            border-bottom-right-radius: 4px;
+        }
+        [dir="ltr"] .chat-msg.bot { border-bottom-left-radius: 4px; border-bottom-right-radius: 14px; }
+        .chat-msg.user {
+            align-self: flex-end;
+            background: var(--accent);
+            color: #fff;
+            border-bottom-left-radius: 4px;
+        }
+        [dir="ltr"] .chat-msg.user { border-bottom-right-radius: 4px; border-bottom-left-radius: 14px; }
+        .chat-msg a {
+            color: var(--accent-dark);
+            font-weight: 600;
+            text-decoration: underline;
+        }
+        .chat-msg.user a { color: #fff; }
+
+        #chatbot-quick {
+            padding: 0 16px 12px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+        .quick-btn {
+            background: #f3f4f6;
+            border: 1px solid #e5e7eb;
+            color: var(--text);
+            padding: 6px 12px;
+            border-radius: 16px;
+            font-size: 12.5px;
+            font-family: 'Assistant', Arial, sans-serif;
+            cursor: pointer;
+            transition: background 0.15s, border-color 0.15s;
+            white-space: nowrap;
+        }
+        .quick-btn:hover { background: #e5e7eb; border-color: var(--accent); }
+
+        #chatbot-input-wrap {
+            display: flex;
+            gap: 8px;
+            padding: 12px 16px;
+            border-top: 1px solid #e5e7eb;
+            background: #fafafa;
+            flex-shrink: 0;
+        }
+        #chatbot-input {
+            flex: 1;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            padding: 8px 14px;
+            font-family: 'Assistant', Arial, sans-serif;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        #chatbot-input:focus { border-color: var(--accent); }
+        #chatbot-send {
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+            flex-shrink: 0;
+        }
+        #chatbot-send:hover { background: var(--accent-dark); }
+
+        @media (max-width: 768px) {
+            #chatbot-panel {
+                bottom: 0;
+                right: 0;
+                left: 0;
+                width: 100%;
+                max-width: 100%;
+                max-height: 80vh;
+                border-radius: 16px 16px 0 0;
+            }
+            [dir="ltr"] #chatbot-panel { right: 0; left: 0; }
+        }
+    </style>
+
+    <button id="chatbot-btn" onclick="chatbotToggle()" aria-label="פתח צ'אט">
+        <span class="badge">1</span>
+        <img src="images/chen-avatar.svg" alt="צ'אט עם חן" style="width:54px; height:54px; border-radius:50%;">
+    </button>
+
+    <div id="chatbot-panel">
+        <div id="chatbot-header">
+            <div class="chat-title">
+                <div class="avatar"><img src="images/chen-avatar.svg" alt="חן אליעז"></div>
+                <div>
+                    <div data-he="חן אליעז" data-en="Chen Eliaz">חן אליעז</div>
+                    <div style="font-weight:400; font-size:12px; opacity:0.85;" data-he="מדריך טיולים · מרצה · סופר" data-en="Travel Guide · Lecturer · Author">מדריך טיולים · מרצה · סופר</div>
+                </div>
+            </div>
+            <button onclick="chatbotToggle()" aria-label="סגור צ'אט">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+        </div>
+        <div id="chatbot-messages"></div>
+        <div id="chatbot-quick"></div>
+        <div id="chatbot-input-wrap">
+            <input type="text" id="chatbot-input" placeholder="הקלידו שאלה..." data-he-placeholder="הקלידו שאלה..." data-en-placeholder="Type a question...">
+            <button id="chatbot-send" onclick="chatbotSend()" aria-label="שלח">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            </button>
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        var chatOpen = false;
+        var welcomed = false;
+
+        var faq = {
+            he: {
+                welcome: 'שלום! 👋 אני חן אליעז, מדריך טיולים, מרצה וסופר.\nאיך אפשר לעזור לכם?',
+                quickButtons: [
+                    'אילו טיולים יש בקרוב?',
+                    'איך יוצרים קשר?',
+                    'ספרו לי על ההרצאות',
+                    'אילו ספרים יש?',
+                    'מה כולל שירות הייעוץ?',
+                    'מי זה חן אליעז?'
+                ],
+                answers: [
+                    {
+                        patterns: ['טיול', 'טיולים', 'קרוב', 'יעד', 'יעדים', 'לאן', 'מתי', 'תאריך', 'תאריכים'],
+                        answer: '✈️ הטיולים הקרובים שלי:\n\n• <b>סין — הטיול המקיף</b> — מאי 2026\n• <b>דרך המשי ההיסטורית</b> — יוני 2026 (חזרנו, היה חלום!)\n• <b>סין — הדרקון התנער</b> — ספטמבר 2026 (מקומות אחרונים!)\n• <b>המדינות הבלטיות</b> — אוקטובר 2026 (מקומות אחרונים!)\n• <b>יפן בשלכת חלומית</b> — נובמבר 2026 (מלא!)\n• <b>ויאטנם וקמבודיה</b> — דצמבר 2026 (מלא!)\n\n2027:\n• ויאטנם וקמבודיה — ינואר\n• הודו — פברואר\n• יפן בפריחת הדובדבן — אפריל\n• דרך המשי — יוני\n• איחוד האמירויות\n\n<a href="#trips">לכל הטיולים באתר</a> · <a href="#contact">צרו קשר</a> · 📞 052-8595493'
+                    },
+                    {
+                        patterns: ['קשר', 'טלפון', 'מייל', 'אימייל', 'וואטסאפ', 'whatsapp', 'כתובת', 'מיקום', 'phone', 'email', 'contact'],
+                        answer: '📞 דרכים ליצור קשר עם חן:\n\n• <b>טלפון / וואטסאפ:</b> <a href="tel:+972528595493">052-8595493</a>\n• <b>אימייל:</b> <a href="mailto:eliaz_chen@hotmail.com">eliaz_chen@hotmail.com</a>\n• <b>מיקום:</b> זיכרון יעקב, ישראל\n\nאו מלאו את <a href="#contact">טופס יצירת הקשר</a> באתר.'
+                    },
+                    {
+                        patterns: ['הרצאה', 'הרצאות', 'lecture', 'lectures', 'מרצה'],
+                        answer: '🎤 אני מעביר הרצאות מצולמות ומרתקות, ביניהן:\n\n• ויטנאם — בודהא, קונפוציוס ולאוצה\n• קמבודיה — שגריר סיני מדווח אחרי 800 שנים\n• דרך המשי — ערים אבודות ונסתרות\n• בורמה — קסמים בארץ פגודות הזהב\n• הודו — אלים ובני אנוש\n• נפאל — האם הגענו אל גן עדן?\n• קאמה סוטרה — העיר האבודה קאג\'רהו\n• ועוד...\n\n<a href="#lectures">לכל ההרצאות באתר</a> · להזמנת הרצאה — <a href="#contact">צרו קשר</a>'
+                    },
+                    {
+                        patterns: ['ספר', 'ספרים', 'book', 'books', 'קנ', 'לקנות', 'רכישה', 'מחיר'],
+                        answer: '📚 כתבתי שני ספרים:\n\n<b>1. פעם אחת בחיים</b>\n557 עמודים + 32 עמודי צבע. ספר מסע מבוסס על יומן שנכתב במהלך שנת טיול במזרח הרחוק — נפאל, הודו, תאילנד, בורמה, קמבודיה וויאטנם.\n\n<b>2. מנהגי קמבודיה</b>\nהספר היחיד בעברית על ממלכת קמבודיה. תרגום כתבי השגריר הסיני צ\'ו טא-קואן מהמאה ה-13.\n💰 90 ₪ כולל משלוח והקדשה אישית.\n\n<a href="#books">לעוד פרטים על הספרים</a> · לרכישה: <a href="tel:+972528595493">052-8595493</a>'
+                    },
+                    {
+                        patterns: ['ייעוץ', 'יעוץ', 'consult', 'תכנון', 'מסלול', 'עצה', 'טיפ', 'המלצה', 'ויזה', 'חיסון', 'ביטוח', 'ארוז', 'לארוז'],
+                        answer: '🗺️ שירות הייעוץ שלי כולל:\n\n• <b>תכנון מסלול</b> — מותאם אישית לזמן, תקציב והעדפות\n• <b>המלצות שהייה</b> — מלונות בוטיק, גסטהאוסים ולינות ייחודיות\n• <b>תרבות ואוכל מקומי</b> — טיפים לחוויה אותנטית\n• <b>הכנה לפני יציאה</b> — ארוז, חיסונים, ביטוח, ויזות, מטבע\n• <b>טיולים משפחתיים</b> — התאמת פעילויות למשפחה\n• <b>ליווי מרחוק</b> — תמיכה בוואטסאפ גם בזמן הטיול\n\n<a href="#consulting">לעוד פרטים על הייעוץ</a> · <a href="#contact">צרו קשר</a>'
+                    },
+                    {
+                        patterns: ['מי', 'חן', 'אליעז', 'אודות', 'רקע', 'ניסיון', 'השכלה'],
+                        answer: '👤 אני חן אליעז — מדריך טיולים, מרצה וסופר.\n\n• מתגורר בזיכרון יעקב, נשוי ואב לשלושה\n• תואר שני בגיאוגרפיה וארכיאולוגיה (אוני\' בן-גוריון ותל אביב)\n• 25+ שנות ניסיון בהדרכת טיולים למזרח הרחוק ואירופה\n• 15+ מדינות\n• 2 ספרים\n• ניהלתי בעבר את טיולי המשפחות של החברה הגיאוגרפית\n\n<i>\"המוטו שלי — לטייל לאט, לנצל את הזמן היטב, לראות את המקומות והאנשים מבוקר עד ערב.\"</i>\n\n<a href="#about">עוד עליי</a>'
+                    },
+                    {
+                        patterns: ['סין', 'china', 'דרקון'],
+                        answer: '🐉 הטיולים שלי לסין:\n\n• <b>סין — הטיול המקיף</b> — מאי 2026\nהצטרפו אליי לטיול חלומי בין סין העתיקה והחדשה. חכמים, לוחמים, קיסרים, שירה, טבע דרמטי, מקדשים, קולינריה ורכבות המהירות בעולם.\n\n• <b>סין — הדרקון התנער</b> — ספטמבר 2026 (מקומות אחרונים!)\nמסע אל סין המתחדשת.\n\n<a href="#trips">לכל הטיולים</a> · <a href="#contact">צרו קשר</a> · 📞 052-8595493'
+                    },
+                    {
+                        patterns: ['משי', 'silk', 'road'],
+                        answer: '🛤️ דרך המשי ההיסטורית:\n\n• <b>יוני 2026</b> — חזרנו, היה חלום!\n• <b>יוני 2027</b> — ההרשמה החלה!\n\nמסע מיוחד אל ראשית החיבור בין מזרח למערב. תחנות דרכים עתיקות, ערים אבודות, שווקים, חיי נוודים ויושבי קבע.\n\n<a href="#trips">לפרטים באתר</a> · <a href="#contact">מלאו את הטופס</a> · 📞 052-8595493'
+                    },
+                    {
+                        patterns: ['יפן', 'japan', 'סאקורה', 'דובדבן', 'שלכת'],
+                        answer: '🌸 הטיולים שלי ליפן:\n\n• <b>יפן בשלכת חלומית</b> — נובמבר 2026 (מלא!)\n• <b>יפן בפריחת הדובדבן</b> — אפריל 2027 (מקומות אחרונים!)\n\nמסורת וטבע מהים אל ההרים. מקדשים עתיקים, גנים יפניים ושדרות דובדבן פורחים.\n\n<a href="#trips">לכל הטיולים</a> · <a href="#contact">צרו קשר</a> · 📞 052-8595493'
+                    },
+                    {
+                        patterns: ['הודו', 'india', 'טאג', 'מאהל'],
+                        answer: '🕌 הטיול שלי להודו — אלים ובני אנוש:\n\n• <b>פברואר 2027</b> — בין הסארי לטאג\' מאהל (מקומות אחרונים!)\n\nמסע אל לב הודו — מקדשים צבעוניים, שוקי תבלינים, נהר הגנגס הקדוש וטאג\' מאהל.\n\n<a href="#trips">לכל הטיולים</a> · <a href="#contact">צרו קשר</a> · 📞 052-8595493'
+                    },
+                    {
+                        patterns: ['ויאטנם', 'וייטנאם', 'vietnam', 'קמבודיה', 'cambodia'],
+                        answer: '🌿 ויאטנם וקמבודיה:\n\n• <b>דצמבר 2026</b> — מלא!\n• <b>ינואר 2027</b> — מקומות אחרונים!\n\nמממלכת הדרקון הקטן אל ממלכה שנעלמה בג\'ונגלים. מסע מרתק בדרום מזרח אסיה.\n\n<a href="#trips">לכל הטיולים</a> · <a href="#contact">צרו קשר</a> · 📞 052-8595493'
+                    },
+                    {
+                        patterns: ['בלט', 'ליטא', 'לטביה', 'baltic'],
+                        answer: '🏰 המדינות הבלטיות — אוהבי לכת:\n\n• <b>אוקטובר 2026</b> — מקומות אחרונים!\n\nליטא ולטביה — בין מבצרים עתיקים, יערות ואגמים. טיול הליכה ייחודי.\n\n<a href="#trips">לכל הטיולים</a> · <a href="#contact">צרו קשר</a> · 📞 052-8595493'
+                    },
+                    {
+                        patterns: ['אמירויות', 'דובאי', 'אבו', 'דאבי', 'uae', 'dubai'],
+                        answer: '🏜️ איחוד האמירויות — אגדה מדברית:\n\n• <b>2027</b>\n\nמסע בין מדבר ומגדלי זכוכית, שווקי תבלינים ומסגדים מפוארים — דובאי, אבו דאבי ומעבר להן.\n\n<a href="#trips">לכל הטיולים</a> · <a href="#contact">צרו קשר</a> · 📞 052-8595493'
+                    }
+                ],
+                fallback: 'שאלה מעניינת! 🤔\nאני לא בטוח שיש לי תשובה מוכנה, אבל אשמח לעזור אישית.\n\nמלאו את <a href="#contact">טופס יצירת הקשר</a> ואחזור אליכם בהקדם!\n\nאו התקשרו ישירות:\n📞 <a href="tel:+972528595493">052-8595493</a>\n✉️ <a href="mailto:eliaz_chen@hotmail.com">eliaz_chen@hotmail.com</a>'
+            },
+            en: {
+                welcome: 'Hello! 👋 I\'m Chen Eliaz, travel guide, lecturer and author.\nHow can I help you?',
+                quickButtons: [
+                    'What trips are coming up?',
+                    'How to contact?',
+                    'Tell me about lectures',
+                    'What books are available?',
+                    'What does consulting include?',
+                    'Who is Chen Eliaz?'
+                ],
+                answers: [
+                    {
+                        patterns: ['trip', 'trips', 'tour', 'tours', 'upcoming', 'destination', 'when', 'date', 'where'],
+                        answer: '✈️ My upcoming trips:\n\n• <b>China — Comprehensive Tour</b> — May 2026\n• <b>The Historic Silk Road</b> — June 2026 (We\'re back, it was a dream!)\n• <b>China — The Dragon Awakens</b> — Sep 2026 (Last spots!)\n• <b>The Baltics</b> — Oct 2026 (Last spots!)\n• <b>Japan in Autumn</b> — Nov 2026 (Full!)\n• <b>Vietnam & Cambodia</b> — Dec 2026 (Full!)\n\n2027:\n• Vietnam & Cambodia — Jan\n• India — Feb\n• Japan Cherry Blossom — Apr\n• Silk Road — June\n• UAE\n\n<a href="#trips">See all trips</a> · <a href="#contact">Contact me</a> · 📞 052-8595493'
+                    },
+                    {
+                        patterns: ['contact', 'phone', 'email', 'whatsapp', 'address', 'location', 'reach'],
+                        answer: '📞 Reach me at:\n\n• <b>Phone / WhatsApp:</b> <a href="tel:+972528595493">052-8595493</a>\n• <b>Email:</b> <a href="mailto:eliaz_chen@hotmail.com">eliaz_chen@hotmail.com</a>\n• <b>Location:</b> Zichron Ya\'akov, Israel\n\nOr fill out the <a href="#contact">contact form</a>.'
+                    },
+                    {
+                        patterns: ['lecture', 'lectures', 'talk', 'talks', 'speaker'],
+                        answer: '🎤 I give fascinating illustrated lectures, including:\n\n• Vietnam — Buddha, Confucius & Laozi\n• Cambodia — A Chinese Ambassador Reports After 800 Years\n• The Silk Road — Lost & Hidden Cities\n• Burma — Enchantment in the Land of Golden Pagodas\n• India — Gods & Mortals\n• Nepal — Have We Reached Paradise?\n• Kama Sutra — The Lost City of Khajuraho\n• And more...\n\n<a href="#lectures">See all lectures</a> · To book — <a href="#contact">Contact me</a>'
+                    },
+                    {
+                        patterns: ['book', 'books', 'buy', 'purchase', 'price', 'read'],
+                        answer: '📚 I\'ve written two books:\n\n<b>1. Once in a Lifetime</b>\n557 pages + 32 color pages. A travel book from a year-long journey through the Far East — Nepal, India, Thailand, Burma, Cambodia & Vietnam.\n\n<b>2. Customs of Cambodia</b>\nThe only Hebrew book about the great Cambodian kingdom. Translation of 13th-century Chinese ambassador Zhou Daguan\'s writings.\n💰 90 ₪ including shipping & personal dedication.\n\n<a href="#books">More about my books</a> · To purchase: <a href="tel:+972528595493">052-8595493</a>'
+                    },
+                    {
+                        patterns: ['consult', 'consulting', 'plan', 'planning', 'route', 'advice', 'tip', 'visa', 'vaccine', 'insurance', 'pack'],
+                        answer: '🗺️ My travel consulting services:\n\n• <b>Route Planning</b> — customized for your time, budget & preferences\n• <b>Accommodation</b> — boutique hotels, guesthouses & unique stays\n• <b>Culture & Food</b> — tips for an authentic experience\n• <b>Pre-Departure</b> — packing, vaccines, insurance, visas, currency\n• <b>Family Trips</b> — adapting activities for families\n• <b>Remote Support</b> — WhatsApp support during your trip\n\n<a href="#consulting">More details</a> · <a href="#contact">Contact me</a>'
+                    },
+                    {
+                        patterns: ['who', 'chen', 'eliaz', 'about', 'background', 'experience', 'education'],
+                        answer: '👤 I\'m Chen Eliaz — Travel guide, lecturer & author.\n\n• Based in Zichron Ya\'akov, married, father of three\n• Master\'s in Geography & Archaeology (BGU & TAU)\n• 25+ years guiding trips to the Far East & Europe\n• 15+ countries\n• 2 published books\n• Former manager of the Geographic Society\'s family trips\n\n<i>"My motto — travel slowly, make the most of your time, see the places and people from morning to evening."</i>\n\n<a href="#about">More about me</a>'
+                    }
+                ],
+                fallback: 'Great question! 🤔\nI don\'t have a ready answer for that, but I\'d love to help personally.\n\nFill out the <a href="#contact">contact form</a> and I\'ll get back to you soon!\n\nOr reach me directly:\n📞 <a href="tel:+972528595493">052-8595493</a>\n✉️ <a href="mailto:eliaz_chen@hotmail.com">eliaz_chen@hotmail.com</a>'
+            }
+        };
+
+        function getLang() {
+            return document.documentElement.getAttribute('lang') || 'he';
+        }
+
+        function getFaq() {
+            return faq[getLang()] || faq.he;
+        }
+
+        function addMsg(text, isUser) {
+            var container = document.getElementById('chatbot-messages');
+            var row = document.createElement('div');
+            row.className = 'chat-msg-row' + (isUser ? ' user-row' : '');
+
+            if (!isUser) {
+                var avatar = document.createElement('img');
+                avatar.src = 'images/chen-avatar.svg';
+                avatar.alt = '';
+                avatar.className = 'chat-avatar-sm';
+                row.appendChild(avatar);
+            }
+
+            var div = document.createElement('div');
+            div.className = 'chat-msg ' + (isUser ? 'user' : 'bot');
+            div.innerHTML = text.replace(/\n/g, '<br>');
+            row.appendChild(div);
+            container.appendChild(row);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function showQuickButtons() {
+            var wrap = document.getElementById('chatbot-quick');
+            wrap.innerHTML = '';
+            var btns = getFaq().quickButtons;
+            btns.forEach(function(text) {
+                var btn = document.createElement('button');
+                btn.className = 'quick-btn';
+                btn.textContent = text;
+                btn.onclick = function() { processQuestion(text); };
+                wrap.appendChild(btn);
+            });
+        }
+
+        function findAnswer(text) {
+            var data = getFaq();
+            var lower = text.toLowerCase();
+            var bestMatch = null;
+            var bestScore = 0;
+
+            for (var i = 0; i < data.answers.length; i++) {
+                var entry = data.answers[i];
+                var score = 0;
+                for (var j = 0; j < entry.patterns.length; j++) {
+                    if (lower.indexOf(entry.patterns[j]) !== -1) {
+                        score++;
+                    }
+                }
+                if (score > bestScore) {
+                    bestScore = score;
+                    bestMatch = entry;
+                }
+            }
+
+            return bestScore > 0 ? bestMatch.answer : data.fallback;
+        }
+
+        function processQuestion(text) {
+            addMsg(text, true);
+            setTimeout(function() {
+                addMsg(findAnswer(text), false);
+            }, 400);
+        }
+
+        window.chatbotToggle = function() {
+            chatOpen = !chatOpen;
+            var panel = document.getElementById('chatbot-panel');
+            var btn = document.getElementById('chatbot-btn');
+            var badge = btn.querySelector('.badge');
+
+            if (chatOpen) {
+                panel.classList.add('open');
+                if (badge) badge.style.display = 'none';
+                if (!welcomed) {
+                    welcomed = true;
+                    addMsg(getFaq().welcome, false);
+                    showQuickButtons();
+                }
+                document.getElementById('chatbot-input').focus();
+            } else {
+                panel.classList.remove('open');
+            }
+        };
+
+        window.chatbotSend = function() {
+            var input = document.getElementById('chatbot-input');
+            var text = input.value.trim();
+            if (!text) return;
+            input.value = '';
+            processQuestion(text);
+        };
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && document.activeElement === document.getElementById('chatbot-input')) {
+                chatbotSend();
+            }
+        });
+
+        var origToggle = window.toggleLanguage;
+        window.toggleLanguage = function() {
+            if (origToggle) origToggle();
+            if (welcomed) {
+                showQuickButtons();
+            }
+            var input = document.getElementById('chatbot-input');
+            var lang = getLang() === 'he' ? 'en' : 'he';
+            if (input) input.placeholder = input.getAttribute('data-' + lang + '-placeholder') || input.placeholder;
+        };
+    })();
+    </script>
+    <!-- =================== End Chatbot =================== -->
+
 </body>
 </html>
