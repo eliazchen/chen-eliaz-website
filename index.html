@@ -3669,6 +3669,33 @@
             });
         }
 
+        var destinationKeywords = [
+            'תאילנד','thailand','טיבט','tibet','נפאל','nepal','בורמה','מיאנמר','myanmar','burma',
+            'לאוס','laos','אינדונזיה','indonesia','באלי','bali','פיליפינים','philippines',
+            'קוריאה','korea','מונגוליה','mongolia','סרי לנקה','sri lanka',
+            'טורקיה','turkey','יוון','greece','איטליה','italy','ספרד','spain','פורטוגל','portugal',
+            'צרפת','france','גרמניה','germany','אנגליה','england','הולנד','holland','netherlands',
+            'קרואטיה','croatia','צ\'כיה','czech','פולין','poland','הונגריה','hungary',
+            'רומניה','romania','בולגריה','bulgaria','אוסטריה','austria','שוויץ','switzerland',
+            'נורבגיה','norway','שבדיה','sweden','פינלנד','finland','דנמרק','denmark','איסלנד','iceland',
+            'מרוקו','morocco','דרום אפריקה','south africa','קניה','kenya','טנזניה','tanzania',
+            'אתיופיה','ethiopia','מצרים','egypt','ירדן','jordan','עומאן','oman',
+            'פרו','peru','ארגנטינה','argentina','ברזיל','brazil','קולומביה','colombia',
+            'מקסיקו','mexico','צ\'ילה','chile','בוליביה','bolivia','קובה','cuba',
+            'אוסטרליה','australia','ניו זילנד','new zealand',
+            'רוסיה','russia','אוזבקיסטן','uzbekistan','גאורגיה','georgia','ארמניה','armenia',
+            'קמבודיה','cambodia','ויאטנם','vietnam','טייוואן','taiwan','הונג קונג','hong kong',
+            'מלזיה','malaysia','סינגפור','singapore'
+        ];
+
+        function isDestinationQuery(text) {
+            var lower = text.toLowerCase();
+            for (var i = 0; i < destinationKeywords.length; i++) {
+                if (lower.indexOf(destinationKeywords[i]) !== -1) return true;
+            }
+            return false;
+        }
+
         function findAnswer(text) {
             var data = getFaq();
             var lower = text.toLowerCase();
@@ -3689,7 +3716,14 @@
                 }
             }
 
-            if (bestScore === 0) return data.fallback;
+            if (bestScore === 0) {
+                if (isDestinationQuery(text)) {
+                    var lang = getLang();
+                    if (lang === 'en') return '✈️ This destination isn\'t currently on my upcoming trips list, but I\'d love to hear about your interest!\n\nWrite me a personal message via the <a href="#contact">contact form</a> and I\'ll get back to you.\n\n📞 <a href="tel:+972528595493">052-8595493</a>';
+                    return '✈️ יעד זה לא מופיע כרגע ברשימת הטיולים המתוכננים שלי, אבל אשמח לשמוע!\n\nכתבו לי הודעה אישית דרך <a href="#contact">טופס יצירת הקשר</a> ואחזור אליכם.\n\n📞 <a href="tel:+972528595493">052-8595493</a>';
+                }
+                return data.fallback;
+            }
             return bestMatch.dynamic ? bestMatch.dynamic() : bestMatch.answer;
         }
 
