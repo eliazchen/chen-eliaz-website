@@ -3670,22 +3670,51 @@
         }
 
         var destinationKeywords = [
-            'תאילנד','thailand','טיבט','tibet','נפאל','nepal','בורמה','מיאנמר','myanmar','burma',
-            'לאוס','laos','אינדונזיה','indonesia','באלי','bali','פיליפינים','philippines',
-            'קוריאה','korea','מונגוליה','mongolia','סרי לנקה','sri lanka',
-            'טורקיה','turkey','יוון','greece','איטליה','italy','ספרד','spain','פורטוגל','portugal',
-            'צרפת','france','גרמניה','germany','אנגליה','england','הולנד','holland','netherlands',
-            'קרואטיה','croatia','צ\'כיה','czech','פולין','poland','הונגריה','hungary',
-            'רומניה','romania','בולגריה','bulgaria','אוסטריה','austria','שוויץ','switzerland',
-            'נורבגיה','norway','שבדיה','sweden','פינלנד','finland','דנמרק','denmark','איסלנד','iceland',
-            'מרוקו','morocco','דרום אפריקה','south africa','קניה','kenya','טנזניה','tanzania',
-            'אתיופיה','ethiopia','מצרים','egypt','ירדן','jordan','עומאן','oman',
-            'פרו','peru','ארגנטינה','argentina','ברזיל','brazil','קולומביה','colombia',
-            'מקסיקו','mexico','צ\'ילה','chile','בוליביה','bolivia','קובה','cuba',
-            'אוסטרליה','australia','ניו זילנד','new zealand',
-            'רוסיה','russia','אוזבקיסטן','uzbekistan','גאורגיה','georgia','ארמניה','armenia',
-            'קמבודיה','cambodia','ויאטנם','vietnam','טייוואן','taiwan','הונג קונג','hong kong',
-            'מלזיה','malaysia','סינגפור','singapore'
+            'אפגניסטן','afghanistan','אלבניה','albania','אלג\'ריה','algeria','אנדורה','andorra',
+            'אנגולה','angola','אנטיגואה','antigua','ארגנטינה','argentina','אוסטרליה','australia',
+            'אוסטריה','austria','אזרבייג\'ן','azerbaijan','בהאמה','bahamas','בחריין','bahrain',
+            'בנגלדש','bangladesh','ברבדוס','barbados','בלארוס','belarus','בלגיה','belgium',
+            'בליז','belize','בנין','benin','בהוטן','bhutan','בוליביה','bolivia',
+            'בוסניה','bosnia','בוצוואנה','botswana','ברזיל','brazil','ברוניי','brunei',
+            'בולגריה','bulgaria','בורקינה','burkina','בורונדי','burundi','בורמה','מיאנמר','myanmar','burma',
+            'קמבודיה','cambodia','קמרון','cameroon','קנדה','canada','כף ורדה','cape verde',
+            'צ\'אד','chad','צ\'ילה','chile','צ\'כיה','czech','קולומביה','colombia',
+            'קומורו','comoros','קונגו','congo','קוסטה ריקה','costa rica','קרואטיה','croatia',
+            'קובה','cuba','קפריסין','cyprus','דנמרק','denmark','ג\'יבוטי','djibouti',
+            'דומיניקה','dominica','אקוודור','ecuador','מצרים','egypt','אל סלבדור','el salvador',
+            'אריתריאה','eritrea','אסטוניה','estonia','אסוואטיני','eswatini','אתיופיה','ethiopia',
+            'פיג\'י','fiji','פינלנד','finland','צרפת','france','גבון','gabon',
+            'גמביה','gambia','גאורגיה','georgia','גרמניה','germany','גאנה','ghana',
+            'יוון','greece','גרנדה','grenada','גואטמלה','guatemala','גינאה','guinea',
+            'גיאנה','guyana','האיטי','haiti','הונדורס','honduras','הונגריה','hungary',
+            'איסלנד','iceland','אינדונזיה','indonesia','באלי','bali','איראן','iran',
+            'עיראק','iraq','אירלנד','ireland','איטליה','italy','חוף השנהב','ivory coast',
+            'ג\'מייקה','jamaica','ירדן','jordan','קזחסטן','kazakhstan','קניה','kenya',
+            'קירגיזסטן','kyrgyzstan','לאוס','laos','לטביה','latvia','לבנון','lebanon',
+            'לסוטו','lesotho','ליבריה','liberia','לוב','libya','ליכטנשטיין','liechtenstein',
+            'ליטא','lithuania','לוקסמבורג','luxembourg','מדגסקר','madagascar','מלאווי','malawi',
+            'מלזיה','malaysia','מלדיביים','maldives','מאלי','mali','מלטה','malta',
+            'מאוריטניה','mauritania','מאוריציוס','mauritius','מקסיקו','mexico','מולדובה','moldova',
+            'מונקו','monaco','מונגוליה','mongolia','מונטנגרו','montenegro','מרוקו','morocco',
+            'מוזמביק','mozambique','נמיביה','namibia','נפאל','nepal','הולנד','holland','netherlands',
+            'ניו זילנד','new zealand','ניקרגואה','nicaragua','ניז\'ר','niger','ניגריה','nigeria',
+            'מקדוניה','macedonia','נורבגיה','norway','עומאן','oman','פקיסטן','pakistan',
+            'פנמה','panama','פפואה','papua','פרגוואי','paraguay','פרו','peru',
+            'פיליפינים','philippines','פולין','poland','פורטוגל','portugal','קטאר','qatar',
+            'רומניה','romania','רוסיה','russia','רואנדה','rwanda','סמואה','samoa',
+            'סעודיה','saudi','סנגל','senegal','סרביה','serbia','סיישל','seychelles',
+            'סיירה לאונה','sierra leone','סינגפור','singapore','סלובקיה','slovakia','סלובניה','slovenia',
+            'סומליה','somalia','דרום אפריקה','south africa','דרום סודן','south sudan',
+            'ספרד','spain','סרי לנקה','sri lanka','סודן','sudan','סורינם','suriname',
+            'שבדיה','sweden','שוויץ','switzerland','סוריה','syria','טייוואן','taiwan',
+            'טג\'יקיסטן','tajikistan','טנזניה','tanzania','תאילנד','thailand','טיבט','tibet',
+            'טוגו','togo','טונגה','tonga','טרינידד','trinidad','תוניסיה','tunisia',
+            'טורקיה','turkey','טורקמניסטן','turkmenistan','אוגנדה','uganda','אוקראינה','ukraine',
+            'אנגליה','england','בריטניה','britain','אורוגוואי','uruguay',
+            'אוזבקיסטן','uzbekistan','ונואטו','vanuatu','ונצואלה','venezuela',
+            'ויאטנם','vietnam','תימן','yemen','זמביה','zambia','זימבבואה','zimbabwe',
+            'קוריאה','korea','הונג קונג','hong kong','טייוואן','taiwan',
+            'קירגיזיה','קירגיסטן'
         ];
 
         function isDestinationQuery(text) {
@@ -3696,16 +3725,21 @@
             return false;
         }
 
-        var knownDestinationPatterns = [
-            'סין','china','דרקון','משי','silk','road','יפן','japan','סאקורה','דובדבן','שלכת',
-            'הודו','india','טאג','מאהל','ויאטנם','וייטנאם','vietnam','קמבודיה','cambodia',
-            'בלט','ליטא','לטביה','baltic','אמירויות','דובאי','אבו','דאבי','uae','dubai'
-        ];
+        function getKnownDestinationTags() {
+            var known = [];
+            for (var i = 0; i < trips.length; i++) {
+                for (var j = 0; j < trips[i].tags.length; j++) {
+                    if (known.indexOf(trips[i].tags[j]) === -1) known.push(trips[i].tags[j]);
+                }
+            }
+            return known;
+        }
 
         function isKnownDestination(text) {
             var lower = text.toLowerCase();
-            for (var i = 0; i < knownDestinationPatterns.length; i++) {
-                if (lower.indexOf(knownDestinationPatterns[i]) !== -1) return true;
+            var known = getKnownDestinationTags();
+            for (var i = 0; i < known.length; i++) {
+                if (lower.indexOf(known[i]) !== -1) return true;
             }
             return false;
         }
