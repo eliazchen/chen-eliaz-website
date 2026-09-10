@@ -1566,6 +1566,10 @@
             font-size: 1.4rem;
         }
 
+        .promo-text {
+            transition: opacity 0.4s ease;
+        }
+
         .promo-cta {
             background: rgba(255,255,255,0.2);
             padding: 6px 18px;
@@ -1765,11 +1769,33 @@
     </section>
 
     <!-- Silk Road Banner -->
-    <a href="#contact" class="promo-banner">
+    <a href="#contact" class="promo-banner" id="promo-banner">
         <span class="promo-icon">🌟</span>
-        <span class="promo-text" data-he="הודו הרומנטית והמרתקת — פברואר 2027 — מקומות אחרונים!" data-en="Romantic & Fascinating India — February 2027 — Last spots!">הודו הרומנטית והמרתקת — פברואר 2027 — מקומות אחרונים!</span>
+        <span class="promo-text" id="promo-text" data-he="הודו הרומנטית והמרתקת — פברואר 2027 — מקומות אחרונים!" data-en="Romantic & Fascinating India — February 2027 — Last spots!">הודו הרומנטית והמרתקת — פברואר 2027 — מקומות אחרונים!</span>
         <span class="promo-cta" data-he="לפרטים ←" data-en="Details →">לפרטים ←</span>
     </a>
+    <script>
+    (function() {
+        var promos = [
+            { he: 'הודו הרומנטית והמרתקת — פברואר 2027 — מקומות אחרונים!', en: 'Romantic & Fascinating India — February 2027 — Last spots!' },
+            { he: 'יפן בפריחת הדובדבן — אפריל 2027 — מקומות אחרונים!', en: 'Japan in Cherry Blossom Season — April 2027 — Last spots!' }
+        ];
+        var idx = 0;
+        var el = document.getElementById('promo-text');
+        setInterval(function() {
+            el.style.opacity = '0';
+            setTimeout(function() {
+                idx = (idx + 1) % promos.length;
+                var lang = document.documentElement.lang || 'he';
+                var text = lang === 'en' ? promos[idx].en : promos[idx].he;
+                el.textContent = text;
+                el.setAttribute('data-he', promos[idx].he);
+                el.setAttribute('data-en', promos[idx].en);
+                el.style.opacity = '1';
+            }, 400);
+        }, 15000);
+    })();
+    </script>
 
     <!-- About -->
     <section class="about" id="about">
