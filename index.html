@@ -680,6 +680,55 @@
             box-shadow: 0 8px 32px rgba(200,149,108,0.25);
         }
 
+        /* Featured upcoming lecture box */
+        .lecture-feature {
+            position: relative;
+            max-width: 820px;
+            margin: 0 auto 45px;
+            padding: 36px 40px 32px;
+            text-align: center;
+            border-radius: 14px;
+            border: 2px solid #e74c3c;
+            background: rgba(231,76,60,0.10);
+            box-shadow: 0 10px 36px rgba(231,76,60,0.25);
+            scroll-margin-top: 100px;
+        }
+        .lecture-feature .feature-badge {
+            display: inline-block;
+            background: linear-gradient(160deg, #e74c3c, #c0392b);
+            color: #fff;
+            font-family: 'Secular One', sans-serif;
+            font-size: 14px;
+            padding: 5px 18px;
+            border-radius: 20px;
+            margin-bottom: 16px;
+        }
+        .lecture-feature h3 {
+            font-size: 1.6rem;
+            line-height: 1.4;
+            margin-bottom: 18px;
+            color: var(--white);
+        }
+        .lecture-feature p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: rgba(255,255,255,0.88);
+            margin-bottom: 8px;
+        }
+        .lecture-feature p.feature-cta {
+            font-weight: 700;
+            color: var(--white);
+            margin-top: 14px;
+        }
+        .lecture-feature .btn {
+            margin-top: 18px;
+        }
+        @media (max-width: 768px) {
+            .lecture-feature { padding: 28px 20px 24px; }
+            .lecture-feature h3 { font-size: 1.3rem; }
+            .lecture-feature p { font-size: 1rem; }
+        }
+
         /* Gallery Modal */
         #gallery-overlay {
             display: none;
@@ -1728,7 +1777,7 @@
 
     <!-- Floating bubble -->
     <a href="#trips-2027" class="floating-bubble" data-he="מקומות אחרונים לטיול מובטח" data-en="Last spots — guaranteed trip">מקומות אחרונים לטיול מובטח</a>
-    <a href="#contact" class="floating-bubble bubble-right" data-he="הרצאה ב-2.12 לקראת הטיול להודו" data-en="Lecture on Dec 2 — ahead of the India trip">הרצאה ב-2.12 לקראת הטיול להודו</a>
+    <a href="#india-lecture" class="floating-bubble bubble-right" data-he="הרצאה ב-2.12 לקראת הטיול להודו" data-en="Lecture on Dec 2 — ahead of the India trip">הרצאה ב-2.12 לקראת הטיול להודו</a>
 
     <!-- Skip Navigation -->
     <a href="#main-content" class="sr-only" data-he="דלג לתוכן הראשי" data-en="Skip to main content">דלג לתוכן הראשי</a>
@@ -2020,6 +2069,15 @@
                 <h2 data-he="הרצאות" data-en="Lectures">הרצאות</h2>
                 <p data-he="הרצאות מצולמות ומרתקות על מדינות, תרבויות ומסעות" data-en="Fascinating illustrated lectures on countries, cultures, and journeys">הרצאות מצולמות ומרתקות על מדינות, תרבויות ומסעות</p>
                 <div class="section-line"></div>
+            </div>
+            <div class="lecture-feature fade-up" id="india-lecture">
+                <span class="feature-badge" data-he="הרצאה קרובה · 2.12" data-en="Upcoming lecture · Dec 2">הרצאה קרובה · 2.12</span>
+                <h3 data-he="הודו קוראת לכם: הרצאה מרתקת על המסע הקסום שיוצא בתחילת פברואר 2027" data-en="India is calling: a fascinating lecture on the magical journey departing in early February 2027">הודו קוראת לכם: הרצאה מרתקת על המסע הקסום שיוצא בתחילת פברואר 2027</h3>
+                <p data-he="מהגאטים של ורנאסי לתוככי המקדשים ומהארמונות של רג'סטאן ועד הטאג' מהאל באור שקיעה." data-en="From the ghats of Varanasi into the heart of the temples, and from the palaces of Rajasthan to the Taj Mahal at sunset.">מהגאטים של ורנאסי לתוככי המקדשים ומהארמונות של רג'סטאן ועד הטאג' מהאל באור שקיעה.</p>
+                <p data-he="ניכנס לשעה נפלאה לארץ של צבעים, ריחות, תבלינים ואמונות שלא דומה לשום מקום אחר בעולם." data-en="For one wonderful hour we'll step into a land of colors, scents, spices and faiths unlike anywhere else in the world.">ניכנס לשעה נפלאה לארץ של צבעים, ריחות, תבלינים ואמונות שלא דומה לשום מקום אחר בעולם.</p>
+                <p data-he="נשמע ונראה איך נראים הימים בטיול, ואיך חוויה גדולה כל כך הופכת לטיול נוח ובטוח." data-en="We'll hear and see what the days of the trip look like, and how such a big experience becomes a comfortable, safe journey.">נשמע ונראה איך נראים הימים בטיול, ואיך חוויה גדולה כל כך הופכת לטיול נוח ובטוח.</p>
+                <p class="feature-cta" data-he="מספר המקומות מוגבל. בואו לשמוע, להתרגש ולהבטיח לעצמכם מקום עימי במסע של החיים." data-en="Places are limited. Come listen, get excited, and secure your place with me on the journey of a lifetime.">מספר המקומות מוגבל. בואו לשמוע, להתרגש ולהבטיח לעצמכם מקום עימי במסע של החיים.</p>
+                <a href="#contact" class="btn btn-primary" data-he="להרשמה להרצאה" data-en="Register for the lecture">להרשמה להרצאה</a>
             </div>
             <div class="lectures-grid">
                 <div class="lecture-card hot fade-up" onclick="openGallery('vietnam')" role="button" tabindex="0"
